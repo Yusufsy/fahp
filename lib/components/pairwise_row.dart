@@ -36,7 +36,7 @@ class _PairWiseRowState extends State<PairWiseRow> {
                 child: Text('${widget.index + 1}'),
               ),
             ),
-            for (String criteria in widget.criteria) _criteriaCell(criteria),
+            _criteriaCell(),
             TableCell(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -91,22 +91,27 @@ class _PairWiseRowState extends State<PairWiseRow> {
     );
   }
 
-  TableCell _criteriaCell(String criteria) {
+  TableCell _criteriaCell() {
     return TableCell(
         child: SizedBox(
       width: MediaQuery.of(context).size.width * 0.1,
-      child: Row(
+      child: Column(
         children: [
-          Radio(
-            value: criteria,
-            groupValue: groupVal,
-            onChanged: (value) {
-              setState(() {
-                groupVal = value!;
-              });
-            },
-          ),
-          Text(criteria),
+          for (String criteria in widget.criteria)
+            Row(
+              children: [
+                Radio(
+                  value: criteria,
+                  groupValue: groupVal,
+                  onChanged: (value) {
+                    setState(() {
+                      groupVal = value!;
+                    });
+                  },
+                ),
+                Text(criteria),
+              ],
+            ),
         ],
       ),
     ));

@@ -209,9 +209,6 @@ class _AhpMethodState extends State<AhpMethod> {
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              context
-                                  .read<ExpertNotifier>()
-                                  .init(int.parse(_numberExperts.text));
                               setState(() {
                                 _expertWeights = false;
                                 _numQuestions = true;
@@ -334,10 +331,10 @@ class _AhpMethodState extends State<AhpMethod> {
                               ),
                             ],
                           ),
-                          for (int i = 1;
-                              i <= int.parse(_numberExperts.text);
+                          for (int i = 0;
+                              i < int.parse(_numberQuestions.text);
                               i++)
-                            questionMatrixRow(i - 1)
+                            questionMatrixRow(i)
                         ],
                       ),
                       const SizedBox(
@@ -360,12 +357,10 @@ class _AhpMethodState extends State<AhpMethod> {
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              context
-                                  .read<ExpertNotifier>()
-                                  .init(int.parse(_numberExperts.text));
+                              context.read<QuestionNotifier>().generatePairs();
                               setState(() {
                                 _questionsMatrix = false;
-                                _numCriteriaInput = true;
+                                _criteriaTable = true;
                               });
                             },
                             child: const Text('Next'),
@@ -376,198 +371,244 @@ class _AhpMethodState extends State<AhpMethod> {
                   )
                 : const SizedBox(),
           ),
-          Visibility(
-            visible: _numCriteriaInput,
-            child: Column(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 0.0),
-                  child: Text('Select number of  Criteria'),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      child: TextFormField(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        decoration: const InputDecoration(
-                          icon: Icon(Icons.location_city),
-                          labelText: 'Input from (2-20)',
-                        ),
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        controller: _numberController,
-                        keyboardType: TextInputType.number,
-                        validator: (value) {
-                          if (value!.isNotEmpty) {
-                            if (int.parse(value) < 2 || int.parse(value) > 20) {
-                              return 'number must be between 2-20';
-                            }
-                          }
-                          return value.isEmpty
-                              ? 'Please fill this field'
-                              : null;
-                        },
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        // const Spacer(),
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              _numCriteriaInput = false;
-                              _questionsMatrix = true;
-                            });
-                          },
-                          child: const Text('Back'),
-                        ),
-                        const SizedBox(
-                          width: 30.0,
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            if (_numberController.text.isNotEmpty) {
-                              setState(() {
-                                _numCriteria =
-                                    int.parse(_numberController.text);
-                                _numCriteriaInput = false;
-                                _setInputCriteria = true;
-                                _criteriaTable = false;
-                              });
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: const Text('Please input a number'),
-                                  backgroundColor: Theme.of(context).errorColor,
-                                ),
-                              );
-                            }
-                          },
-                          child: const Text('Next'),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.5,
-            child: Visibility(
-              visible: _setInputCriteria,
-              child: Column(children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 0.0),
-                  child: Text('Input name of Criteria'),
-                ),
-                for (int i = 0; i < _numCriteria; i++)
-                  TextFormField(
-                    decoration: InputDecoration(labelText: 'Criteria ${i + 1}'),
-                    onChanged: (value) {
-                      if (_criteria.isEmpty) {
-                        setState(() {
-                          _criteria.add(value);
-                        });
-                      } else if (_criteria.length <= i) {
-                        setState(() {
-                          _criteria.add(value);
-                        });
-                      } else {
-                        setState(() {
-                          _criteria[i] = value;
-                        });
-                      }
-                    },
-                  ),
-                const SizedBox(
-                  height: 15.0,
-                ),
-                Row(
-                  children: [
-                    const Spacer(),
-                    TextButton(
-                      onPressed: () {
-                        setState(() {
-                          _setInputCriteria = !_setInputCriteria;
-                          _numCriteriaInput = !_numCriteriaInput;
-                          _criteriaTable = false;
-                        });
-                      },
-                      child: const Text('Back'),
-                    ),
-                    const SizedBox(
-                      width: 30.0,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        _pairs = Pairer().paiarCriteria(_criteria);
-                        print(_pairs);
-                        context
-                            .read<MatrixNotifier>()
-                            .updateCriteria(_criteria, _pairs);
-                        setState(() {
-                          _setInputCriteria = !_setInputCriteria;
-                          _numCriteriaInput = false;
-                          _criteriaTable = !_criteriaTable;
-                        });
-                      },
-                      child: const Text('OK'),
-                    ),
-                  ],
-                ),
-              ]),
-            ),
-          ),
+          // Visibility(
+          //   visible: _numCriteriaInput,
+          //   child: Column(
+          //     children: [
+          //       const Padding(
+          //         padding: EdgeInsets.symmetric(vertical: 0.0),
+          //         child: Text('Select number of  Criteria'),
+          //       ),
+          //       Row(
+          //         mainAxisAlignment: MainAxisAlignment.center,
+          //         children: [
+          //           SizedBox(
+          //             width: MediaQuery.of(context).size.width * 0.5,
+          //             child: TextFormField(
+          //               autovalidateMode: AutovalidateMode.onUserInteraction,
+          //               decoration: const InputDecoration(
+          //                 icon: Icon(Icons.location_city),
+          //                 labelText: 'Input from (2-20)',
+          //               ),
+          //               inputFormatters: [
+          //                 FilteringTextInputFormatter.digitsOnly
+          //               ],
+          //               controller: _numberController,
+          //               keyboardType: TextInputType.number,
+          //               validator: (value) {
+          //                 if (value!.isNotEmpty) {
+          //                   if (int.parse(value) < 2 || int.parse(value) > 20) {
+          //                     return 'number must be between 2-20';
+          //                   }
+          //                 }
+          //                 return value.isEmpty
+          //                     ? 'Please fill this field'
+          //                     : null;
+          //               },
+          //             ),
+          //           ),
+          //           Row(
+          //             children: [
+          //               // const Spacer(),
+          //               TextButton(
+          //                 onPressed: () {
+          //                   setState(() {
+          //                     _numCriteriaInput = false;
+          //                     _questionsMatrix = true;
+          //                   });
+          //                 },
+          //                 child: const Text('Back'),
+          //               ),
+          //               const SizedBox(
+          //                 width: 30.0,
+          //               ),
+          //               ElevatedButton(
+          //                 onPressed: () {
+          //                   if (_numberController.text.isNotEmpty) {
+          //                     setState(() {
+          //                       _numCriteria =
+          //                           int.parse(_numberController.text);
+          //                       _numCriteriaInput = false;
+          //                       _setInputCriteria = true;
+          //                       _criteriaTable = false;
+          //                     });
+          //                   } else {
+          //                     ScaffoldMessenger.of(context).showSnackBar(
+          //                       SnackBar(
+          //                         content: const Text('Please input a number'),
+          //                         backgroundColor: Theme.of(context).errorColor,
+          //                       ),
+          //                     );
+          //                   }
+          //                 },
+          //                 child: const Text('Next'),
+          //               ),
+          //             ],
+          //           ),
+          //         ],
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          // SizedBox(
+          //   width: MediaQuery.of(context).size.width * 0.5,
+          //   child: Visibility(
+          //     visible: _setInputCriteria,
+          //     child: Column(children: [
+          //       const Padding(
+          //         padding: EdgeInsets.symmetric(vertical: 0.0),
+          //         child: Text('Input name of Criteria'),
+          //       ),
+          //       for (int i = 0; i < _numCriteria; i++)
+          //         TextFormField(
+          //           decoration: InputDecoration(labelText: 'Criteria ${i + 1}'),
+          //           onChanged: (value) {
+          //             if (_criteria.isEmpty) {
+          //               setState(() {
+          //                 _criteria.add(value);
+          //               });
+          //             } else if (_criteria.length <= i) {
+          //               setState(() {
+          //                 _criteria.add(value);
+          //               });
+          //             } else {
+          //               setState(() {
+          //                 _criteria[i] = value;
+          //               });
+          //             }
+          //           },
+          //         ),
+          //       const SizedBox(
+          //         height: 15.0,
+          //       ),
+          //       Row(
+          //         children: [
+          //           const Spacer(),
+          //           TextButton(
+          //             onPressed: () {
+          //               setState(() {
+          //                 _setInputCriteria = !_setInputCriteria;
+          //                 _numCriteriaInput = !_numCriteriaInput;
+          //                 _criteriaTable = false;
+          //               });
+          //             },
+          //             child: const Text('Back'),
+          //           ),
+          //           const SizedBox(
+          //             width: 30.0,
+          //           ),
+          //           ElevatedButton(
+          //             onPressed: () {
+          //               _pairs = Pairer().paiarCriteria(_criteria);
+          //               print(_pairs);
+          //               context
+          //                   .read<MatrixNotifier>()
+          //                   .updateCriteria(_criteria, _pairs);
+          //               setState(() {
+          //                 _setInputCriteria = !_setInputCriteria;
+          //                 _numCriteriaInput = false;
+          //                 _criteriaTable = !_criteriaTable;
+          //               });
+          //             },
+          //             child: const Text('OK'),
+          //           ),
+          //         ],
+          //       ),
+          //     ]),
+          //   ),
+          // ),
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.7,
             child: Visibility(
               visible: _criteriaTable,
-              child: Column(
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10.0),
-                    child: Text('Pairwise Comparison'),
-                  ),
-                  for (List<String> criteria in _pairs)
-                    PairWiseRow(
-                        criteria: criteria, index: _pairs.indexOf(criteria)),
-                  const SizedBox(
-                    height: 15.0,
-                  ),
-                  Row(
-                    children: [
-                      const Spacer(),
-                      TextButton(
-                        onPressed: () {
-                          setState(() {
-                            _criteriaTable = !_criteriaTable;
-                            _setInputCriteria = !_setInputCriteria;
-                          });
-                        },
-                        child: const Text('Back'),
-                      ),
-                      const SizedBox(
-                        width: 30.0,
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: ((context) => const AhpResult())));
-                          });
-                        },
-                        child: const Text('Calculate'),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+              child: _criteriaTable
+                  ? Column(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10.0),
+                          child: Text('Pairwise Comparison'),
+                        ),
+                        for (List<List<String>> criterias in context
+                            .watch<QuestionNotifier>()
+                            .pairsGen
+                            .values
+                            .toList())
+                          Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: RichText(
+                                  text: TextSpan(
+                                      text: 'With respect to ',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium,
+                                      children: [
+                                        TextSpan(
+                                          text: context
+                                                  .watch<QuestionNotifier>()
+                                                  .wrt![
+                                              context
+                                                  .watch<QuestionNotifier>()
+                                                  .pairsGen
+                                                  .values
+                                                  .toList()
+                                                  .indexOf(criterias)],
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleLarge,
+                                        ),
+                                        TextSpan(
+                                          text:
+                                              ', which of the following criterion is more important? and by how much is more?',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium,
+                                        ),
+                                      ]),
+                                ),
+                              ),
+                              for (List<String> criteria in criterias)
+                                PairWiseRow(
+                                    criteria: criteria,
+                                    index: criterias.indexOf(criteria)),
+                            ],
+                          ),
+                        const SizedBox(
+                          height: 15.0,
+                        ),
+                        Row(
+                          children: [
+                            const Spacer(),
+                            TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  _criteriaTable = !_criteriaTable;
+                                  _questionsMatrix = !_questionsMatrix;
+                                });
+                              },
+                              child: const Text('Back'),
+                            ),
+                            const SizedBox(
+                              width: 30.0,
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: ((context) =>
+                                              const AhpResult())));
+                                });
+                              },
+                              child: const Text('Calculate'),
+                            ),
+                          ],
+                        ),
+                      ],
+                    )
+                  : const SizedBox(),
             ),
           ),
         ],
@@ -642,10 +683,9 @@ class _AhpMethodState extends State<AhpMethod> {
                         labelText: 'Criteria $i',
                       ),
                       onChanged: (value) {
-                        // context
-                        //     .read<ExpertNotifier>()
-                        //     .setWeight(
-                        //         i - 1, double.parse(value));
+                        context
+                            .read<QuestionNotifier>()
+                            .setCriteria(q, i, value);
                       },
                     ),
                   ),
@@ -664,10 +704,7 @@ class _AhpMethodState extends State<AhpMethod> {
                   labelText: 'Criteria',
                 ),
                 onChanged: (value) {
-                  // context
-                  //     .read<ExpertNotifier>()
-                  //     .setWeight(
-                  //         i - 1, double.parse(value));
+                  context.read<QuestionNotifier>().setWrt(q, value);
                 },
               ),
             ),
