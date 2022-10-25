@@ -570,6 +570,18 @@ class _AhpMethodState extends State<AhpMethod> {
                               ),
                               for (List<String> criteria in criterias)
                                 PairWiseRow(
+                                    qIndex: context
+                                        .watch<QuestionNotifier>()
+                                        .wrt!
+                                        .indexOf(context
+                                                .watch<QuestionNotifier>()
+                                                .wrt![
+                                            context
+                                                .watch<QuestionNotifier>()
+                                                .pairsGen
+                                                .values
+                                                .toList()
+                                                .indexOf(criterias)]),
                                     criteria: criteria,
                                     index: criterias.indexOf(criteria)),
                             ],

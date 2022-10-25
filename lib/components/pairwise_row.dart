@@ -1,11 +1,17 @@
 import 'package:fahp/services/matrix_notifier.dart';
+import 'package:fahp/services/question_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PairWiseRow extends StatefulWidget {
-  const PairWiseRow({super.key, required this.criteria, required this.index});
+  const PairWiseRow(
+      {super.key,
+      required this.criteria,
+      required this.index,
+      required this.qIndex});
   final List<String> criteria;
   final int index;
+  final int qIndex;
 
   @override
   State<PairWiseRow> createState() => _PairWiseRowState();
@@ -71,8 +77,11 @@ class _PairWiseRowState extends State<PairWiseRow> {
                             value: '$i',
                             groupValue: _groupValue,
                             onChanged: (value) {
-                              context.read<MatrixNotifier>().setMatrixValue(
-                                  widget.criteria, i, widget.index);
+                              context.read<QuestionNotifier>().setMatrixValue(
+                                  widget.criteria,
+                                  i,
+                                  widget.qIndex,
+                                  widget.index);
                               setState(() {
                                 _groupValue = value!;
                               });
