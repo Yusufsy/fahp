@@ -606,6 +606,9 @@ class _AhpMethodState extends State<AhpMethod> {
                             ),
                             ElevatedButton(
                               onPressed: () {
+                                context
+                                    .read<QuestionNotifier>()
+                                    .calculatePriorities();
                                 setState(() {
                                   Navigator.push(
                                       context,

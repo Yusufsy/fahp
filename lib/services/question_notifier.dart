@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:collection/collection.dart';
 import 'package:fahp/utils/pairer.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,9 @@ class QuestionNotifier extends ChangeNotifier {
   Map<int, List<String>> questionMatrixMap = {};
   Map<int, List<List<String>>> pairsGen = {};
   Map<List<String>, List<List<double>>> allMatrices = {};
+  Map<List<String>, List<double>> allPriorities = {};
+  Map<List<String>, List<double>> allWeights = {};
+  List<double> gci = [];
 
   init(int numQuestions) {
     questionMatrix = [];
@@ -71,7 +76,8 @@ class QuestionNotifier extends ChangeNotifier {
     print(allMatrices);
   }
 
-  void setMatrixValue(List<String> pair, double val, int index, int pos) {
+  void setMatrixValue(
+      List<String> pair, double val, int index, int pos, int respect) {
     print(questionMatrixMap[index]);
     allMatrices.forEach((key, value) {
       if (key == questionMatrixMap[index]) {
@@ -80,11 +86,14 @@ class QuestionNotifier extends ChangeNotifier {
             for (var element in pairsGen[index]!) {
               if (element == pair) {
                 if ([key[i], key[j]].equals(element)) {
-                  print('${[key[i], key[j]]} equal ${element}');
-                  // myMatrix[criteria![i]]![j] = val;
-                  // myMatrix[criteria![j]]![i] = 1 / val;
-                  allMatrices[key]![i][j] = val;
-                  allMatrices[key]![j][i] = 1 / val;
+                  print('${[key[i], key[j]]} equal $element');
+                  if (respect == 0) {
+                    allMatrices[key]![i][j] = val;
+                    allMatrices[key]![j][i] = 1 / val;
+                  } else {
+                    allMatrices[key]![i][j] = 1 / val;
+                    allMatrices[key]![j][i] = val;
+                  }
                 }
               }
             }
@@ -93,5 +102,62 @@ class QuestionNotifier extends ChangeNotifier {
       }
     });
     print(allMatrices);
+  }
+
+  void calculatePriorities() {
+    Map<List<String>, List<double>> logs = {};
+    allPriorities.clear();
+    allWeights.clear();
+    logs.clear();
+    gci.clear();
+    allMatrices.forEach((key, value) {
+      allPriorities[key] = [];
+      allWeights[key] = [];
+      logs[key] = [];
+    });
+    allMatrices.forEach((key, value) {
+      for (var rate in value) {
+        double product = rate.reduce((value, element) => value * element);
+        allPriorities[key]!.add(pow(product, 1 / value.length).toDouble());
+      }
+    });
+    allPriorities.forEach((key, value) {
+      double sum = value.sum;
+      for (double rgm in value) {
+        allWeights[key]!.add(rgm / sum);
+      }
+    });
+    // print(allWeights);
+    allMatrices.forEach((key, value) {
+      int pos = 1;
+      for (var row in allMatrices[key]!) {
+        int i = pos;
+        for (int j = i; j <= row.length; j++) {
+          if (j < row.length) {
+            // print('$pos ${row[j]}');
+            // print(allWeights[key]![pos - 1]);
+            // print(allWeights[key]![j]);
+            logs[key]!.add(pow(
+                    log(row[j]) -
+                        log(allWeights[key]![pos - 1] / allWeights[key]![j]),
+                    2)
+                .toDouble());
+            // logs[key]!.add(pow((log(4) - log(0.6145 / 0.2246)), 2).toDouble());
+          }
+        }
+        pos++;
+      }
+    });
+    print(logs);
+    logs.forEach((key, value) {
+      print(key.length);
+      double totalLogs = value.sum;
+      double upper = 2 * totalLogs;
+      double lower = (key.length - 2) * (key.length - 2);
+      double fraction = upper / lower;
+      double computeGCI = fraction * totalLogs;
+      gci.add(computeGCI);
+    });
+    print(gci);
   }
 }

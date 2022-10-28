@@ -20,6 +20,7 @@ class PairWiseRow extends StatefulWidget {
 class _PairWiseRowState extends State<PairWiseRow> {
   String _groupValue = 'Equal';
   String groupVal = '';
+  int respect = 0;
 
   @override
   void initState() {
@@ -52,9 +53,12 @@ class _PairWiseRowState extends State<PairWiseRow> {
                       value: 'Equal',
                       groupValue: _groupValue,
                       onChanged: (value) {
-                        context
-                            .read<MatrixNotifier>()
-                            .setMatrixValue(widget.criteria, 1, 0);
+                        context.read<QuestionNotifier>().setMatrixValue(
+                            widget.criteria,
+                            1,
+                            widget.qIndex,
+                            widget.index,
+                            respect);
                         setState(() {
                           _groupValue = value!;
                         });
@@ -81,7 +85,8 @@ class _PairWiseRowState extends State<PairWiseRow> {
                                   widget.criteria,
                                   i,
                                   widget.qIndex,
-                                  widget.index);
+                                  widget.index,
+                                  respect);
                               setState(() {
                                 _groupValue = value!;
                               });
@@ -115,6 +120,8 @@ class _PairWiseRowState extends State<PairWiseRow> {
                   onChanged: (value) {
                     setState(() {
                       groupVal = value!;
+                      respect = widget.criteria.indexOf(criteria);
+                      _groupValue = '';
                     });
                   },
                 ),
