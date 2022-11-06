@@ -1,3 +1,4 @@
+import 'package:fahp/components/pairwaise_comp.dart';
 import 'package:fahp/components/pairwise_row.dart';
 import 'package:fahp/results/ahp_result.dart';
 import 'package:fahp/services/expert_notifier.dart';
@@ -267,9 +268,9 @@ class _AhpMethodState extends State<AhpMethod> {
                     ElevatedButton(
                       onPressed: () {
                         if (_numberQuestions.text.isNotEmpty) {
-                          context
-                              .read<QuestionNotifier>()
-                              .init(int.parse(_numberQuestions.text));
+                          context.read<QuestionNotifier>().init(
+                              int.parse(_numberQuestions.text),
+                              context.read<ExpertNotifier>().expertWi!.length);
                           setState(() {
                             _numQuestions = false;
                             _questionsMatrix = true;
@@ -524,68 +525,74 @@ class _AhpMethodState extends State<AhpMethod> {
               child: _criteriaTable
                   ? Column(
                       children: [
-                        const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10.0),
-                          child: Text('Pairwise Comparison'),
-                        ),
-                        for (List<List<String>> criterias in context
-                            .watch<QuestionNotifier>()
-                            .pairsGen
-                            .values
-                            .toList())
-                          Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: RichText(
-                                  text: TextSpan(
-                                      text: 'With respect to ',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium,
-                                      children: [
-                                        TextSpan(
-                                          text: context
-                                                  .watch<QuestionNotifier>()
-                                                  .wrt![
-                                              context
-                                                  .watch<QuestionNotifier>()
-                                                  .pairsGen
-                                                  .values
-                                                  .toList()
-                                                  .indexOf(criterias)],
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleLarge,
-                                        ),
-                                        TextSpan(
-                                          text:
-                                              ', which of the following criterion is more important? and by how much is more?',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium,
-                                        ),
-                                      ]),
-                                ),
-                              ),
-                              for (List<String> criteria in criterias)
-                                PairWiseRow(
-                                    qIndex: context
-                                        .watch<QuestionNotifier>()
-                                        .wrt!
-                                        .indexOf(context
-                                                .watch<QuestionNotifier>()
-                                                .wrt![
-                                            context
-                                                .watch<QuestionNotifier>()
-                                                .pairsGen
-                                                .values
-                                                .toList()
-                                                .indexOf(criterias)]),
-                                    criteria: criteria,
-                                    index: criterias.indexOf(criteria)),
-                            ],
+                        for (int i = 1;
+                            i <=
+                                context
+                                    .watch<ExpertNotifier>()
+                                    .expertWi!
+                                    .length;
+                            i++)
+                          PairWiseComp(
+                            exIndex: i,
                           ),
+                        // for (List<List<String>> criterias in context
+                        //     .watch<QuestionNotifier>()
+                        //     .pairsGen
+                        //     .values
+                        //     .toList())
+                        //   Column(
+                        //     children: [
+                        //       Padding(
+                        //         padding: const EdgeInsets.all(8.0),
+                        //         child: RichText(
+                        //           text: TextSpan(
+                        //               text: 'With respect to ',
+                        //               style: Theme.of(context)
+                        //                   .textTheme
+                        //                   .bodyMedium,
+                        //               children: [
+                        //                 TextSpan(
+                        //                   text: context
+                        //                           .watch<QuestionNotifier>()
+                        //                           .wrt![
+                        //                       context
+                        //                           .watch<QuestionNotifier>()
+                        //                           .pairsGen
+                        //                           .values
+                        //                           .toList()
+                        //                           .indexOf(criterias)],
+                        //                   style: Theme.of(context)
+                        //                       .textTheme
+                        //                       .titleLarge,
+                        //                 ),
+                        //                 TextSpan(
+                        //                   text:
+                        //                       ', which of the following criterion is more important? and by how much is more?',
+                        //                   style: Theme.of(context)
+                        //                       .textTheme
+                        //                       .bodyMedium,
+                        //                 ),
+                        //               ]),
+                        //         ),
+                        //       ),
+                        //       for (List<String> criteria in criterias)
+                        //         PairWiseRow(
+                        //             qIndex: context
+                        //                 .watch<QuestionNotifier>()
+                        //                 .wrt!
+                        //                 .indexOf(context
+                        //                         .watch<QuestionNotifier>()
+                        //                         .wrt![
+                        //                     context
+                        //                         .watch<QuestionNotifier>()
+                        //                         .pairsGen
+                        //                         .values
+                        //                         .toList()
+                        //                         .indexOf(criterias)]),
+                        //             criteria: criteria,
+                        //             index: criterias.indexOf(criteria)),
+                        //     ],
+                        //   ),
                         const SizedBox(
                           height: 15.0,
                         ),

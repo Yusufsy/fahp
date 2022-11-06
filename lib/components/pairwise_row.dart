@@ -8,10 +8,12 @@ class PairWiseRow extends StatefulWidget {
       {super.key,
       required this.criteria,
       required this.index,
-      required this.qIndex});
+      required this.qIndex,
+      required this.exIndex});
   final List<String> criteria;
   final int index;
   final int qIndex;
+  final int exIndex;
 
   @override
   State<PairWiseRow> createState() => _PairWiseRowState();
@@ -54,6 +56,7 @@ class _PairWiseRowState extends State<PairWiseRow> {
                       groupValue: _groupValue,
                       onChanged: (value) {
                         context.read<QuestionNotifier>().setMatrixValue(
+                            widget.exIndex,
                             widget.criteria,
                             1,
                             widget.qIndex,
@@ -82,6 +85,7 @@ class _PairWiseRowState extends State<PairWiseRow> {
                             groupValue: _groupValue,
                             onChanged: (value) {
                               context.read<QuestionNotifier>().setMatrixValue(
+                                  widget.exIndex,
                                   widget.criteria,
                                   i,
                                   widget.qIndex,

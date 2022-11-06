@@ -13,8 +13,27 @@ class QuestionNotifier extends ChangeNotifier {
   Map<List<String>, List<double>> allPriorities = {};
   Map<List<String>, List<double>> allWeights = {};
   List<double> gci = [];
+  List<double> cr = [];
+  List<Map<int, List<String>>> exQuestionMatrixMap = [];
+  List<Map<List<String>, List<List<double>>>> exAllMatrices = [];
+  Map<int, double> kN = {
+    3: 3.147,
+    4: 3.526,
+    5: 3.717,
+    6: 3.755,
+    7: 3.755,
+    8: 3.744,
+    9: 3.733,
+    10: 3.709,
+    11: 3.698,
+    12: 3.685,
+    13: 3.674,
+    14: 3.663,
+    15: 3.646,
+    16: 3.646,
+  };
 
-  init(int numQuestions) {
+  init(int numQuestions, int numExperts) {
     questionMatrix = [];
     wrt = [];
     questionMatrixMap.clear();
@@ -24,8 +43,12 @@ class QuestionNotifier extends ChangeNotifier {
       questionMatrixMap[i] = ['', ''];
       wrt!.add('');
     }
-    print(questionMatrix);
-    print(questionMatrixMap);
+    // print(questionMatrix);
+    // print(questionMatrixMap);
+    for (int i = 0; i < numExperts; i++) {
+      exQuestionMatrixMap.add(questionMatrixMap);
+    }
+    print(exQuestionMatrixMap);
   }
 
   setMatrix(int pos, int value) {
@@ -34,12 +57,19 @@ class QuestionNotifier extends ChangeNotifier {
     for (int i = 0; i < value; i++) {
       questionMatrixMap[pos]!.add('');
     }
-    print(questionMatrixMap);
+    for (int i = 0; i < exQuestionMatrixMap.length; i++) {
+      exQuestionMatrixMap[i] = questionMatrixMap;
+    }
+    print(exQuestionMatrixMap);
   }
 
   setCriteria(int key, int pos, String value) {
     questionMatrixMap[key]![pos] = value;
-    print(questionMatrixMap);
+    // print(questionMatrixMap);
+    for (int i = 0; i < exQuestionMatrixMap.length; i++) {
+      exQuestionMatrixMap[i] = questionMatrixMap;
+    }
+    print(exQuestionMatrixMap);
   }
 
   void setWrt(int pos, String value) {
@@ -49,6 +79,7 @@ class QuestionNotifier extends ChangeNotifier {
 
   void generatePairs() {
     allMatrices.clear();
+    exAllMatrices.clear();
     questionMatrixMap.forEach((key, value) {
       pairsGen[key] = Pairer().paiarCriteria(value);
     });
@@ -73,43 +104,61 @@ class QuestionNotifier extends ChangeNotifier {
         }
       },
     );
-    print(allMatrices);
+    // print(allMatrices);
+    for (int i = 0; i < exQuestionMatrixMap.length; i++) {
+      exAllMatrices.add(allMatrices);
+    }
+    print(exAllMatrices);
   }
 
-  void setMatrixValue(
-      List<String> pair, double val, int index, int pos, int respect) {
-    print(questionMatrixMap[index]);
-    allMatrices.forEach((key, value) {
-      if (key == questionMatrixMap[index]) {
-        for (int i = 0; i < key.length; i++) {
-          for (int j = 0; j < key.length; j++) {
-            for (var element in pairsGen[index]!) {
-              if (element == pair) {
-                if ([key[i], key[j]].equals(element)) {
-                  print('${[key[i], key[j]]} equal $element');
-                  if (respect == 0) {
-                    allMatrices[key]![i][j] = val;
-                    allMatrices[key]![j][i] = 1 / val;
-                  } else {
-                    allMatrices[key]![i][j] = 1 / val;
-                    allMatrices[key]![j][i] = val;
-                  }
-                }
+  void setMatrixValue(int exIndex, List<String> pair, double val, int index,
+      int pos, int respect) {
+    print(exIndex);
+    // print(exQuestionMatrixMap[exIndex][index]);
+    Map matrix = exAllMatrices[exIndex];
+    // exAllMatrices[exIndex].forEach((key, value) {
+    // if (key == exQuestionMatrixMap[exIndex][index]) {
+    for (int i = 0; i < matrix.keys.toList()[index].length; i++) {
+      for (int j = 0; j < matrix.keys.toList()[index].length; j++) {
+        for (var element in pairsGen[index]!) {
+          if (element == pair) {
+            if ([matrix.keys.toList()[index][i], matrix.keys.toList()[index][j]]
+                .equals(element)) {
+              print('${[
+                matrix.keys.toList()[index][i],
+                matrix.keys.toList()[index][j]
+              ]} equal $element');
+              if (respect == 0) {
+                matrix[matrix.keys.toList()[index]]![i][j] = val;
+                matrix[matrix.keys.toList()[index]]![j][i] = 1 / val;
+              } else {
+                matrix[matrix.keys.toList()[index]]![i][j] = 1 / val;
+                matrix[matrix.keys.toList()[index]]![j][i] = val;
               }
             }
           }
         }
       }
-    });
-    print(allMatrices);
+    }
+    // }
+    // });
+    print(matrix);
+    // for (int i = 0; i < exQuestionMatrixMap.length; i++) {
+    //   if (i == exIndex) {
+    //     exAllMatrices[i] = matrix;
+    //   }
+    // }
+    print(exAllMatrices);
   }
 
   void calculatePriorities() {
+    print(exAllMatrices);
     Map<List<String>, List<double>> logs = {};
     allPriorities.clear();
     allWeights.clear();
     logs.clear();
     gci.clear();
+    cr.clear();
     allMatrices.forEach((key, value) {
       allPriorities[key] = [];
       allWeights[key] = [];
@@ -157,7 +206,8 @@ class QuestionNotifier extends ChangeNotifier {
       double fraction = upper / lower;
       double computeGCI = fraction * totalLogs;
       gci.add(computeGCI);
+      cr.add(computeGCI / kN[key.length]!);
     });
-    print(gci);
+    print('GCI: $gci CR: $cr');
   }
 }

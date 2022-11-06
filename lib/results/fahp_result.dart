@@ -3,14 +3,14 @@ import 'package:fahp/services/question_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class AhpResult extends StatefulWidget {
-  const AhpResult({super.key});
+class FahpResult extends StatefulWidget {
+  const FahpResult({super.key});
 
   @override
-  State<AhpResult> createState() => _AhpResultState();
+  State<FahpResult> createState() => _FahpResultState();
 }
 
-class _AhpResultState extends State<AhpResult> {
+class _FahpResultState extends State<FahpResult> {
   @override
   void initState() {
     // context.read<MatrixNotifier>().generatePriorities();
@@ -51,7 +51,7 @@ class _AhpResultState extends State<AhpResult> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10.0),
                   child: Text(
-                    'AHP RESULTS',
+                    'FAHP RESULTS',
                     style: topicStyle,
                   ),
                 ),
@@ -108,7 +108,26 @@ class _AhpResultState extends State<AhpResult> {
                                     TableCell(
                                         child: Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Text(rows.toStringAsFixed(2)),
+                                      child: Row(
+                                        children: [
+                                          SizedBox(
+                                            width: 50,
+                                            child: rows == 1 || rows == 9
+                                                ? Text(
+                                                    "${rows.toStringAsFixed(2)} ")
+                                                : Text(
+                                                    "${(rows - 1).toStringAsFixed(2)} "),
+                                          ),
+                                          SizedBox(
+                                              width: 50,
+                                              child: Text(
+                                                  "${rows.toStringAsFixed(2)} ")),
+                                          rows == 1 || rows == 9
+                                              ? Text(rows.toStringAsFixed(2))
+                                              : Text((rows + 1)
+                                                  .toStringAsFixed(2)),
+                                        ],
+                                      ),
                                     )),
                                 ],
                               ),
@@ -232,124 +251,6 @@ class _AhpResultState extends State<AhpResult> {
                       ),
                     ],
                   ),
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(vertical: 10.0),
-                //   child: RichText(
-                //     text: TextSpan(
-                //         text: 'Number of Comparisons:',
-                //         style: Theme.of(context).textTheme.headline4,
-                //         children: [
-                //           TextSpan(
-                //               text:
-                //                   ' ${context.watch<MatrixNotifier>().numOfComp}',
-                //               style: Theme.of(context).textTheme.headline2)
-                //         ]),
-                //   ),
-                // ),
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(vertical: 10.0),
-                //   child: Text(
-                //     'Priorities',
-                //     style: topicStyle,
-                //   ),
-                // ),
-                // Table(
-                //   border: TableBorder.all(),
-                //   defaultColumnWidth: const IntrinsicColumnWidth(),
-                //   defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-                //   children: [
-                //     const TableRow(
-                //       children: [
-                //         TableCell(
-                //           child: Padding(
-                //             padding: EdgeInsets.all(8.0),
-                //             child: Text('ID'),
-                //           ),
-                //         ),
-                //         TableCell(
-                //           child: Padding(
-                //             padding: EdgeInsets.all(8.0),
-                //             child: Text('Criteria'),
-                //           ),
-                //         ),
-                //         TableCell(
-                //           child: Padding(
-                //             padding: EdgeInsets.all(8.0),
-                //             child: Text('Priorities'),
-                //           ),
-                //         ),
-                //       ],
-                //     ),
-                //     for (int i = 0; i < criteria.length; i++)
-                //       TableRow(
-                //         children: [
-                //           TableCell(
-                //             child: Padding(
-                //               padding: const EdgeInsets.all(8.0),
-                //               child: Text('${i + 1}'),
-                //             ),
-                //           ),
-                //           TableCell(
-                //             child: Padding(
-                //               padding: const EdgeInsets.all(8.0),
-                //               child: Text(criteria[i]),
-                //             ),
-                //           ),
-                //           TableCell(
-                //             child: Padding(
-                //               padding: const EdgeInsets.all(8.0),
-                //               child: Text(
-                //                   '${(priorities![i] * 100).toStringAsFixed(2)}%'),
-                //             ),
-                //           ),
-                //         ],
-                //       ),
-                //   ],
-                // ),
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(vertical: 10.0),
-                //   child: RichText(
-                //     text: TextSpan(
-                //       text: 'Principal Eigen Value:',
-                //       style: Theme.of(context).textTheme.headline4,
-                //       children: [
-                //         TextSpan(
-                //             text:
-                //                 ' ${context.watch<MatrixNotifier>().consistAvg!.toStringAsFixed(4)}',
-                //             style: Theme.of(context).textTheme.headline2)
-                //       ],
-                //     ),
-                //   ),
-                // ),
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(vertical: 10.0),
-                //   child: RichText(
-                //     text: TextSpan(
-                //       text: 'Consistency Ratio:',
-                //       style: Theme.of(context).textTheme.headline4,
-                //       children: [
-                //         TextSpan(
-                //           text:
-                //               ' ${context.watch<MatrixNotifier>().consistRatio!.toStringAsFixed(4)}',
-                //           style: context.watch<MatrixNotifier>().consistRatio! <
-                //                   0.10
-                //               ? TextStyle(
-                //                   color: Colors.green,
-                //                   fontSize: Theme.of(context)
-                //                       .textTheme
-                //                       .headline2!
-                //                       .fontSize)
-                //               : TextStyle(
-                //                   color: Colors.red,
-                //                   fontSize: Theme.of(context)
-                //                       .textTheme
-                //                       .headline2!
-                //                       .fontSize),
-                //         ),
-                //       ],
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           ),
