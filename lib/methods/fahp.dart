@@ -14,11 +14,11 @@ class FahpMethod extends StatefulWidget {
 }
 
 class _FahpMethodState extends State<FahpMethod> {
-  final TextEditingController _numberExperts = TextEditingController();
+  // final TextEditingController _numberExperts = TextEditingController();
   final TextEditingController _numberQuestions = TextEditingController();
-  bool _numExperts = true;
-  bool _numQuestions = false;
-  bool _expertWeights = false;
+  // bool _numExperts = false;
+  bool _numQuestions = true;
+  // bool _expertWeights = false;
   bool _questionsMatrix = false;
   bool _setInputCriteria = false;
   bool _numCriteriaInput = false;
@@ -41,184 +41,184 @@ class _FahpMethodState extends State<FahpMethod> {
               fontSize: 40,
             ),
           ),
-          Visibility(
-            visible: _numExperts,
-            child: Column(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 0.0),
-                  child: Text('Enter number of Experts'),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      child: TextFormField(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        decoration: const InputDecoration(
-                          icon: Icon(Icons.group),
-                          labelText: 'No. of experts',
-                        ),
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        controller: _numberExperts,
-                        keyboardType: TextInputType.number,
-                        validator: (value) {
-                          return value!.isEmpty
-                              ? 'Please fill this field'
-                              : null;
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (_numberExperts.text.isNotEmpty) {
-                        context
-                            .read<ExpertNotifier>()
-                            .init(int.parse(_numberExperts.text));
-                        setState(() {
-                          _numExperts = false;
-                          _expertWeights = true;
-                          _numCriteriaInput = false;
-                          _setInputCriteria = false;
-                          _criteriaTable = false;
-                        });
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: const Text('Please input a number'),
-                            backgroundColor: Theme.of(context).errorColor,
-                          ),
-                        );
-                      }
-                    },
-                    child: const Text('Next'),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Visibility(
-            visible: _expertWeights,
-            child: _expertWeights
-                ? Column(
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 0.0),
-                        child: Text('Insert the question matrix and criteria'),
-                      ),
-                      Table(
-                        border: TableBorder.all(),
-                        defaultColumnWidth: const IntrinsicColumnWidth(),
-                        children: [
-                          const TableRow(children: [
-                            TableCell(
-                              child: Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Text('Expert'),
-                              ),
-                            ),
-                            TableCell(
-                              child: Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Text('Weight'),
-                              ),
-                            ),
-                          ]),
-                          for (int i = 1;
-                              i <= int.parse(_numberExperts.text);
-                              i++)
-                            TableRow(
-                              children: [
-                                TableCell(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text('ΔE$i'),
-                                  ),
-                                ),
-                                TableCell(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.1,
-                                      child: TextFormField(
-                                        autovalidateMode:
-                                            AutovalidateMode.onUserInteraction,
-                                        decoration: InputDecoration(
-                                          labelText: 'Weight of ΔE$i',
-                                        ),
-                                        // inputFormatters: [
-                                        //   FilteringTextInputFormatter.digitsOnly
-                                        // ],
-                                        keyboardType: const TextInputType
-                                            .numberWithOptions(decimal: true),
-                                        onChanged: (value) {
-                                          if (value.isNotEmpty || value != '') {
-                                            context
-                                                .read<ExpertNotifier>()
-                                                .setWeight(
-                                                    i - 1, double.parse(value));
-                                          }
-                                        },
-                                        validator: (value) {
-                                          if (value!.isNotEmpty) {
-                                            if (double.parse(value) < 0.0 ||
-                                                double.parse(value) > 1.0) {
-                                              return 'Between 0-1';
-                                            }
-                                          }
-                                          return value.isEmpty
-                                              ? 'Please fill this field'
-                                              : null;
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 15.0,
-                      ),
-                      Row(
-                        children: [
-                          const Spacer(),
-                          TextButton(
-                            onPressed: () {
-                              setState(() {
-                                _numExperts = true;
-                                _expertWeights = false;
-                              });
-                            },
-                            child: const Text('Back'),
-                          ),
-                          const SizedBox(
-                            width: 30.0,
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                _expertWeights = false;
-                                _numQuestions = true;
-                              });
-                            },
-                            child: const Text('Next'),
-                          ),
-                        ],
-                      ),
-                    ],
-                  )
-                : const SizedBox(),
-          ),
+          // Visibility(
+          //   visible: _numExperts,
+          //   child: Column(
+          //     children: [
+          //       const Padding(
+          //         padding: EdgeInsets.symmetric(vertical: 0.0),
+          //         child: Text('Enter number of Experts'),
+          //       ),
+          //       Row(
+          //         mainAxisAlignment: MainAxisAlignment.center,
+          //         children: [
+          //           SizedBox(
+          //             width: MediaQuery.of(context).size.width * 0.5,
+          //             child: TextFormField(
+          //               autovalidateMode: AutovalidateMode.onUserInteraction,
+          //               decoration: const InputDecoration(
+          //                 icon: Icon(Icons.group),
+          //                 labelText: 'No. of experts',
+          //               ),
+          //               inputFormatters: [
+          //                 FilteringTextInputFormatter.digitsOnly
+          //               ],
+          //               controller: _numberExperts,
+          //               keyboardType: TextInputType.number,
+          //               validator: (value) {
+          //                 return value!.isEmpty
+          //                     ? 'Please fill this field'
+          //                     : null;
+          //               },
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //       Padding(
+          //         padding: const EdgeInsets.symmetric(vertical: 10.0),
+          //         child: ElevatedButton(
+          //           onPressed: () {
+          //             if (_numberExperts.text.isNotEmpty) {
+          //               context
+          //                   .read<ExpertNotifier>()
+          //                   .init(int.parse(_numberExperts.text));
+          //               setState(() {
+          //                 _numExperts = false;
+          //                 _expertWeights = true;
+          //                 _numCriteriaInput = false;
+          //                 _setInputCriteria = false;
+          //                 _criteriaTable = false;
+          //               });
+          //             } else {
+          //               ScaffoldMessenger.of(context).showSnackBar(
+          //                 SnackBar(
+          //                   content: const Text('Please input a number'),
+          //                   backgroundColor: Theme.of(context).errorColor,
+          //                 ),
+          //               );
+          //             }
+          //           },
+          //           child: const Text('Next'),
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          // Visibility(
+          //   visible: _expertWeights,
+          //   child: _expertWeights
+          //       ? Column(
+          //           children: [
+          //             const Padding(
+          //               padding: EdgeInsets.symmetric(vertical: 0.0),
+          //               child: Text('Insert the question matrix and criteria'),
+          //             ),
+          //             Table(
+          //               border: TableBorder.all(),
+          //               defaultColumnWidth: const IntrinsicColumnWidth(),
+          //               children: [
+          //                 const TableRow(children: [
+          //                   TableCell(
+          //                     child: Padding(
+          //                       padding: EdgeInsets.all(8.0),
+          //                       child: Text('Expert'),
+          //                     ),
+          //                   ),
+          //                   TableCell(
+          //                     child: Padding(
+          //                       padding: EdgeInsets.all(8.0),
+          //                       child: Text('Weight'),
+          //                     ),
+          //                   ),
+          //                 ]),
+          //                 for (int i = 1;
+          //                     i <= int.parse(_numberExperts.text);
+          //                     i++)
+          //                   TableRow(
+          //                     children: [
+          //                       TableCell(
+          //                         child: Padding(
+          //                           padding: const EdgeInsets.all(8.0),
+          //                           child: Text('ΔE$i'),
+          //                         ),
+          //                       ),
+          //                       TableCell(
+          //                         child: Padding(
+          //                           padding: const EdgeInsets.all(8.0),
+          //                           child: SizedBox(
+          //                             width: MediaQuery.of(context).size.width *
+          //                                 0.1,
+          //                             child: TextFormField(
+          //                               autovalidateMode:
+          //                                   AutovalidateMode.onUserInteraction,
+          //                               decoration: InputDecoration(
+          //                                 labelText: 'Weight of ΔE$i',
+          //                               ),
+          //                               // inputFormatters: [
+          //                               //   FilteringTextInputFormatter.digitsOnly
+          //                               // ],
+          //                               keyboardType: const TextInputType
+          //                                   .numberWithOptions(decimal: true),
+          //                               onChanged: (value) {
+          //                                 if (value.isNotEmpty || value != '') {
+          //                                   context
+          //                                       .read<ExpertNotifier>()
+          //                                       .setWeight(
+          //                                           i - 1, double.parse(value));
+          //                                 }
+          //                               },
+          //                               validator: (value) {
+          //                                 if (value!.isNotEmpty) {
+          //                                   if (double.parse(value) < 0.0 ||
+          //                                       double.parse(value) > 1.0) {
+          //                                     return 'Between 0-1';
+          //                                   }
+          //                                 }
+          //                                 return value.isEmpty
+          //                                     ? 'Please fill this field'
+          //                                     : null;
+          //                               },
+          //                             ),
+          //                           ),
+          //                         ),
+          //                       ),
+          //                     ],
+          //                   ),
+          //               ],
+          //             ),
+          //             const SizedBox(
+          //               height: 15.0,
+          //             ),
+          //             Row(
+          //               children: [
+          //                 const Spacer(),
+          //                 TextButton(
+          //                   onPressed: () {
+          //                     setState(() {
+          //                       _numExperts = true;
+          //                       _expertWeights = false;
+          //                     });
+          //                   },
+          //                   child: const Text('Back'),
+          //                 ),
+          //                 const SizedBox(
+          //                   width: 30.0,
+          //                 ),
+          //                 ElevatedButton(
+          //                   onPressed: () {
+          //                     setState(() {
+          //                       _expertWeights = false;
+          //                       _numQuestions = true;
+          //                     });
+          //                   },
+          //                   child: const Text('Next'),
+          //                 ),
+          //               ],
+          //             ),
+          //           ],
+          //         )
+          //       : const SizedBox(),
+          // ),
           Visibility(
             visible: _numQuestions,
             child: Column(
@@ -249,21 +249,22 @@ class _FahpMethodState extends State<FahpMethod> {
                 Row(
                   children: [
                     const Spacer(),
-                    TextButton(
-                      onPressed: () {
-                        setState(() {
-                          _expertWeights = true;
-                          _numQuestions = false;
-                        });
-                      },
-                      child: const Text('Back'),
-                    ),
-                    const SizedBox(
-                      width: 30.0,
-                    ),
+                    // TextButton(
+                    //   onPressed: () {
+                    //     setState(() {
+                    //       _expertWeights = true;
+                    //       _numQuestions = false;
+                    //     });
+                    //   },
+                    //   child: const Text('Back'),
+                    // ),
+                    // const SizedBox(
+                    //   width: 30.0,
+                    // ),
                     ElevatedButton(
                       onPressed: () {
                         if (_numberQuestions.text.isNotEmpty) {
+                          context.read<ExpertNotifier>().init(1);
                           context.read<QuestionNotifier>().init(
                               int.parse(_numberQuestions.text),
                               context.read<ExpertNotifier>().expertWi!.length);
