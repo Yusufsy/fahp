@@ -1,11 +1,7 @@
 import 'package:fahp/components/pairwaise_comp.dart';
-import 'package:fahp/components/pairwise_row.dart';
-import 'package:fahp/results/ahp_result.dart';
 import 'package:fahp/results/fahp_result.dart';
 import 'package:fahp/services/expert_notifier.dart';
-import 'package:fahp/services/matrix_notifier.dart';
 import 'package:fahp/services/question_notifier.dart';
-import 'package:fahp/utils/pairer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +16,6 @@ class FqfdMethod extends StatefulWidget {
 class _FqfdMethodState extends State<FqfdMethod> {
   final TextEditingController _numberExperts = TextEditingController();
   final TextEditingController _numberQuestions = TextEditingController();
-  final TextEditingController _numberController = TextEditingController();
   bool _numExperts = true;
   bool _numQuestions = false;
   bool _expertWeights = false;
@@ -70,7 +65,7 @@ class _FqfdMethodState extends State<FqfdMethod> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: const InputDecoration(
                           icon: Icon(Icons.group),
-                          labelText: 'No. of srequirements',
+                          labelText: 'No. of requirements',
                         ),
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly
