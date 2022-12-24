@@ -1,5 +1,6 @@
+import 'package:fahp/components/fahd_gdm_res.dart';
 import 'package:fahp/components/pairwaise_comp.dart';
-import 'package:fahp/results/fahp_result.dart';
+import 'package:fahp/results/fahp_gdm_results.dart';
 import 'package:fahp/services/expert_notifier.dart';
 import 'package:fahp/services/question_notifier.dart';
 import 'package:flutter/material.dart';
@@ -355,6 +356,9 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                           ElevatedButton(
                             onPressed: () {
                               context.read<QuestionNotifier>().generatePairs();
+                              context
+                                  .read<QuestionNotifier>()
+                                  .calculatePriorities();
                               setState(() {
                                 _questionsMatrix = false;
                                 _criteriaTable = true;
@@ -382,8 +386,13 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                                     .expertWi!
                                     .length;
                             i++)
-                          PairWiseComp(
-                            exIndex: i,
+                          Column(
+                            children: [
+                              PairWiseComp(
+                                exIndex: i,
+                              ),
+                              FahpGdmRes(exIndex: i - 1)
+                            ],
                           ),
                         const SizedBox(
                           height: 15.0,
@@ -413,7 +422,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                                       context,
                                       MaterialPageRoute(
                                           builder: ((context) =>
-                                              const FahpResult())));
+                                              const FahpGdmResult())));
                                 });
                               },
                               child: const Text('Calculate'),

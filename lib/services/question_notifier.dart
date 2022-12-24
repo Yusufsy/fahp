@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:collection/collection.dart';
@@ -17,6 +18,7 @@ class QuestionNotifier extends ChangeNotifier {
   List<Map<int, List<String>>> exQuestionMatrixMap = [];
   List<Map<List<String>, List<List<double>>>> exAllMatrices = [];
   Map<int, double> kN = {
+    2: 3.147,
     3: 3.147,
     4: 3.526,
     5: 3.717,
@@ -31,6 +33,10 @@ class QuestionNotifier extends ChangeNotifier {
     14: 3.663,
     15: 3.646,
     16: 3.646,
+    17: 3.646,
+    18: 3.646,
+    19: 3.646,
+    20: 3.646,
   };
 
   init(int numQuestions, int numExperts) {
@@ -46,7 +52,7 @@ class QuestionNotifier extends ChangeNotifier {
     // print(questionMatrix);
     // print(questionMatrixMap);
     for (int i = 0; i < numExperts; i++) {
-      exQuestionMatrixMap.add(questionMatrixMap);
+      exQuestionMatrixMap.add({...questionMatrixMap});
     }
     print(exQuestionMatrixMap);
   }
@@ -58,7 +64,7 @@ class QuestionNotifier extends ChangeNotifier {
       questionMatrixMap[pos]!.add('');
     }
     for (int i = 0; i < exQuestionMatrixMap.length; i++) {
-      exQuestionMatrixMap[i] = questionMatrixMap;
+      exQuestionMatrixMap[i] = {...questionMatrixMap};
     }
     print(exQuestionMatrixMap);
   }
@@ -67,7 +73,7 @@ class QuestionNotifier extends ChangeNotifier {
     questionMatrixMap[key]![pos] = value;
     // print(questionMatrixMap);
     for (int i = 0; i < exQuestionMatrixMap.length; i++) {
-      exQuestionMatrixMap[i] = questionMatrixMap;
+      exQuestionMatrixMap[i] = {...questionMatrixMap};
     }
     print(exQuestionMatrixMap);
   }
@@ -106,7 +112,7 @@ class QuestionNotifier extends ChangeNotifier {
     );
     // print(allMatrices);
     for (int i = 0; i < exQuestionMatrixMap.length; i++) {
-      exAllMatrices.add(allMatrices);
+      exAllMatrices.add({...allMatrices});
     }
     print(exAllMatrices);
   }
@@ -114,20 +120,13 @@ class QuestionNotifier extends ChangeNotifier {
   void setMatrixValue(int exIndex, List<String> pair, double val, int index,
       int pos, int respect) {
     print(exIndex);
-    // print(exQuestionMatrixMap[exIndex][index]);
-    Map matrix = exAllMatrices[exIndex];
-    // exAllMatrices[exIndex].forEach((key, value) {
-    // if (key == exQuestionMatrixMap[exIndex][index]) {
+    Map<List<String>, List<List<double>>> matrix = exAllMatrices[exIndex];
     for (int i = 0; i < matrix.keys.toList()[index].length; i++) {
       for (int j = 0; j < matrix.keys.toList()[index].length; j++) {
         for (var element in pairsGen[index]!) {
           if (element == pair) {
             if ([matrix.keys.toList()[index][i], matrix.keys.toList()[index][j]]
                 .equals(element)) {
-              print('${[
-                matrix.keys.toList()[index][i],
-                matrix.keys.toList()[index][j]
-              ]} equal $element');
               if (respect == 0) {
                 matrix[matrix.keys.toList()[index]]![i][j] = val;
                 matrix[matrix.keys.toList()[index]]![j][i] = 1 / val;
@@ -140,15 +139,8 @@ class QuestionNotifier extends ChangeNotifier {
         }
       }
     }
-    // }
-    // });
-    print(matrix);
-    // for (int i = 0; i < exQuestionMatrixMap.length; i++) {
-    //   if (i == exIndex) {
-    //     exAllMatrices[i] = matrix;
-    //   }
-    // }
-    print(exAllMatrices);
+    calculatePriorities();
+    notifyListeners();
   }
 
   void calculatePriorities() {
@@ -176,30 +168,23 @@ class QuestionNotifier extends ChangeNotifier {
         allWeights[key]!.add(rgm / sum);
       }
     });
-    // print(allWeights);
     allMatrices.forEach((key, value) {
       int pos = 1;
       for (var row in allMatrices[key]!) {
         int i = pos;
         for (int j = i; j <= row.length; j++) {
           if (j < row.length) {
-            // print('$pos ${row[j]}');
-            // print(allWeights[key]![pos - 1]);
-            // print(allWeights[key]![j]);
             logs[key]!.add(pow(
                     log(row[j]) -
                         log(allWeights[key]![pos - 1] / allWeights[key]![j]),
                     2)
                 .toDouble());
-            // logs[key]!.add(pow((log(4) - log(0.6145 / 0.2246)), 2).toDouble());
           }
         }
         pos++;
       }
     });
-    print(logs);
     logs.forEach((key, value) {
-      print(key.length);
       double totalLogs = value.sum;
       double upper = 2 * totalLogs;
       double lower = (key.length - 2) * (key.length - 2);
