@@ -1,6 +1,7 @@
 import 'package:fahp/components/pairwaise_comp.dart';
 import 'package:fahp/results/fahp_result.dart';
 import 'package:fahp/services/expert_notifier.dart';
+import 'package:fahp/services/qfd_notifier.dart';
 import 'package:fahp/services/question_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,7 +21,7 @@ class _FqfdMethodState extends State<FqfdMethod> {
   bool _numQuestions = false;
   bool _expertWeights = false;
   bool _questionsMatrix = false;
-  bool _setInputCriteria = false;
+  bool _engReq = false;
   bool _numCriteriaInput = false;
   bool _criteriaTable = false;
   bool _crispNumbers = false;
@@ -30,6 +31,8 @@ class _FqfdMethodState extends State<FqfdMethod> {
   final String _groupValue = 'Equal';
   @override
   Widget build(BuildContext context) {
+    var engReq = context.watch<QfdNotifier>().engReq;
+    var cusReq = context.watch<QfdNotifier>().cusReq;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
@@ -87,13 +90,13 @@ class _FqfdMethodState extends State<FqfdMethod> {
                     onPressed: () {
                       if (_numberExperts.text.isNotEmpty) {
                         context
-                            .read<ExpertNotifier>()
-                            .init(int.parse(_numberExperts.text));
+                            .read<QfdNotifier>()
+                            .setNumCusReq(int.parse(_numberExperts.text));
                         setState(() {
                           _numExperts = false;
                           _expertWeights = true;
                           _numCriteriaInput = false;
-                          _setInputCriteria = false;
+                          _engReq = false;
                           _criteriaTable = false;
                         });
                       } else {
@@ -164,50 +167,17 @@ class _FqfdMethodState extends State<FqfdMethod> {
                                               ? 'Please fill this field'
                                               : null;
                                         },
+                                        onChanged: (value) {
+                                          if (value.isNotEmpty || value != '') {
+                                            context
+                                                .read<QfdNotifier>()
+                                                .setCusReq(i - 1, value);
+                                          }
+                                        },
                                       ),
                                     ),
                                   ),
                                 ),
-                                /*TableCell(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.1,
-                                      child: TextFormField(
-                                        autovalidateMode:
-                                            AutovalidateMode.onUserInteraction,
-                                        decoration: InputDecoration(
-                                          labelText: 'Weight of ΔE$i',
-                                        ),
-                                        // inputFormatters: [
-                                        //   FilteringTextInputFormatter.digitsOnly
-                                        // ],
-                                        keyboardType: const TextInputType
-                                            .numberWithOptions(decimal: true),
-                                        onChanged: (value) {
-                                          if (value.isNotEmpty || value != '') {
-                                            context
-                                                .read<ExpertNotifier>()
-                                                .setWeight(
-                                                    i - 1, double.parse(value));
-                                          }
-                                        },
-                                        validator: (value) {
-                                          if (value!.isNotEmpty) {
-                                            if (double.parse(value) < 0.0 ||
-                                                double.parse(value) > 1.0) {
-                                              return 'Between 0-1';
-                                            }
-                                          }
-                                          return value.isEmpty
-                                              ? 'Please fill this field'
-                                              : null;
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ),*/
                               ],
                             ),
                         ],
@@ -289,13 +259,14 @@ class _FqfdMethodState extends State<FqfdMethod> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        /*if (_numberQuestions.text.isNotEmpty) {
-                          context.read<QuestionNotifier>().init(
-                              int.parse(_numberQuestions.text),
-                              context.read<ExpertNotifier>().expertWi!.length);
+                        if (_numberQuestions.text.isNotEmpty) {
+                          context
+                              .read<QfdNotifier>()
+                              .setNumEngReq(int.parse(_numberQuestions.text));
                           setState(() {
                             _numQuestions = false;
-                            _questionsMatrix = true;
+                            _questionsMatrix = false;
+                            _engReq = true;
                           });
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
@@ -303,8 +274,8 @@ class _FqfdMethodState extends State<FqfdMethod> {
                               content: const Text('Please input a number'),
                               backgroundColor: Theme.of(context).errorColor,
                             ),
-                          ); 
-                        }*/
+                          );
+                        }
                       },
                       child: const Text('Next'),
                     ),
@@ -314,50 +285,128 @@ class _FqfdMethodState extends State<FqfdMethod> {
             ),
           ),
           Visibility(
+            visible: _engReq,
+            child: _engReq
+                ? Column(
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 0.0),
+                        child: Text('Insert the engineering requirements'),
+                      ),
+                      Table(
+                        border: TableBorder.all(),
+                        defaultColumnWidth: const IntrinsicColumnWidth(),
+                        children: [
+                          for (int i = 1;
+                              i <= int.parse(_numberQuestions.text);
+                              i++)
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.5,
+                                      child: TextFormField(
+                                        autovalidateMode:
+                                            AutovalidateMode.onUserInteraction,
+                                        decoration: InputDecoration(
+                                          icon: const Icon(Icons.group),
+                                          labelText: 'Requirements $i',
+                                        ),
+                                        validator: (value) {
+                                          return value!.isEmpty
+                                              ? 'Please fill this field'
+                                              : null;
+                                        },
+                                        onChanged: (value) {
+                                          if (value.isNotEmpty || value != '') {
+                                            context
+                                                .read<QfdNotifier>()
+                                                .setEngReq(i - 1, value);
+                                          }
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 15.0,
+                      ),
+                      Row(
+                        children: [
+                          const Spacer(),
+                          TextButton(
+                            onPressed: () {
+                              setState(() {
+                                _expertWeights = false;
+                                _numQuestions = true;
+                              });
+                            },
+                            child: const Text('Back'),
+                          ),
+                          const SizedBox(
+                            width: 30.0,
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                _engReq = false;
+                                _numQuestions = false;
+                                _questionsMatrix = true;
+                              });
+                            },
+                            child: const Text('Next'),
+                          ),
+                        ],
+                      ),
+                    ],
+                  )
+                : const SizedBox(),
+          ),
+          Visibility(
             visible: _questionsMatrix,
             child: _questionsMatrix
                 ? Column(
                     children: [
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 0.0),
-                        child: Text('Insert the matrix of each question'),
+                        child: Text('Insert the value for each requirment'),
                       ),
                       Table(
                         border: TableBorder.all(),
                         defaultColumnWidth: const IntrinsicColumnWidth(),
                         children: [
-                          const TableRow(
+                          TableRow(
                             children: [
-                              TableCell(
+                              const TableCell(
                                 child: Padding(
                                   padding: EdgeInsets.all(8.0),
-                                  child: Text('Q'),
+                                  child: Text('Customer Requirements'),
                                 ),
                               ),
-                              TableCell(
+                              const TableCell(
                                 child: Padding(
                                   padding: EdgeInsets.all(8.0),
-                                  child: Text('Matrix'),
+                                  child: Text('Weights'),
                                 ),
                               ),
-                              TableCell(
-                                child: Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Text('Crit'),
+                              for (String req in engReq)
+                                TableCell(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(req),
+                                  ),
                                 ),
-                              ),
-                              TableCell(
-                                child: Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Text('WRT'),
-                                ),
-                              ),
                             ],
                           ),
-                          for (int i = 0;
-                              i < int.parse(_numberQuestions.text);
-                              i++)
-                            questionMatrixRow(i)
+                          for (String req in cusReq)
+                            questionMatrixRow(req, engReq)
                         ],
                       ),
                       const SizedBox(
@@ -375,19 +424,19 @@ class _FqfdMethodState extends State<FqfdMethod> {
                             },
                             child: const Text('Back'),
                           ),
-                          const SizedBox(
-                            width: 30.0,
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              context.read<QuestionNotifier>().generatePairs();
-                              setState(() {
-                                _questionsMatrix = false;
-                                _criteriaTable = true;
-                              });
-                            },
-                            child: const Text('Next'),
-                          ),
+                          // const SizedBox(
+                          //   width: 30.0,
+                          // ),
+                          // ElevatedButton(
+                          //   onPressed: () {
+                          //     context.read<QuestionNotifier>().generatePairs();
+                          //     setState(() {
+                          //       _questionsMatrix = false;
+                          //       _criteriaTable = true;
+                          //     });
+                          //   },
+                          //   child: const Text('Next'),
+                          // ),
                         ],
                       ),
                     ],
@@ -456,100 +505,44 @@ class _FqfdMethodState extends State<FqfdMethod> {
     );
   }
 
-  TableRow questionMatrixRow(int q) {
+  TableRow questionMatrixRow(String cus, List<String> numEng) {
     return TableRow(
       children: [
         TableCell(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text('${q + 1}'),
+            child: Text(cus),
           ),
         ),
         TableCell(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                IconButton(
-                  onPressed: () {
-                    if (context.read<QuestionNotifier>().questionMatrix![q] >
-                        2) {
-                      setState(() {
-                        context.read<QuestionNotifier>().setMatrix(
-                            q,
-                            context
-                                    .read<QuestionNotifier>()
-                                    .questionMatrix![q] -
-                                1);
-                      });
-                    }
-                  },
-                  icon: const Icon(Icons.remove),
-                ),
-                Text('${context.read<QuestionNotifier>().questionMatrix![q]}'),
-                IconButton(
-                  onPressed: () {
-                    if (context.read<QuestionNotifier>().questionMatrix![q] <=
-                        20) {
-                      setState(() {
-                        context.read<QuestionNotifier>().setMatrix(
-                            q,
-                            context
-                                    .read<QuestionNotifier>()
-                                    .questionMatrix![q] +
-                                1);
-                      });
-                    }
-                  },
-                  icon: const Icon(Icons.add_outlined),
-                ),
-              ],
+            child: TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              decoration: const InputDecoration(
+                labelText: 'W',
+              ),
+              onChanged: (value) {
+                // context.read<QuestionNotifier>().setWrt(q, value);
+              },
             ),
           ),
         ),
-        TableCell(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Wrap(
-              children: [
-                for (int i = 0;
-                    i < context.read<QuestionNotifier>().questionMatrix![q];
-                    i++)
-                  SizedBox(
-                    width: 150,
-                    child: TextFormField(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      decoration: InputDecoration(
-                        labelText: 'Criteria $i',
-                      ),
-                      onChanged: (value) {
-                        context
-                            .read<QuestionNotifier>()
-                            .setCriteria(q, i, value);
-                      },
-                    ),
-                  ),
-              ],
-            ),
-          ),
-        ),
-        TableCell(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              width: 150,
+        for (String req in numEng)
+          TableCell(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 decoration: const InputDecoration(
-                  labelText: 'Criteria',
+                  labelText: 'Scale',
                 ),
                 onChanged: (value) {
-                  context.read<QuestionNotifier>().setWrt(q, value);
+                  // context.read<QuestionNotifier>().setWrt(q, value);
                 },
               ),
             ),
           ),
-        ),
       ],
     );
   }

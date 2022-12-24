@@ -1,6 +1,7 @@
 import 'package:fahp/homepage.dart';
 import 'package:fahp/services/expert_notifier.dart';
 import 'package:fahp/services/matrix_notifier.dart';
+import 'package:fahp/services/qfd_notifier.dart';
 import 'package:fahp/services/question_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => MatrixNotifier()),
         ChangeNotifierProvider(create: (_) => ExpertNotifier()),
         ChangeNotifierProvider(create: (_) => QuestionNotifier()),
+        ChangeNotifierProvider(create: (_) => QfdNotifier()),
       ],
       child: MaterialApp(
         title: 'Consensus AHP',
