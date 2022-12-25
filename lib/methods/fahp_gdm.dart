@@ -207,10 +207,24 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              setState(() {
-                                _expertWeights = false;
-                                _numQuestions = true;
-                              });
+                              if (context.read<ExpertNotifier>().expertWi!.fold(
+                                      0.0,
+                                      (previousValue, element) =>
+                                          previousValue + element) ==
+                                  1) {
+                                setState(() {
+                                  _expertWeights = false;
+                                  _numQuestions = true;
+                                });
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: const Text('Invalid weights'),
+                                    backgroundColor:
+                                        Theme.of(context).errorColor,
+                                  ),
+                                );
+                              }
                             },
                             child: const Text('Next'),
                           ),
