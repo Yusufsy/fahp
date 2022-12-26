@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:fahp/components/fahd_gdm_res.dart';
 import 'package:fahp/components/pairwaise_comp.dart';
 import 'package:fahp/results/fahp_gdm_results.dart';
@@ -29,6 +31,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
   final List<String> _criteria = [];
   List<List<String>> _pairs = [];
   final String _groupValue = 'Equal';
+  int _currentStep = 0;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -393,21 +396,36 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
               child: _criteriaTable
                   ? Column(
                       children: [
-                        for (int i = 1;
-                            i <=
-                                context
-                                    .watch<ExpertNotifier>()
-                                    .expertWi!
-                                    .length;
-                            i++)
-                          Column(
-                            children: [
-                              PairWiseComp(
-                                exIndex: i,
-                              ),
-                              FahpGdmRes(exIndex: i - 1)
-                            ],
-                          ),
+                        Stepper(
+                            onStepTapped: (step) => tapped(step),
+                            onStepContinue: continued,
+                            onStepCancel: cancel,
+                            physics: const ScrollPhysics(),
+                            currentStep: _currentStep,
+                            steps: [
+                              for (int i = 1;
+                                  i <=
+                                      context
+                                          .watch<ExpertNotifier>()
+                                          .expertWi!
+                                          .length;
+                                  i++)
+                                Step(
+                                  title: Text("Expert $i"),
+                                  content: Column(
+                                    children: [
+                                      PairWiseComp(
+                                        exIndex: i,
+                                      ),
+                                      FahpGdmRes(exIndex: i - 1)
+                                    ],
+                                  ),
+                                  isActive: _currentStep >= 0,
+                                  state: _currentStep >= (i - 1)
+                                      ? StepState.complete
+                                      : StepState.disabled,
+                                )
+                            ]),
                         const SizedBox(
                           height: 15.0,
                         ),
@@ -439,7 +457,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                                               const FahpGdmResult())));
                                 });
                               },
-                              child: const Text('Calculate'),
+                              child: const Text('Calculate CJM'),
                             ),
                           ],
                         ),
@@ -451,6 +469,41 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
         ],
       ),
     );
+  }
+
+  tapped(int step) {
+    setState(() => _currentStep = step);
+  }
+
+  continued() {
+    final allMatrices = Map<List<String>, List<List<double>>>.from(
+        context.read<QuestionNotifier>().allMatrices);
+    Map<String, Map<String, List<List<double>>>> expValues =
+        Map<String, Map<String, List<List<double>>>>.from(
+            context.read<ExpertNotifier>().expValues);
+    Map<String, List<List<double>>> exMap = {};
+    int q = 1;
+    List<List<double>> _value = [];
+    allMatrices.forEach((key, value) {
+      value.forEach((element) {
+        List<double> val = [];
+        element.forEach((element) {
+          val.add(element);
+        });
+        _value.add(val);
+      });
+      exMap["q$q"] = _value.toList();
+      q++;
+    });
+    expValues["ex${_currentStep + 1}"] = exMap;
+    context.read<ExpertNotifier>().setExpValues(newExpValues: expValues);
+    _currentStep < context.read<ExpertNotifier>().expertWi!.length - 1
+        ? setState(() => _currentStep += 1)
+        : null;
+  }
+
+  cancel() {
+    _currentStep > 0 ? setState(() => _currentStep -= 1) : null;
   }
 
   TableRow questionMatrixRow(int q) {

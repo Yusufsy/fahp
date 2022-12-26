@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class ExpertNotifier extends ChangeNotifier {
   List<double>? expertWi;
+  Map<String, Map<String, List<List<double>>>> expValues = {};
 
   init(int numExperts) {
     expertWi = [];
@@ -16,4 +17,14 @@ class ExpertNotifier extends ChangeNotifier {
     expertWi![pos] = value;
     print(expertWi);
   }
+
+  setExpValues(
+      {required Map<String, Map<String, List<List<double>>>> newExpValues}) {
+    // expValues[key] = {...exMap};
+    expValues = newExpValues;
+    notifyListeners();
+    print(expValues);
+  }
+
+  setUpCJM() {}
 }

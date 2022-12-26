@@ -210,12 +210,18 @@ class _FahpGdmResState extends State<FahpGdmRes> {
                           TableCell(
                             child: Padding(
                               padding: EdgeInsets.all(8.0),
-                              child: Text(context
-                                  .watch<QuestionNotifier>()
-                                  .cr[qMatrices.values
-                                      .toList()
-                                      .indexOf(qMatrix)]
-                                  .toStringAsFixed(4)),
+                              child: Text(
+                                "${(context.watch<QuestionNotifier>().cr[qMatrices.values.toList().indexOf(qMatrix)] * 100).toStringAsFixed(2)}%",
+                                style: TextStyle(
+                                    color: context.watch<QuestionNotifier>().cr[
+                                                    qMatrices.values
+                                                        .toList()
+                                                        .indexOf(qMatrix)] *
+                                                100 >
+                                            10.00
+                                        ? Colors.red
+                                        : Colors.green),
+                              ),
                             ),
                           ),
                         ])

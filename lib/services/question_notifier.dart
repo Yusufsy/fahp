@@ -51,7 +51,8 @@ class QuestionNotifier extends ChangeNotifier {
     // print(questionMatrix);
     // print(questionMatrixMap);
     for (int i = 0; i < numExperts; i++) {
-      exQuestionMatrixMap.add({...questionMatrixMap});
+      exQuestionMatrixMap
+          .add(Map<int, List<String>>.from({...questionMatrixMap}));
     }
     print(exQuestionMatrixMap);
   }
@@ -63,7 +64,8 @@ class QuestionNotifier extends ChangeNotifier {
       questionMatrixMap[pos]!.add('');
     }
     for (int i = 0; i < exQuestionMatrixMap.length; i++) {
-      exQuestionMatrixMap[i] = {...questionMatrixMap};
+      exQuestionMatrixMap[i] =
+          Map<int, List<String>>.from({...questionMatrixMap});
     }
     print(exQuestionMatrixMap);
   }
@@ -72,7 +74,8 @@ class QuestionNotifier extends ChangeNotifier {
     questionMatrixMap[key]![pos] = value;
     // print(questionMatrixMap);
     for (int i = 0; i < exQuestionMatrixMap.length; i++) {
-      exQuestionMatrixMap[i] = {...questionMatrixMap};
+      exQuestionMatrixMap[i] =
+          Map<int, List<String>>.from({...questionMatrixMap});
     }
     print(exQuestionMatrixMap);
   }
@@ -86,7 +89,7 @@ class QuestionNotifier extends ChangeNotifier {
     allMatrices.clear();
     exAllMatrices.clear();
     questionMatrixMap.forEach((key, value) {
-      pairsGen[key] = Pairer().paiarCriteria(value);
+      pairsGen[key] = Pairer().paiarCriteria([...value]);
     });
     print(pairsGen);
 
@@ -111,7 +114,8 @@ class QuestionNotifier extends ChangeNotifier {
     );
     // print(allMatrices);
     for (int i = 0; i < exQuestionMatrixMap.length; i++) {
-      exAllMatrices.add({...allMatrices});
+      exAllMatrices
+          .add(Map<List<String>, List<List<double>>>.from({...allMatrices}));
     }
     print(exAllMatrices);
   }
@@ -119,7 +123,7 @@ class QuestionNotifier extends ChangeNotifier {
   void setMatrixValue(int exIndex, List<String> pair, double val, int index,
       int pos, int respect) {
     print(exIndex);
-    Map<List<String>, List<List<double>>> matrix = exAllMatrices[exIndex];
+    Map<List<String>, List<List<double>>> matrix = {...exAllMatrices[exIndex]};
     for (int i = 0; i < matrix.keys.toList()[index].length; i++) {
       for (int j = 0; j < matrix.keys.toList()[index].length; j++) {
         for (var element in pairsGen[index]!) {
