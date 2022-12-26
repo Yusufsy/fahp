@@ -24,9 +24,8 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Consensus AHP',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        theme:
+            ThemeData(primarySwatch: Colors.blue, brightness: Brightness.dark),
         home: const MyHomePage(),
       ),
     );

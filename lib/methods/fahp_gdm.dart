@@ -446,16 +446,17 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                             ),
                             ElevatedButton(
                               onPressed: () {
-                                context
-                                    .read<QuestionNotifier>()
-                                    .calculatePriorities();
-                                setState(() {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: ((context) =>
-                                              const FahpGdmResult())));
-                                });
+                                // context
+                                //     .read<QuestionNotifier>()
+                                //     .calculatePriorities();
+                                // setState(() {
+                                //   Navigator.push(
+                                //       context,
+                                //       MaterialPageRoute(
+                                //           builder: ((context) =>
+                                //               const FahpGdmResult())));
+                                // });
+                                context.read<ExpertNotifier>().setUpCJM();
                               },
                               child: const Text('Calculate CJM'),
                             ),
