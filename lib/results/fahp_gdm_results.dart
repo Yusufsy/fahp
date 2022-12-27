@@ -57,224 +57,234 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                     style: topicStyle,
                   ),
                 ),
-                for (int i = 0; i < exMatrix.length; i++)
-                  Column(
-                    children: [
-                      Text(
-                        "Expert ${i + 1}",
-                        style: topicStyle,
-                      ),
-                      for (var qMatrix in qMatrices.values)
-                        Column(
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 10.0),
-                              child: Text(
-                                'Question ${qMatrices.values.toList().indexOf(qMatrix) + 1}',
-                                style: subTopicStyle,
-                              ),
+                // for (int i = 0; i < exMatrix.length; i++)
+                Column(
+                  children: [
+                    Text(
+                      "Collective Judgement Matrix",
+                      style: topicStyle,
+                    ),
+                    for (var qMatrix in qMatrices.values)
+                      Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10.0),
+                            child: Text(
+                              'Question ${qMatrices.values.toList().indexOf(qMatrix) + 1}',
+                              style: subTopicStyle,
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 10.0),
-                              child: Text(
-                                'Crisp Numbers',
-                                style: subTopicStyle,
-                              ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10.0),
+                            child: Text(
+                              'Crisp Numbers',
+                              style: subTopicStyle,
                             ),
-                            Center(
-                              child: Table(
-                                border: TableBorder.all(),
-                                defaultColumnWidth:
-                                    const IntrinsicColumnWidth(),
-                                children: [
-                                  TableRow(
-                                    children: [
-                                      const TableCell(
+                          ),
+                          Center(
+                            child: Table(
+                              border: TableBorder.all(),
+                              defaultColumnWidth: const IntrinsicColumnWidth(),
+                              children: [
+                                TableRow(
+                                  children: [
+                                    const TableCell(
+                                      child: Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Text(' '),
+                                      ),
+                                    ),
+                                    for (String criteria in qMatrix)
+                                      TableCell(
                                         child: Padding(
-                                          padding: EdgeInsets.all(8.0),
-                                          child: Text(' '),
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(criteria),
                                         ),
                                       ),
-                                      for (String criteria in qMatrix)
-                                        TableCell(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text(criteria),
-                                          ),
+                                  ],
+                                ),
+                                for (String criteria in qMatrix)
+                                  TableRow(
+                                    children: [
+                                      TableCell(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(criteria),
                                         ),
+                                      ),
+                                      for (var rows in allMatrices[qMatrix]![
+                                          qMatrix.indexOf(criteria)])
+                                        TableCell(
+                                            child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            children: [
+                                              SizedBox(
+                                                width: 50,
+                                                child: rows == 1 || rows == 9
+                                                    ? Text(
+                                                        "${rows.toStringAsFixed(2)} ")
+                                                    : Text(
+                                                        "${(rows - 1).toStringAsFixed(2)} "),
+                                              ),
+                                              SizedBox(
+                                                  width: 50,
+                                                  child: Text(
+                                                      "${rows.toStringAsFixed(2)} ")),
+                                              rows == 1 || rows == 9
+                                                  ? Text(
+                                                      rows.toStringAsFixed(2))
+                                                  : Text((rows + 1)
+                                                      .toStringAsFixed(2)),
+                                            ],
+                                          ),
+                                        )),
                                     ],
                                   ),
-                                  for (String criteria in qMatrix)
-                                    TableRow(
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10.0),
+                            child: Text(
+                              'Calculations',
+                              style: subTopicStyle,
+                            ),
+                          ),
+                          Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Table(
+                                  border: TableBorder.all(),
+                                  defaultColumnWidth:
+                                      const IntrinsicColumnWidth(),
+                                  children: [
+                                    const TableRow(
                                       children: [
                                         TableCell(
                                           child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text(criteria),
+                                            padding: EdgeInsets.all(8.0),
+                                            child: Text(' '),
                                           ),
                                         ),
-                                        for (var rows in allMatrices[qMatrix]![
-                                            qMatrix.indexOf(criteria)])
-                                          TableCell(
-                                              child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 50,
-                                                  child: rows == 1 || rows == 9
-                                                      ? Text(
-                                                          "${rows.toStringAsFixed(2)} ")
-                                                      : Text(
-                                                          "${(rows - 1).toStringAsFixed(2)} "),
-                                                ),
-                                                SizedBox(
-                                                    width: 50,
-                                                    child: Text(
-                                                        "${rows.toStringAsFixed(2)} ")),
-                                                rows == 1 || rows == 9
-                                                    ? Text(
-                                                        rows.toStringAsFixed(2))
-                                                    : Text((rows + 1)
-                                                        .toStringAsFixed(2)),
-                                              ],
-                                            ),
-                                          )),
+                                        TableCell(
+                                          child: Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                            child: Text('Fuzzy RGM'),
+                                          ),
+                                        ),
+                                        TableCell(
+                                          child: Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                            child: Text('Fuzzy Weight'),
+                                          ),
+                                        ),
                                       ],
                                     ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 10.0),
-                              child: Text(
-                                'Calculations',
-                                style: subTopicStyle,
-                              ),
-                            ),
-                            Center(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Table(
-                                    border: TableBorder.all(),
-                                    defaultColumnWidth:
-                                        const IntrinsicColumnWidth(),
-                                    children: [
-                                      const TableRow(
+                                    for (String criteria in qMatrix)
+                                      TableRow(
                                         children: [
                                           TableCell(
                                             child: Padding(
-                                              padding: EdgeInsets.all(8.0),
-                                              child: Text(' '),
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Text(criteria),
+                                            ),
+                                          ),
+                                          // for (int i = 0; i < qMatrix.length; i++)
+                                          TableCell(
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Text(
+                                                  allPriorities[qMatrix]![
+                                                          qMatrix.indexOf(
+                                                              criteria)]
+                                                      .toStringAsFixed(4)),
                                             ),
                                           ),
                                           TableCell(
                                             child: Padding(
-                                              padding: EdgeInsets.all(8.0),
-                                              child: Text('RGM'),
-                                            ),
-                                          ),
-                                          TableCell(
-                                            child: Padding(
-                                              padding: EdgeInsets.all(8.0),
-                                              child: Text('Weight'),
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Text(allWeights[qMatrix]![
+                                                      qMatrix.indexOf(criteria)]
+                                                  .toStringAsFixed(4)),
                                             ),
                                           ),
                                         ],
                                       ),
-                                      for (String criteria in qMatrix)
-                                        TableRow(
-                                          children: [
-                                            TableCell(
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Text(criteria),
-                                              ),
-                                            ),
-                                            // for (int i = 0; i < qMatrix.length; i++)
-                                            TableCell(
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Text(
-                                                    allPriorities[qMatrix]![
-                                                            qMatrix.indexOf(
-                                                                criteria)]
-                                                        .toStringAsFixed(4)),
-                                              ),
-                                            ),
-                                            TableCell(
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Text(
-                                                    allWeights[qMatrix]![qMatrix
-                                                            .indexOf(criteria)]
-                                                        .toStringAsFixed(4)),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                    ],
-                                  ),
-                                  Table(
-                                    defaultColumnWidth:
-                                        const IntrinsicColumnWidth(),
-                                    children: [
-                                      const TableRow(
-                                        children: [
-                                          TableCell(
-                                            child: Padding(
-                                              padding: EdgeInsets.all(8.0),
-                                              child: Text('GCI'),
-                                            ),
-                                          ),
-                                          TableCell(
-                                            child: Padding(
-                                              padding: EdgeInsets.all(8.0),
-                                              child: Text('CR'),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      TableRow(children: [
+                                  ],
+                                ),
+                                Table(
+                                  defaultColumnWidth:
+                                      const IntrinsicColumnWidth(),
+                                  children: [
+                                    const TableRow(
+                                      children: [
                                         TableCell(
                                           child: Padding(
                                             padding: EdgeInsets.all(8.0),
-                                            child: Text(context
-                                                .watch<QuestionNotifier>()
-                                                .gci[qMatrices.values
-                                                    .toList()
-                                                    .indexOf(qMatrix)]
-                                                .toStringAsFixed(4)),
+                                            child: Text('GCI'),
                                           ),
                                         ),
                                         TableCell(
                                           child: Padding(
                                             padding: EdgeInsets.all(8.0),
-                                            child: Text(context
+                                            child: Text('CR'),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    TableRow(children: [
+                                      TableCell(
+                                        child: Padding(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Text(context
+                                              .watch<QuestionNotifier>()
+                                              .gci[qMatrices.values
+                                                  .toList()
+                                                  .indexOf(qMatrix)]
+                                              .toStringAsFixed(4)),
+                                        ),
+                                      ),
+                                      TableCell(
+                                        child: Padding(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Text(
+                                            context
                                                 .watch<QuestionNotifier>()
                                                 .cr[qMatrices.values
                                                     .toList()
                                                     .indexOf(qMatrix)]
-                                                .toStringAsFixed(4)),
+                                                .toStringAsFixed(4),
+                                            style: TextStyle(
+                                                color: context
+                                                                    .watch<
+                                                                        QuestionNotifier>()
+                                                                    .cr[
+                                                                qMatrices.values
+                                                                    .toList()
+                                                                    .indexOf(
+                                                                        qMatrix)] *
+                                                            100 >
+                                                        10.00
+                                                    ? Colors.red
+                                                    : Colors.green),
                                           ),
                                         ),
-                                      ])
-                                    ],
-                                  ),
-                                ],
-                              ),
+                                      ),
+                                    ])
+                                  ],
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                    ],
-                  )
+                          ),
+                        ],
+                      ),
+                  ],
+                )
               ],
             ),
           ),
