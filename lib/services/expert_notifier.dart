@@ -49,28 +49,53 @@ class ExpertNotifier extends ChangeNotifier {
     });
     print(exQsMatrices);
 
-//product based on expert weights
-    Map<String, Map<String, List<List<List<double>>>>> cjmExQsMatrices = {};
+    //product based on expert weights
+    Map<String, Map<String, Map<String, List<List<double>>>>> cjmExQsMatrices =
+        {};
     exQsMatrices.forEach((key, value) {
-      Map<String, List<List<List<double>>>> qsMatrices = {};
+      Map<String, Map<String, List<List<double>>>> qsMatrices = {};
       value.forEach((key, value) {
-        List<List<List<double>>> matrices = [];
+        Map<String, List<List<double>>> matrices = {};
         for (var items in value) {
-          List<List<double>> item = [];
-          int pos = 0;
-          for (var scale in items) {
-            for (int i = 0; i < scale.length; i++) {
-              if (i == pos) {
-                item.add([
-                  (scale[i] <= 1 || scale[i] >= 9 ? scale[i] : scale[i] - 1),
-                  scale[i],
-                  (scale[i] <= 1 || scale[i] >= 9 ? scale[i] : scale[i] + 1)
-                ]);
+          // for (int i = 0; i < items.length; i++) {
+          List<List<double>> itemL = [];
+          List<List<double>> itemM = [];
+          List<List<double>> itemU = [];
+          List<double> l = [];
+          List<double> m = [];
+          List<double> u = [];
+          for (var element in items) {
+            for (int i = 0; i < element.length; i++) {
+              if (i == 0) {
+                l.add(element[i]);
+              } else if (i == 1) {
+                m.add(element[i]);
+              } else {
+                u.add(element[i]);
               }
             }
-            pos++;
+            // print(l);
+            // List<double> subL = [];
+            // l.forEach((element) {
+            //   subL.add(element);
+            // });
+            itemL.add(l);
+            itemM.add(m);
+            itemU.add(u);
           }
-          matrices.add(item);
+          print(itemL);
+          print(itemM);
+          matrices["l"] = [];
+          itemL.forEach((element) {
+            List<double> el = [];
+            for (var element in element) {
+              el.add(element);
+            }
+            matrices["l"]!.add(el);
+          });
+          // matrices["l"] = itemL;
+          matrices["m"] = itemM;
+          matrices["u"] = itemU;
         }
         qsMatrices[key] = matrices;
       });

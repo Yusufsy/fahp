@@ -495,6 +495,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
       });
       exMap["q$q"] = _value.toList();
       q++;
+      _value.clear();
     });
     expValues["ex${_currentStep + 1}"] = exMap;
     context.read<ExpertNotifier>().setExpValues(newExpValues: expValues);
