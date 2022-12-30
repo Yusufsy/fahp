@@ -446,10 +446,10 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                             ),
                             ElevatedButton(
                               onPressed: () {
-                                context.read<ExpertNotifier>().setUpCJM();
                                 context
                                     .read<QuestionNotifier>()
                                     .calculatePriorities();
+                                context.read<ExpertNotifier>().setUpCJM();
                                 setState(() {
                                   Navigator.push(
                                       context,

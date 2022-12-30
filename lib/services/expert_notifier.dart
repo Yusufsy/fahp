@@ -47,60 +47,51 @@ class ExpertNotifier extends ChangeNotifier {
       });
       exQsMatrices[key] = qsMatrices;
     });
-    print(exQsMatrices);
+    print("exQsMatrices $exQsMatrices");
 
-    //product based on expert weights
+    //collecting l m u
     Map<String, Map<String, Map<String, List<List<double>>>>> cjmExQsMatrices =
         {};
     exQsMatrices.forEach((key, value) {
-      Map<String, Map<String, List<List<double>>>> qsMatrices = {};
-      value.forEach((key, value) {
-        Map<String, List<List<double>>> matrices = {};
-        for (var items in value) {
-          // for (int i = 0; i < items.length; i++) {
-          List<List<double>> itemL = [];
-          List<List<double>> itemM = [];
-          List<List<double>> itemU = [];
+      Map<String, Map<String, List<List<double>>>> itemL = {};
+      value.forEach((_key, _value) {
+        itemL[_key] = {};
+        itemL[_key]!["l"] = [];
+        itemL[_key]!["m"] = [];
+        itemL[_key]!["u"] = [];
+        for (var element in _value) {
           List<double> l = [];
           List<double> m = [];
           List<double> u = [];
-          for (var element in items) {
-            for (int i = 0; i < element.length; i++) {
+          for (var subElement in element) {
+            for (int i = 0; i < subElement.length; i++) {
               if (i == 0) {
-                l.add(element[i]);
+                l.add(subElement[i]);
               } else if (i == 1) {
-                m.add(element[i]);
+                m.add(subElement[i]);
               } else {
-                u.add(element[i]);
+                u.add(subElement[i]);
               }
             }
-            // print(l);
-            // List<double> subL = [];
-            // l.forEach((element) {
-            //   subL.add(element);
-            // });
-            itemL.add(l);
-            itemM.add(m);
-            itemU.add(u);
           }
-          print(itemL);
-          print(itemM);
-          matrices["l"] = [];
-          itemL.forEach((element) {
-            List<double> el = [];
-            for (var element in element) {
-              el.add(element);
-            }
-            matrices["l"]!.add(el);
-          });
-          // matrices["l"] = itemL;
-          matrices["m"] = itemM;
-          matrices["u"] = itemU;
+          itemL[_key]!["l"]!.add(l.toList());
+          itemL[_key]!["m"]!.add(m.toList());
+          itemL[_key]!["u"]!.add(u.toList());
         }
-        qsMatrices[key] = matrices;
+        cjmExQsMatrices[key] = itemL;
       });
-      cjmExQsMatrices[key] = qsMatrices;
     });
     print(cjmExQsMatrices);
+
+    for (int i = 0; i < expertWi!.length; i++) {
+      for (int iq = 1; iq <= cjmExQsMatrices["ex${i + 1}"]!.length; iq++) {
+        var matL = cjmExQsMatrices["ex${i + 1}"]!['q$iq']!["l"];
+        List<double> xL = [];
+        for (int c = 0; c < matL!.length; c++) {
+          xL.add(matL[c][c]);
+        }
+        print(xL);
+      }
+    }
   }
 }
