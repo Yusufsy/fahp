@@ -89,7 +89,7 @@ class _FahpGdmResState extends State<FahpGdmRes> {
                                 children: [
                                   SizedBox(
                                     width: 50,
-                                    child: rows == 1 || rows == 9
+                                    child: rows <= 1 || rows == 9
                                         ? Text("${rows.toStringAsFixed(2)} ")
                                         : Text(
                                             "${(rows - 1).toStringAsFixed(2)} "),
@@ -98,7 +98,7 @@ class _FahpGdmResState extends State<FahpGdmRes> {
                                       width: 50,
                                       child:
                                           Text("${rows.toStringAsFixed(2)} ")),
-                                  rows == 1 || rows == 9
+                                  rows <= 1 || rows == 9
                                       ? Text(rows.toStringAsFixed(2))
                                       : Text((rows + 1).toStringAsFixed(2)),
                                 ],
