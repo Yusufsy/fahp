@@ -30,6 +30,7 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
     // var matrixVals = context.watch<MatrixNotifier>().myMatrix;
     // var criteria = context.watch<MatrixNotifier>().criteria;
     // var priorities = context.watch<MatrixNotifier>().priorities;
+    final cjmMatrix = context.watch<ExpertNotifier>().cjmMatrix;
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -98,7 +99,49 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                       TableCell(
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
-                                          child: Text(criteria),
+                                          child: Text(criteria,
+                                              textAlign: TextAlign.center),
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const TableCell(
+                                      child: Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Text(' '),
+                                      ),
+                                    ),
+                                    for (String criteria in qMatrix)
+                                      TableCell(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            children: const [
+                                              SizedBox(
+                                                width: 70,
+                                                child: Text(
+                                                  'l',
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 70,
+                                                child: Text(
+                                                  'm',
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 70,
+                                                child: Text(
+                                                  'u',
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                   ],
@@ -112,30 +155,51 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                           child: Text(criteria),
                                         ),
                                       ),
-                                      for (var rows in allMatrices[qMatrix]![
-                                          qMatrix.indexOf(criteria)])
+                                      for (var row = 0;
+                                          row <
+                                              cjmMatrix['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
+                                                          'l']![
+                                                      qMatrix.indexOf(criteria)]
+                                                  .length;
+                                          row++)
                                         TableCell(
                                             child: Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: Row(
                                             children: [
                                               SizedBox(
-                                                width: 50,
-                                                child: rows == 1 || rows == 9
-                                                    ? Text(
-                                                        "${rows.toStringAsFixed(2)} ")
-                                                    : Text(
-                                                        "${(rows - 1).toStringAsFixed(2)} "),
+                                                width: 70,
+                                                child: Text(
+                                                  cjmMatrix['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
+                                                              'l']![
+                                                          qMatrix.indexOf(
+                                                              criteria)][row]
+                                                      .toStringAsFixed(4),
+                                                  textAlign: TextAlign.center,
+                                                ),
                                               ),
                                               SizedBox(
-                                                  width: 50,
-                                                  child: Text(
-                                                      "${rows.toStringAsFixed(2)} ")),
-                                              rows == 1 || rows == 9
-                                                  ? Text(
-                                                      rows.toStringAsFixed(2))
-                                                  : Text((rows + 1)
-                                                      .toStringAsFixed(2)),
+                                                width: 70,
+                                                child: Text(
+                                                  cjmMatrix['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
+                                                              'm']![
+                                                          qMatrix.indexOf(
+                                                              criteria)][row]
+                                                      .toStringAsFixed(4),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 70,
+                                                child: Text(
+                                                  cjmMatrix['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
+                                                              'u']![
+                                                          qMatrix.indexOf(
+                                                              criteria)][row]
+                                                      .toStringAsFixed(4),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ),
                                             ],
                                           ),
                                         )),

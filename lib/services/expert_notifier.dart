@@ -1,8 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class ExpertNotifier extends ChangeNotifier {
   List<double>? expertWi;
   Map<String, Map<String, List<List<double>>>> expValues = {};
+  Map<String, Map<String, List<List<double>>>> cjmMatrix = {};
 
   init(int numExperts) {
     expertWi = [];
@@ -47,7 +50,6 @@ class ExpertNotifier extends ChangeNotifier {
       });
       exQsMatrices[key] = qsMatrices;
     });
-    print("exQsMatrices $exQsMatrices");
 
     //collecting l m u
     Map<String, Map<String, Map<String, List<List<double>>>>> cjmExQsMatrices =
@@ -81,17 +83,83 @@ class ExpertNotifier extends ChangeNotifier {
         cjmExQsMatrices[key] = itemL;
       });
     });
-    print(cjmExQsMatrices);
+    // print(cjmExQsMatrices);
 
+    Map<String, Map<String, List<List<List<double>>>>> allQsM = {};
     for (int i = 0; i < expertWi!.length; i++) {
       for (int iq = 1; iq <= cjmExQsMatrices["ex${i + 1}"]!.length; iq++) {
-        var matL = cjmExQsMatrices["ex${i + 1}"]!['q$iq']!["l"];
-        List<double> xL = [];
-        for (int c = 0; c < matL!.length; c++) {
-          xL.add(matL[c][c]);
+        if (allQsM['q$iq'] == null) {
+          allQsM['q$iq'] = {};
+          allQsM['q$iq']!['l'] = [];
+          allQsM['q$iq']!['m'] = [];
+          allQsM['q$iq']!['u'] = [];
         }
-        print(xL);
+      }
+      for (int iq = 1; iq <= cjmExQsMatrices["ex${i + 1}"]!.length; iq++) {
+        var matL = cjmExQsMatrices["ex${i + 1}"]!['q$iq']!["l"];
+        allQsM['q$iq']!['l']!.add(matL!);
+        allQsM['q$iq']!['m']!
+            .add(cjmExQsMatrices["ex${i + 1}"]!['q$iq']!["m"]!);
+        allQsM['q$iq']!['u']!
+            .add(cjmExQsMatrices["ex${i + 1}"]!['q$iq']!["u"]!);
       }
     }
+    // print(allQsM);
+    int exIndex = 0;
+    allQsM.forEach((keyQ, question) {
+      if (cjmMatrix[keyQ] == null) {
+        cjmMatrix[keyQ] = {};
+        cjmMatrix[keyQ]!['l'] = [];
+        cjmMatrix[keyQ]!['m'] = [];
+        cjmMatrix[keyQ]!['u'] = [];
+      }
+      //for l
+      List<List<double>> multipliedList = [];
+      var dynamicLists = question['l']!;
+      for (var i = 0; i < dynamicLists[0].length; i++) {
+        multipliedList.add([]);
+        for (var j = 0; j < dynamicLists[0][i].length; j++) {
+          double result = 1;
+          for (var k = 0; k < dynamicLists.length; k++) {
+            result *= pow(dynamicLists[k][i][j], expertWi![exIndex]);
+          }
+          multipliedList[i].add(result);
+        }
+      }
+      cjmMatrix[keyQ]!['l'] = multipliedList;
+
+      //for m
+      List<List<double>> multipliedListM = [];
+      var dynamicListsM = question['m']!;
+      for (var i = 0; i < dynamicListsM[0].length; i++) {
+        multipliedListM.add([]);
+        for (var j = 0; j < dynamicListsM[0][i].length; j++) {
+          double result = 1;
+          for (var k = 0; k < dynamicListsM.length; k++) {
+            result *= pow(dynamicListsM[k][i][j], expertWi![exIndex]);
+          }
+          multipliedListM[i].add(result);
+        }
+      }
+      cjmMatrix[keyQ]!['m'] = multipliedListM;
+
+      //for u
+      List<List<double>> multipliedListU = [];
+      var dynamicListsU = question['u']!;
+      for (var i = 0; i < dynamicListsU[0].length; i++) {
+        multipliedListU.add([]);
+        for (var j = 0; j < dynamicListsU[0][i].length; j++) {
+          double result = 1;
+          for (var k = 0; k < dynamicListsU.length; k++) {
+            result *= pow(dynamicListsU[k][i][j], expertWi![exIndex]);
+            // result *= dynamicListsU[k][i][j];
+          }
+          multipliedListU[i].add(result);
+        }
+      }
+      cjmMatrix[keyQ]!['u'] = multipliedListU;
+      exIndex++;
+    });
+    print(cjmMatrix);
   }
 }
