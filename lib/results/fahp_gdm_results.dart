@@ -1,5 +1,4 @@
 import 'package:fahp/services/expert_notifier.dart';
-import 'package:fahp/services/matrix_notifier.dart';
 import 'package:fahp/services/question_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,14 +22,11 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
     final topicStyle = Theme.of(context).textTheme.headline3;
     final subTopicStyle = Theme.of(context).textTheme.headline5;
     final qMatrices = context.watch<QuestionNotifier>().questionMatrixMap;
-    final allMatrices = context.watch<QuestionNotifier>().allMatrices;
-    final allPriorities = context.watch<QuestionNotifier>().allPriorities;
-    final allWeights = context.watch<QuestionNotifier>().allWeights;
-    final exMatrix = context.watch<QuestionNotifier>().exQuestionMatrixMap;
-    // var matrixVals = context.watch<MatrixNotifier>().myMatrix;
-    // var criteria = context.watch<MatrixNotifier>().criteria;
-    // var priorities = context.watch<MatrixNotifier>().priorities;
+    final allPriorities = context.watch<ExpertNotifier>().allPriorities;
+    final allWeights = context.watch<ExpertNotifier>().allWeights;
     final cjmMatrix = context.watch<ExpertNotifier>().cjmMatrix;
+    final gci = context.watch<ExpertNotifier>().gci;
+    final cr = context.watch<ExpertNotifier>().cr;
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -235,13 +231,89 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                         TableCell(
                                           child: Padding(
                                             padding: EdgeInsets.all(8.0),
-                                            child: Text('Fuzzy RGM'),
+                                            child: Text(
+                                              'Fuzzy RGM',
+                                              textAlign: TextAlign.center,
+                                            ),
                                           ),
                                         ),
                                         TableCell(
                                           child: Padding(
                                             padding: EdgeInsets.all(8.0),
-                                            child: Text('Fuzzy Weight'),
+                                            child: Text(
+                                              'Fuzzy Weight',
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    TableRow(
+                                      children: [
+                                        const TableCell(
+                                          child: Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                            child: Text(' '),
+                                          ),
+                                        ),
+                                        TableCell(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Row(
+                                              children: const [
+                                                SizedBox(
+                                                  width: 70,
+                                                  child: Text(
+                                                    'l',
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 70,
+                                                  child: Text(
+                                                    'm',
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 70,
+                                                  child: Text(
+                                                    'u',
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        TableCell(
+                                          child: Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                            child: Row(
+                                              children: const [
+                                                SizedBox(
+                                                  width: 70,
+                                                  child: Text(
+                                                    'l',
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 70,
+                                                  child: Text(
+                                                    'm',
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 70,
+                                                  child: Text(
+                                                    'u',
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -261,20 +333,92 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                             child: Padding(
                                               padding:
                                                   const EdgeInsets.all(8.0),
-                                              child: Text(
-                                                  allPriorities[qMatrix]![
-                                                          qMatrix.indexOf(
-                                                              criteria)]
-                                                      .toStringAsFixed(4)),
+                                              child: Row(
+                                                children: [
+                                                  SizedBox(
+                                                    width: 70,
+                                                    child: Text(
+                                                      allPriorities['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
+                                                                  'l']![
+                                                              qMatrix.indexOf(
+                                                                  criteria)]
+                                                          .toStringAsFixed(4),
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 70,
+                                                    child: Text(
+                                                      allPriorities['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
+                                                                  'm']![
+                                                              qMatrix.indexOf(
+                                                                  criteria)]
+                                                          .toStringAsFixed(4),
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 70,
+                                                    child: Text(
+                                                      allPriorities['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
+                                                                  'u']![
+                                                              qMatrix.indexOf(
+                                                                  criteria)]
+                                                          .toStringAsFixed(4),
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                           TableCell(
                                             child: Padding(
                                               padding:
                                                   const EdgeInsets.all(8.0),
-                                              child: Text(allWeights[qMatrix]![
-                                                      qMatrix.indexOf(criteria)]
-                                                  .toStringAsFixed(4)),
+                                              child: Row(
+                                                children: [
+                                                  SizedBox(
+                                                    width: 70,
+                                                    child: Text(
+                                                      allWeights['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
+                                                                  'l']![
+                                                              qMatrix.indexOf(
+                                                                  criteria)]
+                                                          .toStringAsFixed(4),
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 70,
+                                                    child: Text(
+                                                      allWeights['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
+                                                                  'm']![
+                                                              qMatrix.indexOf(
+                                                                  criteria)]
+                                                          .toStringAsFixed(4),
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 70,
+                                                    child: Text(
+                                                      allWeights['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
+                                                                  'u']![
+                                                              qMatrix.indexOf(
+                                                                  criteria)]
+                                                          .toStringAsFixed(4),
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -305,37 +449,23 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                       TableCell(
                                         child: Padding(
                                           padding: EdgeInsets.all(8.0),
-                                          child: Text(context
-                                              .watch<QuestionNotifier>()
-                                              .gci[qMatrices.values
-                                                  .toList()
-                                                  .indexOf(qMatrix)]
-                                              .toStringAsFixed(4)),
+                                          child: Text(
+                                              gci['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']!
+                                                  .toStringAsFixed(4)),
                                         ),
                                       ),
                                       TableCell(
                                         child: Padding(
                                           padding: EdgeInsets.all(8.0),
                                           child: Text(
-                                            context
-                                                .watch<QuestionNotifier>()
-                                                .cr[qMatrices.values
-                                                    .toList()
-                                                    .indexOf(qMatrix)]
-                                                .toStringAsFixed(4),
+                                            '${(cr['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']! * 100).toStringAsFixed(2)}%',
                                             style: TextStyle(
-                                                color: context
-                                                                    .watch<
-                                                                        QuestionNotifier>()
-                                                                    .cr[
-                                                                qMatrices.values
-                                                                    .toList()
-                                                                    .indexOf(
-                                                                        qMatrix)] *
-                                                            100 >
-                                                        10.00
-                                                    ? Colors.red
-                                                    : Colors.green),
+                                                color:
+                                                    cr['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']! *
+                                                                100 >
+                                                            10.00
+                                                        ? Colors.red
+                                                        : Colors.green),
                                           ),
                                         ),
                                       ),

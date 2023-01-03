@@ -198,7 +198,7 @@ class _FahpGdmResState extends State<FahpGdmRes> {
                         TableRow(children: [
                           TableCell(
                             child: Padding(
-                              padding: EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(8.0),
                               child: Text(context
                                   .watch<QuestionNotifier>()
                                   .gci[qMatrices.values

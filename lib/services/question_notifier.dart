@@ -190,7 +190,7 @@ class QuestionNotifier extends ChangeNotifier {
     logs.forEach((key, value) {
       double totalLogs = value.sum;
       double upper = 2 * totalLogs;
-      double lower = (key.length - 2) * (key.length - 2);
+      double lower = (key.length - 1) * (key.length - 2);
       double fraction = upper / lower;
       double computeGCI = fraction * totalLogs;
       gci.add(computeGCI);

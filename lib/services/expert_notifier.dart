@@ -1,11 +1,18 @@
 import 'dart:math';
 
+import 'package:fahp/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class ExpertNotifier extends ChangeNotifier {
   List<double>? expertWi;
   Map<String, Map<String, List<List<double>>>> expValues = {};
   Map<String, Map<String, List<List<double>>>> cjmMatrix = {};
+  Map<String, List<double>> crispWeights = {};
+  Map<String, List<double>> normalWeights = {};
+  Map<String, double> gci = {};
+  Map<String, double> cr = {};
+  Map<String, Map<String, List<double>>> allPriorities = {};
+  Map<String, Map<String, List<double>>> allWeights = {};
 
   init(int numExperts) {
     expertWi = [];
@@ -152,7 +159,6 @@ class ExpertNotifier extends ChangeNotifier {
           double result = 1;
           for (var k = 0; k < dynamicListsU.length; k++) {
             result *= pow(dynamicListsU[k][i][j], expertWi![exIndex]);
-            // result *= dynamicListsU[k][i][j];
           }
           multipliedListU[i].add(result);
         }
@@ -161,5 +167,113 @@ class ExpertNotifier extends ChangeNotifier {
       exIndex++;
     });
     print(cjmMatrix);
+    calculatePriorities();
+    notifyListeners();
+  }
+
+  void calculatePriorities() {
+    Map<String, List<double>> logs = {};
+    logs.clear();
+    gci.clear();
+    cr.clear();
+    cjmMatrix.forEach((key, value) {
+      allPriorities[key] = {'l': [], 'm': [], 'u': []};
+      allWeights[key] = {'l': [], 'm': [], 'u': []};
+      logs[key] = [];
+      crispWeights[key] = [];
+    });
+    cjmMatrix.forEach((key, value) {
+      for (int rate = 0; rate < cjmMatrix[key]!['l']!.length; rate++) {
+        double productL = cjmMatrix[key]!['l']![rate]
+            .reduce((value, element) => value * element);
+        allPriorities[key]!['l']!
+            .add(pow(productL, 1 / value.length).toDouble());
+
+        double productM = cjmMatrix[key]!['m']![rate]
+            .reduce((value, element) => value * element);
+        allPriorities[key]!['m']!
+            .add(pow(productM, 1 / value.length).toDouble());
+
+        double productU = cjmMatrix[key]!['u']![rate]
+            .reduce((value, element) => value * element);
+        allPriorities[key]!['u']!
+            .add(pow(productU, 1 / value.length).toDouble());
+      }
+    });
+    print('Priorities $allPriorities');
+    allPriorities.forEach((key, value) {
+      double sumL = 0.0;
+      for (double itemL in allPriorities[key]!['l']!) {
+        sumL += itemL;
+      }
+      double sumM = 0.0;
+      for (double itemM in allPriorities[key]!['m']!) {
+        sumM += itemM;
+      }
+      double sumU = 0.0;
+      for (double itemU in allPriorities[key]!['u']!) {
+        sumU += itemU;
+      }
+      for (int rgm = 0; rgm < allPriorities[key]!['l']!.length; rgm++) {
+        allWeights[key]!['l']!.add(allPriorities[key]!['l']![rgm] / sumL);
+        allWeights[key]!['m']!.add(allPriorities[key]!['m']![rgm] / sumM);
+        allWeights[key]!['u']!.add(allPriorities[key]!['u']![rgm] / sumU);
+      }
+    });
+    print('All weights $allWeights');
+    allWeights.forEach((key, value) {
+      for (int i = 0; i < allWeights[key]!['l']!.length; i++) {
+        var l = allWeights[key]!['l']![i];
+        var m = allWeights[key]!['m']![i];
+        var u = allWeights[key]!['u']![i];
+        crispWeights[key]!.add(((l + m + u) / 3));
+      }
+    });
+    print('Crips Weight $crispWeights');
+    crispWeights.forEach((key, value) {
+      normalWeights[key] = [];
+      var sumVal = 0.0;
+      for (var doub in value) {
+        sumVal += doub;
+      }
+      for (var doub in value) {
+        normalWeights[key]!.add(doub / sumVal);
+      }
+    });
+    print(normalWeights);
+    cjmMatrix.forEach((key, value) {
+      int pos = 1;
+      for (int row = 0; row < cjmMatrix[key]!['m']!.length; row++) {
+        int i = pos;
+        for (int j = i; j <= cjmMatrix[key]!['m']![row].length; j++) {
+          if (j < cjmMatrix[key]!['m']![row].length) {
+            logs[key]!.add(pow(
+                    log(cjmMatrix[key]!['m']![row][j]) -
+                        log(normalWeights[key]![pos - 1] /
+                            normalWeights[key]![j]),
+                    2)
+                .toDouble());
+          }
+        }
+        pos++;
+      }
+    });
+    logs.forEach((key, value) {
+      double totalLogs = 0.0;
+      for (double itemL in logs[key]!) {
+        totalLogs += itemL;
+      }
+      double upper = 2 * totalLogs;
+      double lower = (cjmMatrix[key]!['m']!.length - 1) *
+          (cjmMatrix[key]!['m']!.length - 2);
+
+      double fraction = upper / lower;
+
+      double computeGCI = fraction * totalLogs;
+
+      gci[key] = computeGCI;
+      cr[key] = computeGCI / kN[cjmMatrix[key]!['m']!.length]!;
+    });
+    print('GCI: $gci CR: $cr');
   }
 }

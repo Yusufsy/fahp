@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:fahp/components/fahd_gdm_res.dart';
 import 'package:fahp/components/pairwaise_comp.dart';
 import 'package:fahp/results/fahp_gdm_results.dart';
 import 'package:fahp/services/expert_notifier.dart';
@@ -417,7 +414,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                                       PairWiseComp(
                                         exIndex: i,
                                       ),
-                                      FahpGdmRes(exIndex: i - 1)
+                                      // FahpGdmRes(exIndex: i - 1)
                                     ],
                                   ),
                                   isActive: _currentStep >= 0,
@@ -446,6 +443,37 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                             ),
                             ElevatedButton(
                               onPressed: () {
+                                final allMatrices =
+                                    Map<List<String>, List<List<double>>>.from(
+                                        context
+                                            .read<QuestionNotifier>()
+                                            .allMatrices);
+                                Map<String, Map<String, List<List<double>>>>
+                                    expValues = Map<
+                                        String,
+                                        Map<String,
+                                            List<List<double>>>>.from(context
+                                        .read<ExpertNotifier>()
+                                        .expValues);
+                                Map<String, List<List<double>>> exMap = {};
+                                int q = 1;
+                                List<List<double>> _value = [];
+                                allMatrices.forEach((key, value) {
+                                  value.forEach((element) {
+                                    List<double> val = [];
+                                    element.forEach((element) {
+                                      val.add(element);
+                                    });
+                                    _value.add(val);
+                                  });
+                                  exMap["q$q"] = _value.toList();
+                                  q++;
+                                  _value.clear();
+                                });
+                                expValues["ex${_currentStep + 1}"] = exMap;
+                                context
+                                    .read<ExpertNotifier>()
+                                    .setExpValues(newExpValues: expValues);
                                 context
                                     .read<QuestionNotifier>()
                                     .calculatePriorities();
