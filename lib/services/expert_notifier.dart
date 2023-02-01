@@ -229,9 +229,9 @@ class ExpertNotifier extends ChangeNotifier {
         sumU += itemU;
       }
       for (int rgm = 0; rgm < allPriorities[key]!['l']!.length; rgm++) {
-        allWeights[key]!['l']!.add(allPriorities[key]!['l']![rgm] / sumL);
+        allWeights[key]!['l']!.add(allPriorities[key]!['l']![rgm] / sumU);
         allWeights[key]!['m']!.add(allPriorities[key]!['m']![rgm] / sumM);
-        allWeights[key]!['u']!.add(allPriorities[key]!['u']![rgm] / sumU);
+        allWeights[key]!['u']!.add(allPriorities[key]!['u']![rgm] / sumL);
       }
     });
     print('All weights $allWeights');
