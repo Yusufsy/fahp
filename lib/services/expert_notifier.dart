@@ -62,7 +62,7 @@ class ExpertNotifier extends ChangeNotifier {
                   : (items[scale] > 1 && items[scale] < 9
                       ? items[scale] + 1
                       : 1 /
-                          (Fraction.fromDouble(items[scale]).denominator + 1)))
+                          (Fraction.fromDouble(items[scale]).denominator - 1)))
             ]);
           }
           matrices.add(item);
