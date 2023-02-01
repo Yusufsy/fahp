@@ -277,7 +277,7 @@ class ExpertNotifier extends ChangeNotifier {
       for (double itemL in logs[key]!) {
         totalLogs += itemL;
       }
-      double upper = 2 * totalLogs;
+      double upper = 2;
       double lower = (cjmMatrix[key]!['m']!.length - 1) *
           (cjmMatrix[key]!['m']!.length - 2);
 
