@@ -1,6 +1,7 @@
 import 'package:fahp/services/expert_notifier.dart';
 import 'package:fahp/services/question_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:fraction/fraction.dart';
 import 'package:provider/provider.dart';
 
 class FahpGdmResult extends StatefulWidget {
@@ -159,46 +160,50 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                                   .length;
                                           row++)
                                         TableCell(
-                                            child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Row(
-                                            children: [
-                                              SizedBox(
-                                                width: 70,
-                                                child: Text(
-                                                  cjmMatrix['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
-                                                              'l']![
-                                                          qMatrix.indexOf(
-                                                              criteria)][row]
-                                                      .toStringAsFixed(4),
-                                                  textAlign: TextAlign.center,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Row(
+                                              children: [
+                                                SizedBox(
+                                                  width: 70,
+                                                  child: Text(
+                                                    Fraction.fromDouble(cjmMatrix[
+                                                                    'q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
+                                                                'l']![
+                                                            qMatrix.indexOf(
+                                                                criteria)][row])
+                                                        .toString(),
+                                                    textAlign: TextAlign.center,
+                                                  ),
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                width: 70,
-                                                child: Text(
-                                                  cjmMatrix['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
-                                                              'm']![
-                                                          qMatrix.indexOf(
-                                                              criteria)][row]
-                                                      .toStringAsFixed(4),
-                                                  textAlign: TextAlign.center,
+                                                SizedBox(
+                                                  width: 70,
+                                                  child: Text(
+                                                    Fraction.fromDouble(cjmMatrix[
+                                                                    'q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
+                                                                'm']![
+                                                            qMatrix.indexOf(
+                                                                criteria)][row])
+                                                        .toString(),
+                                                    textAlign: TextAlign.center,
+                                                  ),
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                width: 70,
-                                                child: Text(
-                                                  cjmMatrix['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
-                                                              'u']![
-                                                          qMatrix.indexOf(
-                                                              criteria)][row]
-                                                      .toStringAsFixed(4),
-                                                  textAlign: TextAlign.center,
+                                                SizedBox(
+                                                  width: 70,
+                                                  child: Text(
+                                                    Fraction.fromDouble(cjmMatrix[
+                                                                    'q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
+                                                                'u']![
+                                                            qMatrix.indexOf(
+                                                                criteria)][row])
+                                                        .toString(),
+                                                    textAlign: TextAlign.center,
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
-                                        )),
+                                        ),
                                     ],
                                   ),
                               ],

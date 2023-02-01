@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:fahp/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:fraction/fraction.dart';
 
 class ExpertNotifier extends ChangeNotifier {
   List<double>? expertWi;
@@ -44,11 +45,24 @@ class ExpertNotifier extends ChangeNotifier {
         List<List<List<double>>> matrices = [];
         for (var items in value) {
           List<List<double>> item = [];
-          for (var scale in items) {
+          for (var scale = 0; scale < items.length; scale++) {
             item.add([
-              (scale <= 1 || scale >= 9 ? scale : scale - 1),
-              scale,
-              (scale <= 1 || scale >= 9 ? scale : scale + 1)
+              //l
+              (items[scale] == 1 || items[scale] == 9
+                  ? items[scale]
+                  : (items[scale] > 1 && items[scale] < 9
+                      ? items[scale] - 1
+                      : 1 /
+                          (Fraction.fromDouble(items[scale]).denominator + 1))),
+              //m
+              items[scale],
+              //u
+              (items[scale] == 1 || items[scale] == 9
+                  ? items[scale]
+                  : (items[scale] > 1 && items[scale] < 9
+                      ? items[scale] + 1
+                      : 1 /
+                          (Fraction.fromDouble(items[scale]).denominator + 1)))
             ]);
           }
           matrices.add(item);
@@ -187,17 +201,17 @@ class ExpertNotifier extends ChangeNotifier {
         double productL = cjmMatrix[key]!['l']![rate]
             .reduce((value, element) => value * element);
         allPriorities[key]!['l']!
-            .add(pow(productL, 1 / value.length).toDouble());
+            .add(pow(productL, 1 / cjmMatrix[key]!['l']!.length).toDouble());
 
         double productM = cjmMatrix[key]!['m']![rate]
             .reduce((value, element) => value * element);
         allPriorities[key]!['m']!
-            .add(pow(productM, 1 / value.length).toDouble());
+            .add(pow(productM, 1 / cjmMatrix[key]!['m']!.length).toDouble());
 
         double productU = cjmMatrix[key]!['u']![rate]
             .reduce((value, element) => value * element);
         allPriorities[key]!['u']!
-            .add(pow(productU, 1 / value.length).toDouble());
+            .add(pow(productU, 1 / cjmMatrix[key]!['u']!.length).toDouble());
       }
     });
     print('Priorities $allPriorities');
@@ -234,7 +248,7 @@ class ExpertNotifier extends ChangeNotifier {
       normalWeights[key] = [];
       var sumVal = 0.0;
       for (var doub in value) {
-        sumVal += doub;
+        sumVal = sumVal + doub;
       }
       for (var doub in value) {
         normalWeights[key]!.add(doub / sumVal);
