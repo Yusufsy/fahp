@@ -28,6 +28,7 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
     final cjmMatrix = context.watch<ExpertNotifier>().cjmMatrix;
     final gci = context.watch<ExpertNotifier>().gci;
     final cr = context.watch<ExpertNotifier>().cr;
+    final expertNotifier = context.watch<ExpertNotifier>();
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -167,36 +168,57 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                                 SizedBox(
                                                   width: 70,
                                                   child: Text(
-                                                    Fraction.fromDouble(cjmMatrix[
-                                                                    'q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
-                                                                'l']![
-                                                            qMatrix.indexOf(
-                                                                criteria)][row])
-                                                        .toString(),
+                                                    expertNotifier.expertWi!
+                                                                .length <=
+                                                            1
+                                                        ? Fraction.fromDouble(
+                                                                cjmMatrix['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']!['l']![
+                                                                        qMatrix.indexOf(criteria)]
+                                                                    [row])
+                                                            .toString()
+                                                        : cjmMatrix['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
+                                                                    'l']![
+                                                                qMatrix.indexOf(
+                                                                    criteria)][row]
+                                                            .toStringAsFixed(4),
                                                     textAlign: TextAlign.center,
                                                   ),
                                                 ),
                                                 SizedBox(
                                                   width: 70,
                                                   child: Text(
-                                                    Fraction.fromDouble(cjmMatrix[
-                                                                    'q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
-                                                                'm']![
-                                                            qMatrix.indexOf(
-                                                                criteria)][row])
-                                                        .toString(),
+                                                    expertNotifier.expertWi!
+                                                                .length <=
+                                                            1
+                                                        ? Fraction.fromDouble(
+                                                                cjmMatrix['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']!['m']![
+                                                                        qMatrix.indexOf(criteria)]
+                                                                    [row])
+                                                            .toString()
+                                                        : cjmMatrix['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
+                                                                    'm']![
+                                                                qMatrix.indexOf(
+                                                                    criteria)][row]
+                                                            .toStringAsFixed(4),
                                                     textAlign: TextAlign.center,
                                                   ),
                                                 ),
                                                 SizedBox(
                                                   width: 70,
                                                   child: Text(
-                                                    Fraction.fromDouble(cjmMatrix[
-                                                                    'q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
-                                                                'u']![
-                                                            qMatrix.indexOf(
-                                                                criteria)][row])
-                                                        .toString(),
+                                                    expertNotifier.expertWi!
+                                                                .length <=
+                                                            1
+                                                        ? Fraction.fromDouble(
+                                                                cjmMatrix['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']!['u']![
+                                                                        qMatrix.indexOf(criteria)]
+                                                                    [row])
+                                                            .toString()
+                                                        : cjmMatrix['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
+                                                                    'u']![
+                                                                qMatrix.indexOf(
+                                                                    criteria)][row]
+                                                            .toStringAsFixed(4),
                                                     textAlign: TextAlign.center,
                                                   ),
                                                 ),
