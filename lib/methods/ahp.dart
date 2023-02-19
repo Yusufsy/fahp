@@ -115,7 +115,7 @@ class _AhpMethodState extends State<AhpMethod> {
                     children: [
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 0.0),
-                        child: Text('Insert the question matrix and criteria'),
+                        child: Text('Insert the expert weight'),
                       ),
                       Table(
                         border: TableBorder.all(),

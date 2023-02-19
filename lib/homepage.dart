@@ -27,7 +27,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Row(
           children: const [
-            Text("LOGO"),
+            Text("FAHP & QFD Calculator"),
             Expanded(
               child: Align(
                 alignment: Alignment.center,
@@ -46,7 +46,9 @@ class _MyHomePageState extends State<MyHomePage> {
               const ExpansionTile(
                 title: Text("About App"),
                 children: [
-                  Text("About app goes here"),
+                  Text("This website is a calculator that performs the Analytical Hierarchy Process (AHP) method. "
+                  "Additionally, it can also preform calculation of the Quality Function Deployment (QFD) model."
+                  " Moreover, it can easily integrate the both methods (AHP-QFD) by transporting the result obtained from the AHP to the first stage of the QFD."),
                 ],
               ),
               const ExpansionTile(
