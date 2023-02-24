@@ -39,6 +39,7 @@ dependencies:
   collection: ^1.16.0
   provider: ^6.0.3
   fraction: ^4.1.4
+  firebase_core: ^2.6.1
 
 dev_dependencies:
   flutter_test:
