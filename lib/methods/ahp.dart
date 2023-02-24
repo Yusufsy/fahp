@@ -51,7 +51,7 @@ class _AhpMethodState extends State<AhpMethod> {
               children: [
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 0.0),
-                  child: Text('Enter number of Experts'),
+                  child: Text('Enter the number of Experts'),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
