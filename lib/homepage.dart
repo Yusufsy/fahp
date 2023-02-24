@@ -17,8 +17,8 @@ class _MyHomePageState extends State<MyHomePage> {
     'AHP',
     'FAHP',
     'FAHP - GDM',
-    'FQFD',
-    'FAHP with FQFD',
+    'QFD',
+    'FAHP with QFD',
   ];
 
   @override
@@ -105,11 +105,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: const FahpGdmMethod(),
               ),
               Visibility(
-                visible: dropdownvalue == 'FQFD',
+                visible: dropdownvalue == 'QFD',
                 child: const FqfdMethod(),
               ),
               Visibility(
-                visible: dropdownvalue == 'FAHP with FQFD',
+                visible: dropdownvalue == 'FAHP with QFD',
                 child: const FahpFqfdMethod(),
               ),
             ],

@@ -225,7 +225,7 @@ class _FahpMethodState extends State<FahpMethod> {
               children: [
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 10.0),
-                  child: Text('Enter number of questions'),
+                  child: Text('Enter number of Pairwise Comparison Matrices (PCMs)'),
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.5,
@@ -233,7 +233,7 @@ class _FahpMethodState extends State<FahpMethod> {
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: const InputDecoration(
                       icon: Icon(Icons.question_mark),
-                      labelText: 'No. of questions',
+                      labelText: 'Number of Pairwise Comparison Matrices (PCMs)',
                     ),
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     controller: _numberQuestions,

@@ -112,7 +112,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                     children: [
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 0.0),
-                        child: Text('Insert the question matrix and criteria'),
+                        child: Text('The experts’ weight reflects the expert’s years of experience or his/her knowledge. If experts have the same weight, please keep this field blank'),
                       ),
                       Table(
                         border: TableBorder.all(),
@@ -240,7 +240,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
               children: [
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 10.0),
-                  child: Text('Enter number of questions'),
+                  child: Text('Enter number of Pairwise Comparison Matrices (PCMs)'),
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.5,
@@ -248,7 +248,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: const InputDecoration(
                       icon: Icon(Icons.question_mark),
-                      labelText: 'No. of questions',
+                      labelText: 'No. of Pairwise Comparison Matrices (PCMs)',
                     ),
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     controller: _numberQuestions,
@@ -309,7 +309,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                     children: [
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 0.0),
-                        child: Text('Insert the matrix of each question'),
+                        child: Text('Insert the matrix of each Pairwise Comparison Matrices (PCMs)'),
                       ),
                       Table(
                         border: TableBorder.all(),
@@ -332,13 +332,13 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                               TableCell(
                                 child: Padding(
                                   padding: EdgeInsets.all(8.0),
-                                  child: Text('Crit'),
+                                  child: Text('Criteria'),
                                 ),
                               ),
                               TableCell(
                                 child: Padding(
                                   padding: EdgeInsets.all(8.0),
-                                  child: Text('WRT'),
+                                  child: Text('With respect to'),
                                 ),
                               ),
                             ],

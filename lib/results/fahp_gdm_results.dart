@@ -76,7 +76,7 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 10.0),
                             child: Text(
-                              'Crisp Numbers',
+                              ' ',
                               style: subTopicStyle,
                             ),
                           ),

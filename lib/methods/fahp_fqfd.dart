@@ -17,7 +17,7 @@ class _FahpFqfdMethodState extends State<FahpFqfdMethod> {
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
         children: [
-          const Text('FAHP with FQFD'),
+          const Text('FAHP with QFD'),
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.5,
             child: TextFormField(
@@ -40,7 +40,7 @@ class _FahpFqfdMethodState extends State<FahpFqfdMethod> {
               autovalidateMode: AutovalidateMode.onUserInteraction,
               decoration: const InputDecoration(
                 icon: Icon(Icons.question_mark),
-                labelText: 'Number of Questions',
+                labelText: 'Number of Pairwise Comparison Matrices (PCMs)',
               ),
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               controller: _numberController,
