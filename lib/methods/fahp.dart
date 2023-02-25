@@ -30,6 +30,7 @@ class _FahpMethodState extends State<FahpMethod> {
   final String _groupValue = 'Equal';
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
@@ -41,191 +42,14 @@ class _FahpMethodState extends State<FahpMethod> {
               fontSize: 40,
             ),
           ),
-          // Visibility(
-          //   visible: _numExperts,
-          //   child: Column(
-          //     children: [
-          //       const Padding(
-          //         padding: EdgeInsets.symmetric(vertical: 0.0),
-          //         child: Text('Enter number of Experts'),
-          //       ),
-          //       Row(
-          //         mainAxisAlignment: MainAxisAlignment.center,
-          //         children: [
-          //           SizedBox(
-          //             width: MediaQuery.of(context).size.width * 0.5,
-          //             child: TextFormField(
-          //               autovalidateMode: AutovalidateMode.onUserInteraction,
-          //               decoration: const InputDecoration(
-          //                 icon: Icon(Icons.group),
-          //                 labelText: 'No. of experts',
-          //               ),
-          //               inputFormatters: [
-          //                 FilteringTextInputFormatter.digitsOnly
-          //               ],
-          //               controller: _numberExperts,
-          //               keyboardType: TextInputType.number,
-          //               validator: (value) {
-          //                 return value!.isEmpty
-          //                     ? 'Please fill this field'
-          //                     : null;
-          //               },
-          //             ),
-          //           ),
-          //         ],
-          //       ),
-          //       Padding(
-          //         padding: const EdgeInsets.symmetric(vertical: 10.0),
-          //         child: ElevatedButton(
-          //           onPressed: () {
-          //             if (_numberExperts.text.isNotEmpty) {
-          //               context
-          //                   .read<ExpertNotifier>()
-          //                   .init(int.parse(_numberExperts.text));
-          //               setState(() {
-          //                 _numExperts = false;
-          //                 _expertWeights = true;
-          //                 _numCriteriaInput = false;
-          //                 _setInputCriteria = false;
-          //                 _criteriaTable = false;
-          //               });
-          //             } else {
-          //               ScaffoldMessenger.of(context).showSnackBar(
-          //                 SnackBar(
-          //                   content: const Text('Please input a number'),
-          //                   backgroundColor: Theme.of(context).errorColor,
-          //                 ),
-          //               );
-          //             }
-          //           },
-          //           child: const Text('Next'),
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
-          // Visibility(
-          //   visible: _expertWeights,
-          //   child: _expertWeights
-          //       ? Column(
-          //           children: [
-          //             const Padding(
-          //               padding: EdgeInsets.symmetric(vertical: 0.0),
-          //               child: Text('Insert the question matrix and criteria'),
-          //             ),
-          //             Table(
-          //               border: TableBorder.all(),
-          //               defaultColumnWidth: const IntrinsicColumnWidth(),
-          //               children: [
-          //                 const TableRow(children: [
-          //                   TableCell(
-          //                     child: Padding(
-          //                       padding: EdgeInsets.all(8.0),
-          //                       child: Text('Expert'),
-          //                     ),
-          //                   ),
-          //                   TableCell(
-          //                     child: Padding(
-          //                       padding: EdgeInsets.all(8.0),
-          //                       child: Text('Weight'),
-          //                     ),
-          //                   ),
-          //                 ]),
-          //                 for (int i = 1;
-          //                     i <= int.parse(_numberExperts.text);
-          //                     i++)
-          //                   TableRow(
-          //                     children: [
-          //                       TableCell(
-          //                         child: Padding(
-          //                           padding: const EdgeInsets.all(8.0),
-          //                           child: Text('ΔE$i'),
-          //                         ),
-          //                       ),
-          //                       TableCell(
-          //                         child: Padding(
-          //                           padding: const EdgeInsets.all(8.0),
-          //                           child: SizedBox(
-          //                             width: MediaQuery.of(context).size.width *
-          //                                 0.1,
-          //                             child: TextFormField(
-          //                               autovalidateMode:
-          //                                   AutovalidateMode.onUserInteraction,
-          //                               decoration: InputDecoration(
-          //                                 labelText: 'Weight of ΔE$i',
-          //                               ),
-          //                               // inputFormatters: [
-          //                               //   FilteringTextInputFormatter.digitsOnly
-          //                               // ],
-          //                               keyboardType: const TextInputType
-          //                                   .numberWithOptions(decimal: true),
-          //                               onChanged: (value) {
-          //                                 if (value.isNotEmpty || value != '') {
-          //                                   context
-          //                                       .read<ExpertNotifier>()
-          //                                       .setWeight(
-          //                                           i - 1, double.parse(value));
-          //                                 }
-          //                               },
-          //                               validator: (value) {
-          //                                 if (value!.isNotEmpty) {
-          //                                   if (double.parse(value) < 0.0 ||
-          //                                       double.parse(value) > 1.0) {
-          //                                     return 'Between 0-1';
-          //                                   }
-          //                                 }
-          //                                 return value.isEmpty
-          //                                     ? 'Please fill this field'
-          //                                     : null;
-          //                               },
-          //                             ),
-          //                           ),
-          //                         ),
-          //                       ),
-          //                     ],
-          //                   ),
-          //               ],
-          //             ),
-          //             const SizedBox(
-          //               height: 15.0,
-          //             ),
-          //             Row(
-          //               children: [
-          //                 const Spacer(),
-          //                 TextButton(
-          //                   onPressed: () {
-          //                     setState(() {
-          //                       _numExperts = true;
-          //                       _expertWeights = false;
-          //                     });
-          //                   },
-          //                   child: const Text('Back'),
-          //                 ),
-          //                 const SizedBox(
-          //                   width: 30.0,
-          //                 ),
-          //                 ElevatedButton(
-          //                   onPressed: () {
-          //                     setState(() {
-          //                       _expertWeights = false;
-          //                       _numQuestions = true;
-          //                     });
-          //                   },
-          //                   child: const Text('Next'),
-          //                 ),
-          //               ],
-          //             ),
-          //           ],
-          //         )
-          //       : const SizedBox(),
-          // ),
           Visibility(
             visible: _numQuestions,
             child: Column(
               children: [
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 10.0),
-                  child: Text('Enter number of Pairwise Comparison Matrices (PCMs)'),
+                  child: Text(
+                      'Enter number of Pairwise Comparison Matrices (PCMs)'),
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.5,
@@ -233,7 +57,8 @@ class _FahpMethodState extends State<FahpMethod> {
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: const InputDecoration(
                       icon: Icon(Icons.question_mark),
-                      labelText: 'Number of Pairwise Comparison Matrices (PCMs)',
+                      labelText:
+                          'Number of Pairwise Comparison Matrices (PCMs)',
                     ),
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     controller: _numberQuestions,
@@ -376,6 +201,177 @@ class _FahpMethodState extends State<FahpMethod> {
               child: _criteriaTable
                   ? Column(
                       children: [
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 8.0),
+                          child: Text('Saaty\'s scale'),
+                        ),
+                        Table(
+                          border: TableBorder.all(),
+                          defaultColumnWidth:
+                              FixedColumnWidth(size.width * 0.3),
+                          children: const [
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('AHP Saaty (1980)'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Explanation'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('1'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Equal Importance'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('3'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Moderate Importance'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('5'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Strong Importance'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('7'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Very Strong Importance'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('9'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Extremely Important'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('2'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Equally to Moderately'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('4'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Moderately to Strongly'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('6'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Strongly to very strong'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('8'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Very strong to extremely'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                         for (int i = 1;
                             i <=
                                 context

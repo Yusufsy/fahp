@@ -3,6 +3,7 @@ import 'package:fahp/methods/fahp.dart';
 import 'package:fahp/methods/fahp_fqfd.dart';
 import 'package:fahp/methods/fahp_gdm.dart';
 import 'package:fahp/methods/fqfd.dart';
+import 'package:fahp/methods/qfd.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -19,6 +20,7 @@ class _MyHomePageState extends State<MyHomePage> {
     'FAHP - GDM',
     'QFD',
     'FAHP with QFD',
+    'FQFD',
   ];
 
   @override
@@ -46,9 +48,10 @@ class _MyHomePageState extends State<MyHomePage> {
               const ExpansionTile(
                 title: Text("About App"),
                 children: [
-                  Text("This website is a calculator that performs the Analytical Hierarchy Process (AHP) method. "
-                  "Additionally, it can also preform calculation of the Quality Function Deployment (QFD) model."
-                  " Moreover, it can easily integrate the both methods (AHP-QFD) by transporting the result obtained from the AHP to the first stage of the QFD."),
+                  Text(
+                      "This website is a calculator that performs the Analytical Hierarchy Process (AHP) method. "
+                      "Additionally, it can also preform calculation of the Quality Function Deployment (QFD) model."
+                      " Moreover, it can easily integrate the both methods (AHP-QFD) by transporting the result obtained from the AHP to the first stage of the QFD."),
                 ],
               ),
               const ExpansionTile(
@@ -106,11 +109,15 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               Visibility(
                 visible: dropdownvalue == 'QFD',
-                child: const FqfdMethod(),
+                child: const QfdMethod(),
               ),
               Visibility(
                 visible: dropdownvalue == 'FAHP with QFD',
                 child: const FahpFqfdMethod(),
+              ),
+              Visibility(
+                visible: dropdownvalue == 'FQFD',
+                child: const FqfdMethod(),
               ),
             ],
           ),

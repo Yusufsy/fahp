@@ -34,6 +34,7 @@ class _AhpMethodState extends State<AhpMethod> {
   final String _groupValue = 'Equal';
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
@@ -115,7 +116,8 @@ class _AhpMethodState extends State<AhpMethod> {
                     children: [
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 0.0),
-                        child: Text('The experts weight reflects the expert’s years of experience or his/her knowledge. “If experts have the same weight, please keep this field blank”'),
+                        child: Text(
+                            'The experts weight reflects the expert’s years of experience or his/her knowledge. “If experts have the same weight, please keep this field blank”'),
                       ),
                       Table(
                         border: TableBorder.all(),
@@ -229,7 +231,8 @@ class _AhpMethodState extends State<AhpMethod> {
               children: [
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 10.0),
-                  child: Text('Enter number of Pairwise Comparison Matrices (PCMs)'),
+                  child: Text(
+                      'Enter number of Pairwise Comparison Matrices (PCMs)'),
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.5,
@@ -298,7 +301,8 @@ class _AhpMethodState extends State<AhpMethod> {
                     children: [
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 0.0),
-                        child: Text('Insert the matrix of each Pairwise Comparison Matrices (PCMs)'),
+                        child: Text(
+                            'Insert the matrix of each Pairwise Comparison Matrices (PCMs)'),
                       ),
                       Table(
                         border: TableBorder.all(),
@@ -372,152 +376,6 @@ class _AhpMethodState extends State<AhpMethod> {
                   )
                 : const SizedBox(),
           ),
-          // Visibility(
-          //   visible: _numCriteriaInput,
-          //   child: Column(
-          //     children: [
-          //       const Padding(
-          //         padding: EdgeInsets.symmetric(vertical: 0.0),
-          //         child: Text('Select number of  Criteria'),
-          //       ),
-          //       Row(
-          //         mainAxisAlignment: MainAxisAlignment.center,
-          //         children: [
-          //           SizedBox(
-          //             width: MediaQuery.of(context).size.width * 0.5,
-          //             child: TextFormField(
-          //               autovalidateMode: AutovalidateMode.onUserInteraction,
-          //               decoration: const InputDecoration(
-          //                 icon: Icon(Icons.location_city),
-          //                 labelText: 'Input from (2-20)',
-          //               ),
-          //               inputFormatters: [
-          //                 FilteringTextInputFormatter.digitsOnly
-          //               ],
-          //               controller: _numberController,
-          //               keyboardType: TextInputType.number,
-          //               validator: (value) {
-          //                 if (value!.isNotEmpty) {
-          //                   if (int.parse(value) < 2 || int.parse(value) > 20) {
-          //                     return 'number must be between 2-20';
-          //                   }
-          //                 }
-          //                 return value.isEmpty
-          //                     ? 'Please fill this field'
-          //                     : null;
-          //               },
-          //             ),
-          //           ),
-          //           Row(
-          //             children: [
-          //               // const Spacer(),
-          //               TextButton(
-          //                 onPressed: () {
-          //                   setState(() {
-          //                     _numCriteriaInput = false;
-          //                     _questionsMatrix = true;
-          //                   });
-          //                 },
-          //                 child: const Text('Back'),
-          //               ),
-          //               const SizedBox(
-          //                 width: 30.0,
-          //               ),
-          //               ElevatedButton(
-          //                 onPressed: () {
-          //                   if (_numberController.text.isNotEmpty) {
-          //                     setState(() {
-          //                       _numCriteria =
-          //                           int.parse(_numberController.text);
-          //                       _numCriteriaInput = false;
-          //                       _setInputCriteria = true;
-          //                       _criteriaTable = false;
-          //                     });
-          //                   } else {
-          //                     ScaffoldMessenger.of(context).showSnackBar(
-          //                       SnackBar(
-          //                         content: const Text('Please input a number'),
-          //                         backgroundColor: Theme.of(context).errorColor,
-          //                       ),
-          //                     );
-          //                   }
-          //                 },
-          //                 child: const Text('Next'),
-          //               ),
-          //             ],
-          //           ),
-          //         ],
-          //       ),
-          //     ],
-          //   ),
-          // ),
-          // SizedBox(
-          //   width: MediaQuery.of(context).size.width * 0.5,
-          //   child: Visibility(
-          //     visible: _setInputCriteria,
-          //     child: Column(children: [
-          //       const Padding(
-          //         padding: EdgeInsets.symmetric(vertical: 0.0),
-          //         child: Text('Input name of Criteria'),
-          //       ),
-          //       for (int i = 0; i < _numCriteria; i++)
-          //         TextFormField(
-          //           decoration: InputDecoration(labelText: 'Criteria ${i + 1}'),
-          //           onChanged: (value) {
-          //             if (_criteria.isEmpty) {
-          //               setState(() {
-          //                 _criteria.add(value);
-          //               });
-          //             } else if (_criteria.length <= i) {
-          //               setState(() {
-          //                 _criteria.add(value);
-          //               });
-          //             } else {
-          //               setState(() {
-          //                 _criteria[i] = value;
-          //               });
-          //             }
-          //           },
-          //         ),
-          //       const SizedBox(
-          //         height: 15.0,
-          //       ),
-          //       Row(
-          //         children: [
-          //           const Spacer(),
-          //           TextButton(
-          //             onPressed: () {
-          //               setState(() {
-          //                 _setInputCriteria = !_setInputCriteria;
-          //                 _numCriteriaInput = !_numCriteriaInput;
-          //                 _criteriaTable = false;
-          //               });
-          //             },
-          //             child: const Text('Back'),
-          //           ),
-          //           const SizedBox(
-          //             width: 30.0,
-          //           ),
-          //           ElevatedButton(
-          //             onPressed: () {
-          //               _pairs = Pairer().paiarCriteria(_criteria);
-          //               print(_pairs);
-          //               context
-          //                   .read<MatrixNotifier>()
-          //                   .updateCriteria(_criteria, _pairs);
-          //               setState(() {
-          //                 _setInputCriteria = !_setInputCriteria;
-          //                 _numCriteriaInput = false;
-          //                 _criteriaTable = !_criteriaTable;
-          //               });
-          //             },
-          //             child: const Text('OK'),
-          //           ),
-          //         ],
-          //       ),
-          //     ]),
-          //   ),
-          // ),
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.7,
             child: Visibility(
@@ -525,6 +383,177 @@ class _AhpMethodState extends State<AhpMethod> {
               child: _criteriaTable
                   ? Column(
                       children: [
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 8.0),
+                          child: Text('Saaty\'s scale'),
+                        ),
+                        Table(
+                          border: TableBorder.all(),
+                          defaultColumnWidth:
+                              FixedColumnWidth(size.width * 0.3),
+                          children: const [
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('AHP Saaty (1980)'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Explanation'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('1'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Equal Importance'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('3'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Moderate Importance'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('5'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Strong Importance'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('7'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Very Strong Importance'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('9'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Extremely Important'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('2'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Equally to Moderately'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('4'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Moderately to Strongly'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('6'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Strongly to very strong'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('8'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Very strong to extremely'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                         for (int i = 1;
                             i <=
                                 context
@@ -535,64 +564,6 @@ class _AhpMethodState extends State<AhpMethod> {
                           PairWiseComp(
                             exIndex: i,
                           ),
-                        // for (List<List<String>> criterias in context
-                        //     .watch<QuestionNotifier>()
-                        //     .pairsGen
-                        //     .values
-                        //     .toList())
-                        //   Column(
-                        //     children: [
-                        //       Padding(
-                        //         padding: const EdgeInsets.all(8.0),
-                        //         child: RichText(
-                        //           text: TextSpan(
-                        //               text: 'With respect to ',
-                        //               style: Theme.of(context)
-                        //                   .textTheme
-                        //                   .bodyMedium,
-                        //               children: [
-                        //                 TextSpan(
-                        //                   text: context
-                        //                           .watch<QuestionNotifier>()
-                        //                           .wrt![
-                        //                       context
-                        //                           .watch<QuestionNotifier>()
-                        //                           .pairsGen
-                        //                           .values
-                        //                           .toList()
-                        //                           .indexOf(criterias)],
-                        //                   style: Theme.of(context)
-                        //                       .textTheme
-                        //                       .titleLarge,
-                        //                 ),
-                        //                 TextSpan(
-                        //                   text:
-                        //                       ', which of the following criterion is more important? and by how much is more?',
-                        //                   style: Theme.of(context)
-                        //                       .textTheme
-                        //                       .bodyMedium,
-                        //                 ),
-                        //               ]),
-                        //         ),
-                        //       ),
-                        //       for (List<String> criteria in criterias)
-                        //         PairWiseRow(
-                        //             qIndex: context
-                        //                 .watch<QuestionNotifier>()
-                        //                 .wrt!
-                        //                 .indexOf(context
-                        //                         .watch<QuestionNotifier>()
-                        //                         .wrt![
-                        //                     context
-                        //                         .watch<QuestionNotifier>()
-                        //                         .pairsGen
-                        //                         .values
-                        //                         .toList()
-                        //                         .indexOf(criterias)]),
-                        //             criteria: criteria,
-                        //             index: criterias.indexOf(criteria)),
-                        //     ],
-                        //   ),
                         const SizedBox(
                           height: 15.0,
                         ),

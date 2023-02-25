@@ -31,6 +31,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
   int _currentStep = 0;
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
@@ -111,12 +112,13 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                 ? Column(
                     children: [
                       const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 0.0),
-                        child: Text('The experts’ weight reflects the expert’s years of experience or his/her knowledge. If experts have the same weight, please keep this field blank'),
+                        padding: EdgeInsets.symmetric(vertical: 8.0),
+                        child: Text(
+                            'The experts’ weight reflects the expert’s years of experience or his/her knowledge. If experts have the same weight, please keep this field blank'),
                       ),
                       Table(
                         border: TableBorder.all(),
-                        defaultColumnWidth: const IntrinsicColumnWidth(),
+                        defaultColumnWidth: FixedColumnWidth(size.width * 0.3),
                         children: [
                           const TableRow(children: [
                             TableCell(
@@ -240,7 +242,8 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
               children: [
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 10.0),
-                  child: Text('Enter number of Pairwise Comparison Matrices (PCMs)'),
+                  child: Text(
+                      'Enter number of Pairwise Comparison Matrices (PCMs)'),
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.5,
@@ -308,8 +311,9 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                 ? Column(
                     children: [
                       const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 0.0),
-                        child: Text('Insert the matrix of each Pairwise Comparison Matrices (PCMs)'),
+                        padding: EdgeInsets.symmetric(vertical: 8.0),
+                        child: Text(
+                            'Insert the matrix of each Pairwise Comparison Matrices (PCMs)'),
                       ),
                       Table(
                         border: TableBorder.all(),
@@ -393,6 +397,177 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
               child: _criteriaTable
                   ? Column(
                       children: [
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 8.0),
+                          child: Text('Saaty\'s scale'),
+                        ),
+                        Table(
+                          border: TableBorder.all(),
+                          defaultColumnWidth:
+                              FixedColumnWidth(size.width * 0.3),
+                          children: const [
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('AHP Saaty (1980)'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Explanation'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('1'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Equal Importance'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('3'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Moderate Importance'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('5'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Strong Importance'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('7'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Very Strong Importance'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('9'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Extremely Important'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('2'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Equally to Moderately'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('4'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Moderately to Strongly'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('6'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Strongly to very strong'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('8'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Very strong to extremely'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                         Stepper(
                             onStepTapped: (step) => tapped(step),
                             onStepContinue: continued,

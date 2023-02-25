@@ -26,6 +26,8 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
     final allPriorities = context.watch<ExpertNotifier>().allPriorities;
     final allWeights = context.watch<ExpertNotifier>().allWeights;
     final cjmMatrix = context.watch<ExpertNotifier>().cjmMatrix;
+    final crispWi = context.watch<ExpertNotifier>().crispWeights;
+    final normalWi = context.watch<ExpertNotifier>().normalWeights;
     final gci = context.watch<ExpertNotifier>().gci;
     final cr = context.watch<ExpertNotifier>().cr;
     final expertNotifier = context.watch<ExpertNotifier>();
@@ -273,6 +275,24 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                             ),
                                           ),
                                         ),
+                                        TableCell(
+                                          child: Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                            child: Text(
+                                              'Crisp Weight',
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                        ),
+                                        TableCell(
+                                          child: Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                            child: Text(
+                                              'Normal Weight',
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                        ),
                                       ],
                                     ),
                                     TableRow(
@@ -341,6 +361,18 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                                 ),
                                               ],
                                             ),
+                                          ),
+                                        ),
+                                        const TableCell(
+                                          child: Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                            child: Text(' '),
+                                          ),
+                                        ),
+                                        const TableCell(
+                                          child: Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                            child: Text(' '),
                                           ),
                                         ),
                                       ],
@@ -445,6 +477,32 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                                     ),
                                                   ),
                                                 ],
+                                              ),
+                                            ),
+                                          ),
+                                          TableCell(
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Text(
+                                                crispWi['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
+                                                        qMatrix
+                                                            .indexOf(criteria)]
+                                                    .toStringAsFixed(4),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                          ),
+                                          TableCell(
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Text(
+                                                normalWi['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
+                                                        qMatrix
+                                                            .indexOf(criteria)]
+                                                    .toStringAsFixed(4),
+                                                textAlign: TextAlign.center,
                                               ),
                                             ),
                                           ),
