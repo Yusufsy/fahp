@@ -1,5 +1,6 @@
 import 'package:fahp/components/pairwaise_comp.dart';
 import 'package:fahp/results/fahp_result.dart';
+import 'package:fahp/results/qfd_result.dart';
 import 'package:fahp/services/expert_notifier.dart';
 import 'package:fahp/services/qfd_notifier.dart';
 import 'package:fahp/services/question_notifier.dart';
@@ -313,7 +314,7 @@ class _QfdMethodState extends State<QfdMethod> {
                                             AutovalidateMode.onUserInteraction,
                                         decoration: InputDecoration(
                                           icon: const Icon(Icons.group),
-                                          labelText: 'Requirements $i',
+                                          labelText: 'Requirement $i',
                                         ),
                                         validator: (value) {
                                           return value!.isEmpty
@@ -355,6 +356,7 @@ class _QfdMethodState extends State<QfdMethod> {
                           ),
                           ElevatedButton(
                             onPressed: () {
+                              context.read<QfdNotifier>().initHouse();
                               setState(() {
                                 _engReq = false;
                                 _numQuestions = false;
@@ -380,7 +382,7 @@ class _QfdMethodState extends State<QfdMethod> {
                       ),
                       Table(
                         border: TableBorder.all(),
-                        defaultColumnWidth: const IntrinsicColumnWidth(),
+                        // defaultColumnWidth: const IntrinsicColumnWidth(),
                         children: [
                           TableRow(
                             children: [
@@ -406,7 +408,7 @@ class _QfdMethodState extends State<QfdMethod> {
                             ],
                           ),
                           for (String req in cusReq)
-                            questionMatrixRow(req, engReq)
+                            questionMatrixRow(req, cusReq.indexOf(req), engReq)
                         ],
                       ),
                       const SizedBox(
@@ -418,94 +420,38 @@ class _QfdMethodState extends State<QfdMethod> {
                           TextButton(
                             onPressed: () {
                               setState(() {
-                                _numQuestions = true;
+                                _engReq = true;
                                 _questionsMatrix = false;
                               });
                             },
                             child: const Text('Back'),
                           ),
-                          // const SizedBox(
-                          //   width: 30.0,
-                          // ),
-                          // ElevatedButton(
-                          //   onPressed: () {
-                          //     context.read<QuestionNotifier>().generatePairs();
-                          //     setState(() {
-                          //       _questionsMatrix = false;
-                          //       _criteriaTable = true;
-                          //     });
-                          //   },
-                          //   child: const Text('Next'),
-                          // ),
+                          const SizedBox(
+                            width: 30.0,
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              context.read<QfdNotifier>().calculateHoE();
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: ((context) =>
+                                          const QfdResult())));
+                            },
+                            child: const Text('Calculate'),
+                          ),
                         ],
                       ),
                     ],
                   )
                 : const SizedBox(),
           ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.7,
-            child: Visibility(
-              visible: _criteriaTable,
-              child: _criteriaTable
-                  ? Column(
-                      children: [
-                        for (int i = 1;
-                            i <=
-                                context
-                                    .watch<ExpertNotifier>()
-                                    .expertWi!
-                                    .length;
-                            i++)
-                          PairWiseComp(
-                            exIndex: i,
-                          ),
-                        const SizedBox(
-                          height: 15.0,
-                        ),
-                        Row(
-                          children: [
-                            const Spacer(),
-                            TextButton(
-                              onPressed: () {
-                                setState(() {
-                                  _criteriaTable = !_criteriaTable;
-                                  _questionsMatrix = !_questionsMatrix;
-                                });
-                              },
-                              child: const Text('Back'),
-                            ),
-                            const SizedBox(
-                              width: 30.0,
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                context
-                                    .read<QuestionNotifier>()
-                                    .calculatePriorities();
-                                setState(() {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: ((context) =>
-                                              const FahpResult())));
-                                });
-                              },
-                              child: const Text('Calculate'),
-                            ),
-                          ],
-                        ),
-                      ],
-                    )
-                  : const SizedBox(),
-            ),
-          ),
         ],
       ),
     );
   }
 
-  TableRow questionMatrixRow(String cus, List<String> numEng) {
+  TableRow questionMatrixRow(String cus, int cusIndex, List<String> numEng) {
     return TableRow(
       children: [
         TableCell(
@@ -523,7 +469,23 @@ class _QfdMethodState extends State<QfdMethod> {
                 labelText: 'W',
               ),
               onChanged: (value) {
-                // context.read<QuestionNotifier>().setWrt(q, value);
+                if (value.isNotEmpty || value != '') {
+                  context
+                      .read<QfdNotifier>()
+                      .setWeight(cusIndex, double.parse(value));
+                }
+              },
+              keyboardType:
+                  const TextInputType.numberWithOptions(decimal: true),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Cannot be empty';
+                } else if (double.parse(value) >= 0 &&
+                    double.parse(value) <= 1) {
+                  return null;
+                } else {
+                  return 'Invalid value';
+                }
               },
             ),
           ),
@@ -538,7 +500,20 @@ class _QfdMethodState extends State<QfdMethod> {
                   labelText: 'Scale',
                 ),
                 onChanged: (value) {
-                  // context.read<QuestionNotifier>().setWrt(q, value);
+                  if (value.isNotEmpty || value != '') {
+                    context.read<QfdNotifier>().setScale(
+                        cusIndex, numEng.indexOf(req), int.parse(value));
+                  }
+                },
+                validator: (value) {
+                  if (value == '0' ||
+                      value == '1' ||
+                      value == '3' ||
+                      value == '9') {
+                    return null;
+                  } else {
+                    return 'Invalid value';
+                  }
                 },
               ),
             ),

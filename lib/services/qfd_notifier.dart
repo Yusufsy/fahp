@@ -4,6 +4,9 @@ class QfdNotifier extends ChangeNotifier {
   List<String> cusReq = [];
   List<String> engReq = [];
   List<double> weights = [];
+  List<List<int>> scales = [];
+  List<double> importance = [];
+  List<double> percentages = [];
 
   setNumCusReq(int num) {
     cusReq.clear();
@@ -26,5 +29,39 @@ class QfdNotifier extends ChangeNotifier {
 
   setEngReq(int pos, String value) {
     engReq[pos] = value;
+  }
+
+  initHouse() {
+    for (int i = 0; i < cusReq.length; i++) {
+      scales.add([]);
+      weights.add(1 / cusReq.length);
+      for (int j = 0; j < engReq.length; j++) {
+        scales[i].add(0);
+      }
+    }
+  }
+
+  setWeight(int pos, double value) {
+    weights[pos] = value;
+  }
+
+  setScale(int cPos, int ePos, int value) {
+    scales[cPos][ePos] = value;
+  }
+
+  calculateHoE() {
+    importance.clear();
+    percentages.clear();
+    for (int j = 0; j < scales[0].length; j++) {
+      double importanceValue = 0.0;
+      for (int i = 0; i < weights.length; i++) {
+        importanceValue += weights[i] * scales[i][j];
+      }
+      importance.add(importanceValue);
+    }
+    double sumIm = importance.reduce((a, b) => a + b);
+    for (double im in importance) {
+      percentages.add(im / sumIm);
+    }
   }
 }
