@@ -32,6 +32,8 @@ class QfdNotifier extends ChangeNotifier {
   }
 
   initHouse() {
+    scales.clear();
+    weights.clear();
     for (int i = 0; i < cusReq.length; i++) {
       scales.add([]);
       weights.add(1 / cusReq.length);

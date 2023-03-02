@@ -114,7 +114,12 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 8.0),
                         child: Text(
-                            'The experts’ weight reflects the expert’s years of experience or his/her knowledge. If experts have the same weight, please keep this field blank'),
+                            'The experts’ weight reflects the expert’s years of experience or his/her knowledge.'),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 8.0),
+                        child: Text(
+                            'If experts have the same weight, please keep this field blank'),
                       ),
                       Table(
                         border: TableBorder.all(),
