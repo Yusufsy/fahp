@@ -1,15 +1,15 @@
-import 'package:fahp/components/pairwaise_comp.dart';
-import 'package:fahp/results/fahp_result.dart';
 import 'package:fahp/results/qfd_result.dart';
-import 'package:fahp/services/expert_notifier.dart';
 import 'package:fahp/services/qfd_notifier.dart';
-import 'package:fahp/services/question_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class QfdMethod extends StatefulWidget {
-  const QfdMethod({super.key});
+  final DefaultQfd step;
+  const QfdMethod({
+    super.key,
+    this.step = DefaultQfd.customer,
+  });
 
   @override
   State<QfdMethod> createState() => _QfdMethodState();
@@ -46,7 +46,7 @@ class _QfdMethodState extends State<QfdMethod> {
             ),
           ),
           Text(
-            'First House of Equality',
+            'House of Equality',
             style: TextStyle(
               color: Theme.of(context).colorScheme.primary,
               fontSize: 20,
@@ -58,7 +58,7 @@ class _QfdMethodState extends State<QfdMethod> {
               children: [
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 0.0),
-                  child: Text('Enter number of Customer Requirements'),
+                  child: Text('Enter number of Customer Nodes'),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -160,7 +160,6 @@ class _QfdMethodState extends State<QfdMethod> {
                                           icon: const Icon(Icons.group),
                                           labelText: 'Requirements $i',
                                         ),
-
                                         //controller: _numberExperts,
                                         //keyboardType: TextInputType.number,
                                         validator: (value) {
@@ -222,7 +221,7 @@ class _QfdMethodState extends State<QfdMethod> {
               children: [
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 10.0),
-                  child: Text('Enter number of Engineering Requirements'),
+                  child: Text('Enter number of Technical Measures'),
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.5,
@@ -292,7 +291,7 @@ class _QfdMethodState extends State<QfdMethod> {
                     children: [
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 0.0),
-                        child: Text('Insert the engineering requirements'),
+                        child: Text('Insert the technical measures'),
                       ),
                       Table(
                         border: TableBorder.all(),
@@ -346,6 +345,7 @@ class _QfdMethodState extends State<QfdMethod> {
                             onPressed: () {
                               setState(() {
                                 _expertWeights = false;
+                                _engReq = false;
                                 _numQuestions = true;
                               });
                             },
@@ -378,7 +378,7 @@ class _QfdMethodState extends State<QfdMethod> {
                     children: [
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 0.0),
-                        child: Text('Insert the value for each requirment'),
+                        child: Text('Insert the value for each requirement'),
                       ),
                       Table(
                         border: TableBorder.all(),
@@ -389,7 +389,7 @@ class _QfdMethodState extends State<QfdMethod> {
                               const TableCell(
                                 child: Padding(
                                   padding: EdgeInsets.all(8.0),
-                                  child: Text('Customer Requirements'),
+                                  child: Text('Customer Nodes'),
                                 ),
                               ),
                               const TableCell(
@@ -432,7 +432,7 @@ class _QfdMethodState extends State<QfdMethod> {
                           ElevatedButton(
                             onPressed: () {
                               context.read<QfdNotifier>().calculateHoE();
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                       builder: ((context) =>

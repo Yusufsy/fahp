@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 
+enum DefaultQfd {
+  customer,
+  technical,
+  parts,
+  process,
+  production,
+}
+
 class QfdNotifier extends ChangeNotifier {
   List<String> cusReq = [];
   List<String> engReq = [];
@@ -7,6 +15,8 @@ class QfdNotifier extends ChangeNotifier {
   List<List<int>> scales = [];
   List<double> importance = [];
   List<double> percentages = [];
+
+  DefaultQfd step = DefaultQfd.customer;
 
   setNumCusReq(int num) {
     cusReq.clear();
@@ -65,5 +75,11 @@ class QfdNotifier extends ChangeNotifier {
     for (double im in importance) {
       percentages.add(im / sumIm);
     }
+  }
+
+  updateStep(DefaultQfd newStep) {
+    step = newStep;
+    cusReq = [...engReq];
+    notifyListeners();
   }
 }

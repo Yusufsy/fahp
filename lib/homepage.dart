@@ -4,6 +4,7 @@ import 'package:fahp/methods/fahp_fqfd.dart';
 import 'package:fahp/methods/fahp_gdm.dart';
 import 'package:fahp/methods/fqfd.dart';
 import 'package:fahp/methods/qfd.dart';
+import 'package:fahp/services/qfd_notifier.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -63,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
               const ExpansionTile(
                 title: Text("Why Fuzzy-AHP"),
                 children: [
-                  Text("Why fuxxy-AHP goes here"),
+                  Text("Why fuzzy-AHP goes here"),
                 ],
               ),
               const SizedBox(height: 50),
