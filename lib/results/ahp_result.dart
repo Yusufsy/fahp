@@ -32,11 +32,11 @@ class _AhpResultState extends State<AhpResult> {
       appBar: AppBar(
         title: Row(
           children: const [
-            Text("LOGO"),
+            SelectableText("LOGO"),
             Expanded(
               child: Align(
                 alignment: Alignment.center,
-                child: Text("Consensus AHP Online Calculator"),
+                child: SelectableText("Consensus AHP Online Calculator"),
               ),
             ),
           ],
@@ -50,7 +50,7 @@ class _AhpResultState extends State<AhpResult> {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: Text(
+                  child: SelectableText(
                     'AHP RESULTS',
                     style: topicStyle,
                   ),
@@ -60,14 +60,14 @@ class _AhpResultState extends State<AhpResult> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
-                        child: Text(
+                        child: SelectableText(
                           'Question ${qMatrices.values.toList().indexOf(qMatrix) + 1}',
                           style: topicStyle,
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
-                        child: Text(
+                        child: SelectableText(
                           'Crisp Numbers',
                           style: subTopicStyle,
                         ),
@@ -82,14 +82,14 @@ class _AhpResultState extends State<AhpResult> {
                                 const TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text(' '),
+                                    child: SelectableText(' '),
                                   ),
                                 ),
                                 for (String criteria in qMatrix)
                                   TableCell(
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Text(criteria),
+                                      child: SelectableText(criteria),
                                     ),
                                   ),
                               ],
@@ -100,7 +100,7 @@ class _AhpResultState extends State<AhpResult> {
                                   TableCell(
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Text(criteria),
+                                      child: SelectableText(criteria),
                                     ),
                                   ),
                                   for (var rows in allMatrices[qMatrix]![
@@ -108,7 +108,8 @@ class _AhpResultState extends State<AhpResult> {
                                     TableCell(
                                         child: Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Text(rows.toStringAsFixed(2)),
+                                      child: SelectableText(
+                                          rows.toStringAsFixed(2)),
                                     )),
                                 ],
                               ),
@@ -117,7 +118,7 @@ class _AhpResultState extends State<AhpResult> {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
-                        child: Text(
+                        child: SelectableText(
                           'Calculations',
                           style: subTopicStyle,
                         ),
@@ -135,19 +136,19 @@ class _AhpResultState extends State<AhpResult> {
                                     TableCell(
                                       child: Padding(
                                         padding: EdgeInsets.all(8.0),
-                                        child: Text(' '),
+                                        child: SelectableText(' '),
                                       ),
                                     ),
                                     TableCell(
                                       child: Padding(
                                         padding: EdgeInsets.all(8.0),
-                                        child: Text('RGM'),
+                                        child: SelectableText('RGM'),
                                       ),
                                     ),
                                     TableCell(
                                       child: Padding(
                                         padding: EdgeInsets.all(8.0),
-                                        child: Text('Weight'),
+                                        child: SelectableText('Weight'),
                                       ),
                                     ),
                                   ],
@@ -158,24 +159,26 @@ class _AhpResultState extends State<AhpResult> {
                                       TableCell(
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
-                                          child: Text(criteria),
+                                          child: SelectableText(criteria),
                                         ),
                                       ),
                                       // for (int i = 0; i < qMatrix.length; i++)
                                       TableCell(
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
-                                          child: Text(allPriorities[qMatrix]![
-                                                  qMatrix.indexOf(criteria)]
-                                              .toStringAsFixed(4)),
+                                          child: SelectableText(
+                                              allPriorities[qMatrix]![
+                                                      qMatrix.indexOf(criteria)]
+                                                  .toStringAsFixed(4)),
                                         ),
                                       ),
                                       TableCell(
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
-                                          child: Text(allWeights[qMatrix]![
-                                                  qMatrix.indexOf(criteria)]
-                                              .toStringAsFixed(4)),
+                                          child: SelectableText(
+                                              allWeights[qMatrix]![
+                                                      qMatrix.indexOf(criteria)]
+                                                  .toStringAsFixed(4)),
                                         ),
                                       ),
                                     ],
@@ -190,13 +193,13 @@ class _AhpResultState extends State<AhpResult> {
                                     TableCell(
                                       child: Padding(
                                         padding: EdgeInsets.all(8.0),
-                                        child: Text('GCI'),
+                                        child: SelectableText('GCI'),
                                       ),
                                     ),
                                     TableCell(
                                       child: Padding(
                                         padding: EdgeInsets.all(8.0),
-                                        child: Text('CR'),
+                                        child: SelectableText('CR'),
                                       ),
                                     ),
                                   ],
@@ -205,7 +208,7 @@ class _AhpResultState extends State<AhpResult> {
                                   TableCell(
                                     child: Padding(
                                       padding: EdgeInsets.all(8.0),
-                                      child: Text(context
+                                      child: SelectableText(context
                                           .watch<QuestionNotifier>()
                                           .gci[qMatrices.values
                                               .toList()
@@ -216,7 +219,7 @@ class _AhpResultState extends State<AhpResult> {
                                   TableCell(
                                     child: Padding(
                                       padding: EdgeInsets.all(8.0),
-                                      child: Text(context
+                                      child: SelectableText(context
                                           .watch<QuestionNotifier>()
                                           .cr[qMatrices.values
                                               .toList()
@@ -234,7 +237,7 @@ class _AhpResultState extends State<AhpResult> {
                   ),
                 // Padding(
                 //   padding: const EdgeInsets.symmetric(vertical: 10.0),
-                //   child: RichText(
+                //   child: RichSelectableText(
                 //     text: TextSpan(
                 //         text: 'Number of Comparisons:',
                 //         style: Theme.of(context).textTheme.headline4,
@@ -248,7 +251,7 @@ class _AhpResultState extends State<AhpResult> {
                 // ),
                 // Padding(
                 //   padding: const EdgeInsets.symmetric(vertical: 10.0),
-                //   child: Text(
+                //   child: SelectableText(
                 //     'Priorities',
                 //     style: topicStyle,
                 //   ),
@@ -263,19 +266,19 @@ class _AhpResultState extends State<AhpResult> {
                 //         TableCell(
                 //           child: Padding(
                 //             padding: EdgeInsets.all(8.0),
-                //             child: Text('ID'),
+                //             child: SelectableText('ID'),
                 //           ),
                 //         ),
                 //         TableCell(
                 //           child: Padding(
                 //             padding: EdgeInsets.all(8.0),
-                //             child: Text('Criteria'),
+                //             child: SelectableText('Criteria'),
                 //           ),
                 //         ),
                 //         TableCell(
                 //           child: Padding(
                 //             padding: EdgeInsets.all(8.0),
-                //             child: Text('Priorities'),
+                //             child: SelectableText('Priorities'),
                 //           ),
                 //         ),
                 //       ],
@@ -286,19 +289,19 @@ class _AhpResultState extends State<AhpResult> {
                 //           TableCell(
                 //             child: Padding(
                 //               padding: const EdgeInsets.all(8.0),
-                //               child: Text('${i + 1}'),
+                //               child: SelectableText('${i + 1}'),
                 //             ),
                 //           ),
                 //           TableCell(
                 //             child: Padding(
                 //               padding: const EdgeInsets.all(8.0),
-                //               child: Text(criteria[i]),
+                //               child: SelectableText(criteria[i]),
                 //             ),
                 //           ),
                 //           TableCell(
                 //             child: Padding(
                 //               padding: const EdgeInsets.all(8.0),
-                //               child: Text(
+                //               child: SelectableText(
                 //                   '${(priorities![i] * 100).toStringAsFixed(2)}%'),
                 //             ),
                 //           ),
@@ -308,7 +311,7 @@ class _AhpResultState extends State<AhpResult> {
                 // ),
                 // Padding(
                 //   padding: const EdgeInsets.symmetric(vertical: 10.0),
-                //   child: RichText(
+                //   child: RichSelectableText(
                 //     text: TextSpan(
                 //       text: 'Principal Eigen Value:',
                 //       style: Theme.of(context).textTheme.headline4,
@@ -323,7 +326,7 @@ class _AhpResultState extends State<AhpResult> {
                 // ),
                 // Padding(
                 //   padding: const EdgeInsets.symmetric(vertical: 10.0),
-                //   child: RichText(
+                //   child: RichSelectableText(
                 //     text: TextSpan(
                 //       text: 'Consistency Ratio:',
                 //       style: Theme.of(context).textTheme.headline4,

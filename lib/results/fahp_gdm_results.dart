@@ -35,11 +35,11 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
       appBar: AppBar(
         title: Row(
           children: const [
-            Text("LOGO"),
+            SelectableText("LOGO"),
             Expanded(
               child: Align(
                 alignment: Alignment.center,
-                child: Text("Consensus AHP Online Calculator"),
+                child: SelectableText("Consensus AHP Online Calculator"),
               ),
             ),
           ],
@@ -53,7 +53,7 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: Text(
+                  child: SelectableText(
                     'FAHP GDM RESULTS',
                     style: topicStyle,
                   ),
@@ -61,7 +61,7 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                 // for (int i = 0; i < exMatrix.length; i++)
                 Column(
                   children: [
-                    Text(
+                    SelectableText(
                       "Collective Judgement Matrix",
                       style: topicStyle,
                     ),
@@ -70,14 +70,14 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 10.0),
-                            child: Text(
+                            child: SelectableText(
                               'Question ${qMatrices.values.toList().indexOf(qMatrix) + 1}',
                               style: subTopicStyle,
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 10.0),
-                            child: Text(
+                            child: SelectableText(
                               ' ',
                               style: subTopicStyle,
                             ),
@@ -92,14 +92,14 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                     const TableCell(
                                       child: Padding(
                                         padding: EdgeInsets.all(8.0),
-                                        child: Text(' '),
+                                        child: SelectableText(' '),
                                       ),
                                     ),
                                     for (String criteria in qMatrix)
                                       TableCell(
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
-                                          child: Text(criteria,
+                                          child: SelectableText(criteria,
                                               textAlign: TextAlign.center),
                                         ),
                                       ),
@@ -110,7 +110,7 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                     const TableCell(
                                       child: Padding(
                                         padding: EdgeInsets.all(8.0),
-                                        child: Text(' '),
+                                        child: SelectableText(' '),
                                       ),
                                     ),
                                     for (String criteria in qMatrix)
@@ -121,21 +121,21 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                             children: const [
                                               SizedBox(
                                                 width: 70,
-                                                child: Text(
+                                                child: SelectableText(
                                                   'l',
                                                   textAlign: TextAlign.center,
                                                 ),
                                               ),
                                               SizedBox(
                                                 width: 70,
-                                                child: Text(
+                                                child: SelectableText(
                                                   'm',
                                                   textAlign: TextAlign.center,
                                                 ),
                                               ),
                                               SizedBox(
                                                 width: 70,
-                                                child: Text(
+                                                child: SelectableText(
                                                   'u',
                                                   textAlign: TextAlign.center,
                                                 ),
@@ -152,7 +152,7 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                       TableCell(
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
-                                          child: Text(criteria),
+                                          child: SelectableText(criteria),
                                         ),
                                       ),
                                       for (var row = 0;
@@ -169,7 +169,7 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                               children: [
                                                 SizedBox(
                                                   width: 70,
-                                                  child: Text(
+                                                  child: SelectableText(
                                                     expertNotifier.expertWi!
                                                                 .length <=
                                                             1
@@ -188,7 +188,7 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                                 ),
                                                 SizedBox(
                                                   width: 70,
-                                                  child: Text(
+                                                  child: SelectableText(
                                                     expertNotifier.expertWi!
                                                                 .length <=
                                                             1
@@ -207,7 +207,7 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                                 ),
                                                 SizedBox(
                                                   width: 70,
-                                                  child: Text(
+                                                  child: SelectableText(
                                                     expertNotifier.expertWi!
                                                                 .length <=
                                                             1
@@ -235,7 +235,7 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 10.0),
-                            child: Text(
+                            child: SelectableText(
                               'Calculations',
                               style: subTopicStyle,
                             ),
@@ -249,47 +249,53 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                   defaultColumnWidth:
                                       const IntrinsicColumnWidth(),
                                   children: [
-                                    const TableRow(
+                                    TableRow(
                                       children: [
-                                        TableCell(
+                                        const TableCell(
                                           child: Padding(
                                             padding: EdgeInsets.all(8.0),
-                                            child: Text(' '),
+                                            child: SelectableText(' '),
                                           ),
                                         ),
-                                        TableCell(
+                                        const TableCell(
                                           child: Padding(
                                             padding: EdgeInsets.all(8.0),
-                                            child: Text(
+                                            child: SelectableText(
                                               'Fuzzy RGM',
                                               textAlign: TextAlign.center,
                                             ),
                                           ),
                                         ),
-                                        TableCell(
+                                        const TableCell(
                                           child: Padding(
                                             padding: EdgeInsets.all(8.0),
-                                            child: Text(
+                                            child: SelectableText(
                                               'Fuzzy Weight',
                                               textAlign: TextAlign.center,
                                             ),
                                           ),
                                         ),
                                         TableCell(
-                                          child: Padding(
-                                            padding: EdgeInsets.all(8.0),
-                                            child: Text(
-                                              'Crisp Weight',
-                                              textAlign: TextAlign.center,
+                                          child: Container(
+                                            color: Colors.green,
+                                            child: const Padding(
+                                              padding: EdgeInsets.all(8.0),
+                                              child: SelectableText(
+                                                'Crisp Weight',
+                                                textAlign: TextAlign.center,
+                                              ),
                                             ),
                                           ),
                                         ),
                                         TableCell(
-                                          child: Padding(
-                                            padding: EdgeInsets.all(8.0),
-                                            child: Text(
-                                              'Normal Weight',
-                                              textAlign: TextAlign.center,
+                                          child: Container(
+                                            color: Colors.green,
+                                            child: const Padding(
+                                              padding: EdgeInsets.all(8.0),
+                                              child: SelectableText(
+                                                'Normal Weight',
+                                                textAlign: TextAlign.center,
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -300,7 +306,7 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                         const TableCell(
                                           child: Padding(
                                             padding: EdgeInsets.all(8.0),
-                                            child: Text(' '),
+                                            child: SelectableText(' '),
                                           ),
                                         ),
                                         TableCell(
@@ -310,21 +316,21 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                               children: const [
                                                 SizedBox(
                                                   width: 70,
-                                                  child: Text(
+                                                  child: SelectableText(
                                                     'l',
                                                     textAlign: TextAlign.center,
                                                   ),
                                                 ),
                                                 SizedBox(
                                                   width: 70,
-                                                  child: Text(
+                                                  child: SelectableText(
                                                     'm',
                                                     textAlign: TextAlign.center,
                                                   ),
                                                 ),
                                                 SizedBox(
                                                   width: 70,
-                                                  child: Text(
+                                                  child: SelectableText(
                                                     'u',
                                                     textAlign: TextAlign.center,
                                                   ),
@@ -340,21 +346,21 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                               children: const [
                                                 SizedBox(
                                                   width: 70,
-                                                  child: Text(
+                                                  child: SelectableText(
                                                     'l',
                                                     textAlign: TextAlign.center,
                                                   ),
                                                 ),
                                                 SizedBox(
                                                   width: 70,
-                                                  child: Text(
+                                                  child: SelectableText(
                                                     'm',
                                                     textAlign: TextAlign.center,
                                                   ),
                                                 ),
                                                 SizedBox(
                                                   width: 70,
-                                                  child: Text(
+                                                  child: SelectableText(
                                                     'u',
                                                     textAlign: TextAlign.center,
                                                   ),
@@ -363,16 +369,22 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                             ),
                                           ),
                                         ),
-                                        const TableCell(
-                                          child: Padding(
-                                            padding: EdgeInsets.all(8.0),
-                                            child: Text(' '),
+                                        TableCell(
+                                          child: Container(
+                                            color: Colors.green,
+                                            child: const Padding(
+                                              padding: EdgeInsets.all(8.0),
+                                              child: SelectableText(' '),
+                                            ),
                                           ),
                                         ),
-                                        const TableCell(
-                                          child: Padding(
-                                            padding: EdgeInsets.all(8.0),
-                                            child: Text(' '),
+                                        TableCell(
+                                          child: Container(
+                                            color: Colors.green,
+                                            child: const Padding(
+                                              padding: EdgeInsets.all(8.0),
+                                              child: SelectableText(' '),
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -384,7 +396,7 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                             child: Padding(
                                               padding:
                                                   const EdgeInsets.all(8.0),
-                                              child: Text(criteria),
+                                              child: SelectableText(criteria),
                                             ),
                                           ),
                                           // for (int i = 0; i < qMatrix.length; i++)
@@ -396,7 +408,7 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                                 children: [
                                                   SizedBox(
                                                     width: 70,
-                                                    child: Text(
+                                                    child: SelectableText(
                                                       allPriorities['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
                                                                   'l']![
                                                               qMatrix.indexOf(
@@ -408,7 +420,7 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                                   ),
                                                   SizedBox(
                                                     width: 70,
-                                                    child: Text(
+                                                    child: SelectableText(
                                                       allPriorities['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
                                                                   'm']![
                                                               qMatrix.indexOf(
@@ -420,7 +432,7 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                                   ),
                                                   SizedBox(
                                                     width: 70,
-                                                    child: Text(
+                                                    child: SelectableText(
                                                       allPriorities['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
                                                                   'u']![
                                                               qMatrix.indexOf(
@@ -442,7 +454,7 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                                 children: [
                                                   SizedBox(
                                                     width: 70,
-                                                    child: Text(
+                                                    child: SelectableText(
                                                       allWeights['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
                                                                   'l']![
                                                               qMatrix.indexOf(
@@ -454,7 +466,7 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                                   ),
                                                   SizedBox(
                                                     width: 70,
-                                                    child: Text(
+                                                    child: SelectableText(
                                                       allWeights['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
                                                                   'm']![
                                                               qMatrix.indexOf(
@@ -466,7 +478,7 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                                   ),
                                                   SizedBox(
                                                     width: 70,
-                                                    child: Text(
+                                                    child: SelectableText(
                                                       allWeights['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
                                                                   'u']![
                                                               qMatrix.indexOf(
@@ -481,28 +493,34 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                             ),
                                           ),
                                           TableCell(
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Text(
-                                                crispWi['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
-                                                        qMatrix
-                                                            .indexOf(criteria)]
-                                                    .toStringAsFixed(4),
-                                                textAlign: TextAlign.center,
+                                            child: Container(
+                                              color: Colors.green,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: SelectableText(
+                                                  crispWi['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
+                                                          qMatrix.indexOf(
+                                                              criteria)]
+                                                      .toStringAsFixed(4),
+                                                  textAlign: TextAlign.center,
+                                                ),
                                               ),
                                             ),
                                           ),
                                           TableCell(
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Text(
-                                                normalWi['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
-                                                        qMatrix
-                                                            .indexOf(criteria)]
-                                                    .toStringAsFixed(4),
-                                                textAlign: TextAlign.center,
+                                            child: Container(
+                                              color: Colors.green,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: SelectableText(
+                                                  normalWi['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']![
+                                                          qMatrix.indexOf(
+                                                              criteria)]
+                                                      .toStringAsFixed(4),
+                                                  textAlign: TextAlign.center,
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -519,13 +537,13 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                         TableCell(
                                           child: Padding(
                                             padding: EdgeInsets.all(8.0),
-                                            child: Text('GCI'),
+                                            child: SelectableText('GCI'),
                                           ),
                                         ),
                                         TableCell(
                                           child: Padding(
                                             padding: EdgeInsets.all(8.0),
-                                            child: Text('CR'),
+                                            child: SelectableText('CR'),
                                           ),
                                         ),
                                       ],
@@ -534,7 +552,7 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                       TableCell(
                                         child: Padding(
                                           padding: EdgeInsets.all(8.0),
-                                          child: Text(
+                                          child: SelectableText(
                                               gci['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']!
                                                   .toStringAsFixed(4)),
                                         ),
@@ -542,7 +560,7 @@ class _FahpGdmResultState extends State<FahpGdmResult> {
                                       TableCell(
                                         child: Padding(
                                           padding: EdgeInsets.all(8.0),
-                                          child: Text(
+                                          child: SelectableText(
                                             '${(cr['q${qMatrices.values.toList().indexOf(qMatrix) + 1}']! * 100).toStringAsFixed(2)}%',
                                             style: TextStyle(
                                                 color:

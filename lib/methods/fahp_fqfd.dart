@@ -17,7 +17,7 @@ class _FahpFqfdMethodState extends State<FahpFqfdMethod> {
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
         children: [
-          const Text('FAHP with QFD'),
+          const SelectableText('FAHP with QFD'),
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.5,
             child: TextFormField(

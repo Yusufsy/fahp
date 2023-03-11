@@ -18,7 +18,7 @@ class _PairWiseCompState extends State<PairWiseComp> {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 10.0),
-          child: Text(
+          child: SelectableText(
             'Expert ${widget.exIndex}',
             style: Theme.of(context).textTheme.headline3,
           ),
@@ -29,26 +29,27 @@ class _PairWiseCompState extends State<PairWiseComp> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: RichText(
-                  text: TextSpan(
-                      text: 'With respect to ',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                      children: [
-                        TextSpan(
-                          text: context.watch<QuestionNotifier>().wrt![context
-                              .watch<QuestionNotifier>()
-                              .pairsGen
-                              .values
-                              .toList()
-                              .indexOf(criterias)],
-                          style: Theme.of(context).textTheme.titleLarge,
-                        ),
-                        TextSpan(
-                          text:
-                              ', which of the following criterion is more important? and by how much is more?',
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                      ]),
+                child: SelectableText.rich(
+                  TextSpan(
+                    text: 'With respect to ',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    children: [
+                      TextSpan(
+                        text: context.watch<QuestionNotifier>().wrt![context
+                            .watch<QuestionNotifier>()
+                            .pairsGen
+                            .values
+                            .toList()
+                            .indexOf(criterias)],
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      TextSpan(
+                        text:
+                            ', which of the following criterion is more important? and by how much is more?',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               for (List<String> criteria in criterias)

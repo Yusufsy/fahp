@@ -42,7 +42,7 @@ class _PairWiseRowState extends State<PairWiseRow> {
             TableCell(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('${widget.index + 1}'),
+                child: SelectableText('${widget.index + 1}'),
               ),
             ),
             _criteriaCell(),
@@ -67,7 +67,7 @@ class _PairWiseRowState extends State<PairWiseRow> {
                         });
                       },
                     ),
-                    const Text('1'),
+                    const SelectableText('1'),
                   ],
                 ),
               ),
@@ -96,7 +96,7 @@ class _PairWiseRowState extends State<PairWiseRow> {
                               });
                             },
                           ),
-                          Text('$i'),
+                          SelectableText('$i'),
                         ],
                       ),
                   ],
@@ -129,7 +129,7 @@ class _PairWiseRowState extends State<PairWiseRow> {
                     });
                   },
                 ),
-                Text(criteria),
+                SelectableText(criteria),
               ],
             ),
         ],

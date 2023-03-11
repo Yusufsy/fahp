@@ -30,11 +30,11 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Row(
           children: const [
-            Text("FAHP & QFD Calculator"),
+            SelectableText("FAHP & QFD Calculator"),
             Expanded(
               child: Align(
                 alignment: Alignment.center,
-                child: Text("Consensus AHP Online Calculator"),
+                child: SelectableText("Consensus AHP Online Calculator"),
               ),
             ),
           ],
@@ -47,31 +47,31 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const ExpansionTile(
-                title: Text("About App"),
+                title: SelectableText("About App"),
                 children: [
-                  Text(
+                  SelectableText(
                       "This website is a calculator that performs the Analytical Hierarchy Process (AHP) method. "
                       "Additionally, it can also preform calculation of the Quality Function Deployment (QFD) model."
                       " Moreover, it can easily integrate the both methods (AHP-QFD) by transporting the result obtained from the AHP to the first stage of the QFD."),
                 ],
               ),
               const ExpansionTile(
-                title: Text("How to use the app"),
+                title: SelectableText("How to use the app"),
                 children: [
-                  Text("How-to app goes here"),
+                  SelectableText("How-to app goes here"),
                 ],
               ),
               const ExpansionTile(
-                title: Text("Why Fuzzy-AHP"),
+                title: SelectableText("Why Fuzzy-AHP"),
                 children: [
-                  Text("Why fuzzy-AHP goes here"),
+                  SelectableText("Why fuzzy-AHP goes here"),
                 ],
               ),
               const SizedBox(height: 50),
               Row(
                 children: [
                   const Spacer(),
-                  const Text('Method: '),
+                  const SelectableText('Method: '),
                   DropdownButton(
                     // Initial Value
                     value: dropdownvalue,
@@ -83,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     items: items.map((String items) {
                       return DropdownMenuItem(
                         value: items,
-                        child: Text(items),
+                        child: SelectableText(items),
                       );
                     }).toList(),
                     // After selecting the desired option,it will

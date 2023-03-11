@@ -37,14 +37,14 @@ class _FahpGdmResState extends State<FahpGdmRes> {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: Text(
+                child: SelectableText(
                   'Question ${qMatrices.values.toList().indexOf(qMatrix) + 1}',
                   style: subTopicStyle,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: Text(
+                child: SelectableText(
                   'Crisp Numbers',
                   style: subTopicStyle,
                 ),
@@ -59,14 +59,14 @@ class _FahpGdmResState extends State<FahpGdmRes> {
                         const TableCell(
                           child: Padding(
                             padding: EdgeInsets.all(8.0),
-                            child: Text(' '),
+                            child: SelectableText(' '),
                           ),
                         ),
                         for (String criteria in qMatrix)
                           TableCell(
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text(criteria),
+                              child: SelectableText(criteria),
                             ),
                           ),
                       ],
@@ -77,7 +77,7 @@ class _FahpGdmResState extends State<FahpGdmRes> {
                           TableCell(
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text(criteria),
+                              child: SelectableText(criteria),
                             ),
                           ),
                           for (var rows in allMatrices[qMatrix]![
@@ -90,17 +90,19 @@ class _FahpGdmResState extends State<FahpGdmRes> {
                                   SizedBox(
                                     width: 50,
                                     child: rows <= 1 || rows == 9
-                                        ? Text("${rows.toStringAsFixed(2)} ")
-                                        : Text(
+                                        ? SelectableText(
+                                            "${rows.toStringAsFixed(2)} ")
+                                        : SelectableText(
                                             "${(rows - 1).toStringAsFixed(2)} "),
                                   ),
                                   SizedBox(
                                       width: 50,
-                                      child:
-                                          Text("${rows.toStringAsFixed(2)} ")),
+                                      child: SelectableText(
+                                          "${rows.toStringAsFixed(2)} ")),
                                   rows <= 1 || rows == 9
-                                      ? Text(rows.toStringAsFixed(2))
-                                      : Text((rows + 1).toStringAsFixed(2)),
+                                      ? SelectableText(rows.toStringAsFixed(2))
+                                      : SelectableText(
+                                          (rows + 1).toStringAsFixed(2)),
                                 ],
                               ),
                             )),
@@ -111,7 +113,7 @@ class _FahpGdmResState extends State<FahpGdmRes> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: Text(
+                child: SelectableText(
                   'Calculations',
                   style: subTopicStyle,
                 ),
@@ -129,19 +131,19 @@ class _FahpGdmResState extends State<FahpGdmRes> {
                             TableCell(
                               child: Padding(
                                 padding: EdgeInsets.all(8.0),
-                                child: Text(' '),
+                                child: SelectableText(' '),
                               ),
                             ),
                             TableCell(
                               child: Padding(
                                 padding: EdgeInsets.all(8.0),
-                                child: Text('RGM'),
+                                child: SelectableText('RGM'),
                               ),
                             ),
                             TableCell(
                               child: Padding(
                                 padding: EdgeInsets.all(8.0),
-                                child: Text('Weight'),
+                                child: SelectableText('Weight'),
                               ),
                             ),
                           ],
@@ -152,14 +154,14 @@ class _FahpGdmResState extends State<FahpGdmRes> {
                               TableCell(
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Text(criteria),
+                                  child: SelectableText(criteria),
                                 ),
                               ),
                               // for (int i = 0; i < qMatrix.length; i++)
                               TableCell(
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Text(allPriorities[qMatrix]![
+                                  child: SelectableText(allPriorities[qMatrix]![
                                           qMatrix.indexOf(criteria)]
                                       .toStringAsFixed(4)),
                                 ),
@@ -167,7 +169,7 @@ class _FahpGdmResState extends State<FahpGdmRes> {
                               TableCell(
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Text(allWeights[qMatrix]![
+                                  child: SelectableText(allWeights[qMatrix]![
                                           qMatrix.indexOf(criteria)]
                                       .toStringAsFixed(4)),
                                 ),
@@ -184,13 +186,13 @@ class _FahpGdmResState extends State<FahpGdmRes> {
                             TableCell(
                               child: Padding(
                                 padding: EdgeInsets.all(8.0),
-                                child: Text('GCI'),
+                                child: SelectableText('GCI'),
                               ),
                             ),
                             TableCell(
                               child: Padding(
                                 padding: EdgeInsets.all(8.0),
-                                child: Text('CR'),
+                                child: SelectableText('CR'),
                               ),
                             ),
                           ],
@@ -199,7 +201,7 @@ class _FahpGdmResState extends State<FahpGdmRes> {
                           TableCell(
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text(context
+                              child: SelectableText(context
                                   .watch<QuestionNotifier>()
                                   .gci[qMatrices.values
                                       .toList()
@@ -210,7 +212,7 @@ class _FahpGdmResState extends State<FahpGdmRes> {
                           TableCell(
                             child: Padding(
                               padding: EdgeInsets.all(8.0),
-                              child: Text(
+                              child: SelectableText(
                                 "${(context.watch<QuestionNotifier>().cr[qMatrices.values.toList().indexOf(qMatrix)] * 100).toStringAsFixed(2)}%",
                                 style: TextStyle(
                                     color: context.watch<QuestionNotifier>().cr[

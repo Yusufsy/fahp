@@ -14,14 +14,14 @@ class _FqfdMethodState extends State<FqfdMethod> {
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
         children: [
-          Text(
+          SelectableText(
             'FQFD',
             style: TextStyle(
               color: Theme.of(context).colorScheme.primary,
               fontSize: 40,
             ),
           ),
-          Text(
+          SelectableText(
             'This method is coming soon',
             style: TextStyle(
               color: Theme.of(context).colorScheme.primary,

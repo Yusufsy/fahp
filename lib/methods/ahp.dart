@@ -39,7 +39,7 @@ class _AhpMethodState extends State<AhpMethod> {
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
         children: [
-          Text(
+          SelectableText(
             'AHP',
             style: TextStyle(
               color: Theme.of(context).colorScheme.primary,
@@ -52,7 +52,7 @@ class _AhpMethodState extends State<AhpMethod> {
               children: [
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 0.0),
-                  child: Text('Enter the number of Experts'),
+                  child: SelectableText('Enter the number of Experts'),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -97,13 +97,14 @@ class _AhpMethodState extends State<AhpMethod> {
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: const Text('Please input a number'),
+                            content:
+                                const SelectableText('Please input a number'),
                             backgroundColor: Theme.of(context).errorColor,
                           ),
                         );
                       }
                     },
-                    child: const Text('Next'),
+                    child: const SelectableText('Next'),
                   ),
                 ),
               ],
@@ -116,7 +117,7 @@ class _AhpMethodState extends State<AhpMethod> {
                     children: [
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 0.0),
-                        child: Text(
+                        child: SelectableText(
                             'The experts weight reflects the expert’s years of experience or his/her knowledge. “If experts have the same weight, please keep this field blank”'),
                       ),
                       Table(
@@ -127,13 +128,13 @@ class _AhpMethodState extends State<AhpMethod> {
                             TableCell(
                               child: Padding(
                                 padding: EdgeInsets.all(8.0),
-                                child: Text('Expert'),
+                                child: SelectableText('Expert'),
                               ),
                             ),
                             TableCell(
                               child: Padding(
                                 padding: EdgeInsets.all(8.0),
-                                child: Text('Weight'),
+                                child: SelectableText('Weight'),
                               ),
                             ),
                           ]),
@@ -145,7 +146,7 @@ class _AhpMethodState extends State<AhpMethod> {
                                 TableCell(
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Text('ΔE$i'),
+                                    child: SelectableText('ΔE$i'),
                                   ),
                                 ),
                                 TableCell(
@@ -205,7 +206,7 @@ class _AhpMethodState extends State<AhpMethod> {
                                 _expertWeights = false;
                               });
                             },
-                            child: const Text('Back'),
+                            child: const SelectableText('Back'),
                           ),
                           const SizedBox(
                             width: 30.0,
@@ -217,7 +218,7 @@ class _AhpMethodState extends State<AhpMethod> {
                                 _numQuestions = true;
                               });
                             },
-                            child: const Text('Next'),
+                            child: const SelectableText('Next'),
                           ),
                         ],
                       ),
@@ -231,7 +232,7 @@ class _AhpMethodState extends State<AhpMethod> {
               children: [
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 10.0),
-                  child: Text(
+                  child: SelectableText(
                       'Enter number of Pairwise Comparison Matrices (PCMs)'),
                 ),
                 SizedBox(
@@ -263,7 +264,7 @@ class _AhpMethodState extends State<AhpMethod> {
                           _numQuestions = false;
                         });
                       },
-                      child: const Text('Back'),
+                      child: const SelectableText('Back'),
                     ),
                     const SizedBox(
                       width: 30.0,
@@ -281,13 +282,14 @@ class _AhpMethodState extends State<AhpMethod> {
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: const Text('Please input a number'),
+                              content:
+                                  const SelectableText('Please input a number'),
                               backgroundColor: Theme.of(context).errorColor,
                             ),
                           );
                         }
                       },
-                      child: const Text('Next'),
+                      child: const SelectableText('Next'),
                     ),
                   ],
                 ),
@@ -301,7 +303,7 @@ class _AhpMethodState extends State<AhpMethod> {
                     children: [
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 0.0),
-                        child: Text(
+                        child: SelectableText(
                             'Insert the matrix of each Pairwise Comparison Matrices (PCMs)'),
                       ),
                       Table(
@@ -313,25 +315,25 @@ class _AhpMethodState extends State<AhpMethod> {
                               TableCell(
                                 child: Padding(
                                   padding: EdgeInsets.all(8.0),
-                                  child: Text('Q'),
+                                  child: SelectableText('Q'),
                                 ),
                               ),
                               TableCell(
                                 child: Padding(
                                   padding: EdgeInsets.all(8.0),
-                                  child: Text('Matrix'),
+                                  child: SelectableText('Matrix'),
                                 ),
                               ),
                               TableCell(
                                 child: Padding(
                                   padding: EdgeInsets.all(8.0),
-                                  child: Text('Criteria'),
+                                  child: SelectableText('Criteria'),
                                 ),
                               ),
                               TableCell(
                                 child: Padding(
                                   padding: EdgeInsets.all(8.0),
-                                  child: Text('With respect to'),
+                                  child: SelectableText('With respect to'),
                                 ),
                               ),
                             ],
@@ -355,7 +357,7 @@ class _AhpMethodState extends State<AhpMethod> {
                                 _questionsMatrix = false;
                               });
                             },
-                            child: const Text('Back'),
+                            child: const SelectableText('Back'),
                           ),
                           const SizedBox(
                             width: 30.0,
@@ -368,7 +370,7 @@ class _AhpMethodState extends State<AhpMethod> {
                                 _criteriaTable = true;
                               });
                             },
-                            child: const Text('Next'),
+                            child: const SelectableText('Next'),
                           ),
                         ],
                       ),
@@ -385,7 +387,7 @@ class _AhpMethodState extends State<AhpMethod> {
                       children: [
                         const Padding(
                           padding: EdgeInsets.symmetric(vertical: 8.0),
-                          child: Text('Saaty\'s scale'),
+                          child: SelectableText('Saaty\'s scale'),
                         ),
                         Table(
                           border: TableBorder.all(),
@@ -397,29 +399,13 @@ class _AhpMethodState extends State<AhpMethod> {
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text('AHP Saaty (1980)'),
+                                    child: SelectableText('AHP Saaty (1980)'),
                                   ),
                                 ),
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text('Explanation'),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
-                                TableCell(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Text('1'),
-                                  ),
-                                ),
-                                TableCell(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Text('Equal Importance'),
+                                    child: SelectableText('Explanation'),
                                   ),
                                 ),
                               ],
@@ -429,29 +415,13 @@ class _AhpMethodState extends State<AhpMethod> {
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text('3'),
+                                    child: SelectableText('1'),
                                   ),
                                 ),
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text('Moderate Importance'),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
-                                TableCell(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Text('5'),
-                                  ),
-                                ),
-                                TableCell(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Text('Strong Importance'),
+                                    child: SelectableText('Equal Importance'),
                                   ),
                                 ),
                               ],
@@ -461,29 +431,14 @@ class _AhpMethodState extends State<AhpMethod> {
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text('7'),
+                                    child: SelectableText('3'),
                                   ),
                                 ),
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text('Very Strong Importance'),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
-                                TableCell(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Text('9'),
-                                  ),
-                                ),
-                                TableCell(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Text('Extremely Important'),
+                                    child:
+                                        SelectableText('Moderate Importance'),
                                   ),
                                 ),
                               ],
@@ -493,29 +448,13 @@ class _AhpMethodState extends State<AhpMethod> {
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text('2'),
+                                    child: SelectableText('5'),
                                   ),
                                 ),
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text('Equally to Moderately'),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
-                                TableCell(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Text('4'),
-                                  ),
-                                ),
-                                TableCell(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Text('Moderately to Strongly'),
+                                    child: SelectableText('Strong Importance'),
                                   ),
                                 ),
                               ],
@@ -525,13 +464,14 @@ class _AhpMethodState extends State<AhpMethod> {
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text('6'),
+                                    child: SelectableText('7'),
                                   ),
                                 ),
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text('Strongly to very strong'),
+                                    child: SelectableText(
+                                        'Very Strong Importance'),
                                   ),
                                 ),
                               ],
@@ -541,13 +481,82 @@ class _AhpMethodState extends State<AhpMethod> {
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text('8'),
+                                    child: SelectableText('9'),
                                   ),
                                 ),
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text('Very strong to extremely'),
+                                    child:
+                                        SelectableText('Extremely Important'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: SelectableText('2'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child:
+                                        SelectableText('Equally to Moderately'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: SelectableText('4'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: SelectableText(
+                                        'Moderately to Strongly'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: SelectableText('6'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: SelectableText(
+                                        'Strongly to very strong'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: SelectableText('8'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: SelectableText(
+                                        'Very strong to extremely'),
                                   ),
                                 ),
                               ],
@@ -577,7 +586,7 @@ class _AhpMethodState extends State<AhpMethod> {
                                   _questionsMatrix = !_questionsMatrix;
                                 });
                               },
-                              child: const Text('Back'),
+                              child: const SelectableText('Back'),
                             ),
                             const SizedBox(
                               width: 30.0,
@@ -595,7 +604,7 @@ class _AhpMethodState extends State<AhpMethod> {
                                               const AhpResult())));
                                 });
                               },
-                              child: const Text('Calculate'),
+                              child: const SelectableText('Calculate'),
                             ),
                           ],
                         ),
@@ -615,7 +624,7 @@ class _AhpMethodState extends State<AhpMethod> {
         TableCell(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text('${q + 1}'),
+            child: SelectableText('${q + 1}'),
           ),
         ),
         TableCell(
@@ -639,7 +648,8 @@ class _AhpMethodState extends State<AhpMethod> {
                   },
                   icon: const Icon(Icons.remove),
                 ),
-                Text('${context.read<QuestionNotifier>().questionMatrix![q]}'),
+                SelectableText(
+                    '${context.read<QuestionNotifier>().questionMatrix![q]}'),
                 IconButton(
                   onPressed: () {
                     if (context.read<QuestionNotifier>().questionMatrix![q] <=

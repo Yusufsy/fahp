@@ -32,11 +32,11 @@ class _FahpResultState extends State<FahpResult> {
       appBar: AppBar(
         title: Row(
           children: const [
-            Text("LOGO"),
+            SelectableText("LOGO"),
             Expanded(
               child: Align(
                 alignment: Alignment.center,
-                child: Text("Consensus AHP Online Calculator"),
+                child: SelectableText("Consensus AHP Online Calculator"),
               ),
             ),
           ],
@@ -50,7 +50,7 @@ class _FahpResultState extends State<FahpResult> {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: Text(
+                  child: SelectableText(
                     'FAHP RESULTS',
                     style: topicStyle,
                   ),
@@ -60,14 +60,14 @@ class _FahpResultState extends State<FahpResult> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
-                        child: Text(
+                        child: SelectableText(
                           'Question ${qMatrices.values.toList().indexOf(qMatrix) + 1}',
                           style: topicStyle,
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
-                        child: Text(
+                        child: SelectableText(
                           'Crisp Numbers',
                           style: subTopicStyle,
                         ),
@@ -82,14 +82,14 @@ class _FahpResultState extends State<FahpResult> {
                                 const TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text(' '),
+                                    child: SelectableText(' '),
                                   ),
                                 ),
                                 for (String criteria in qMatrix)
                                   TableCell(
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Text(criteria),
+                                      child: SelectableText(criteria),
                                     ),
                                   ),
                               ],
@@ -100,7 +100,7 @@ class _FahpResultState extends State<FahpResult> {
                                   TableCell(
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Text(criteria),
+                                      child: SelectableText(criteria),
                                     ),
                                   ),
                                   for (var rows in allMatrices[qMatrix]![
@@ -113,18 +113,19 @@ class _FahpResultState extends State<FahpResult> {
                                           SizedBox(
                                             width: 50,
                                             child: rows == 1 || rows == 9
-                                                ? Text(
+                                                ? SelectableText(
                                                     "${rows.toStringAsFixed(2)} ")
-                                                : Text(
+                                                : SelectableText(
                                                     "${(rows - 1).toStringAsFixed(2)} "),
                                           ),
                                           SizedBox(
                                               width: 50,
-                                              child: Text(
+                                              child: SelectableText(
                                                   "${rows.toStringAsFixed(2)} ")),
                                           rows == 1 || rows == 9
-                                              ? Text(rows.toStringAsFixed(2))
-                                              : Text((rows + 1)
+                                              ? SelectableText(
+                                                  rows.toStringAsFixed(2))
+                                              : SelectableText((rows + 1)
                                                   .toStringAsFixed(2)),
                                         ],
                                       ),
@@ -136,7 +137,7 @@ class _FahpResultState extends State<FahpResult> {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
-                        child: Text(
+                        child: SelectableText(
                           'Calculations',
                           style: subTopicStyle,
                         ),
@@ -154,19 +155,19 @@ class _FahpResultState extends State<FahpResult> {
                                     TableCell(
                                       child: Padding(
                                         padding: EdgeInsets.all(8.0),
-                                        child: Text(' '),
+                                        child: SelectableText(' '),
                                       ),
                                     ),
                                     TableCell(
                                       child: Padding(
                                         padding: EdgeInsets.all(8.0),
-                                        child: Text('RGM'),
+                                        child: SelectableText('RGM'),
                                       ),
                                     ),
                                     TableCell(
                                       child: Padding(
                                         padding: EdgeInsets.all(8.0),
-                                        child: Text('Weight'),
+                                        child: SelectableText('Weight'),
                                       ),
                                     ),
                                   ],
@@ -177,24 +178,26 @@ class _FahpResultState extends State<FahpResult> {
                                       TableCell(
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
-                                          child: Text(criteria),
+                                          child: SelectableText(criteria),
                                         ),
                                       ),
                                       // for (int i = 0; i < qMatrix.length; i++)
                                       TableCell(
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
-                                          child: Text(allPriorities[qMatrix]![
-                                                  qMatrix.indexOf(criteria)]
-                                              .toStringAsFixed(4)),
+                                          child: SelectableText(
+                                              allPriorities[qMatrix]![
+                                                      qMatrix.indexOf(criteria)]
+                                                  .toStringAsFixed(4)),
                                         ),
                                       ),
                                       TableCell(
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
-                                          child: Text(allWeights[qMatrix]![
-                                                  qMatrix.indexOf(criteria)]
-                                              .toStringAsFixed(4)),
+                                          child: SelectableText(
+                                              allWeights[qMatrix]![
+                                                      qMatrix.indexOf(criteria)]
+                                                  .toStringAsFixed(4)),
                                         ),
                                       ),
                                     ],
@@ -209,13 +212,13 @@ class _FahpResultState extends State<FahpResult> {
                                     TableCell(
                                       child: Padding(
                                         padding: EdgeInsets.all(8.0),
-                                        child: Text('GCI'),
+                                        child: SelectableText('GCI'),
                                       ),
                                     ),
                                     TableCell(
                                       child: Padding(
                                         padding: EdgeInsets.all(8.0),
-                                        child: Text('CR'),
+                                        child: SelectableText('CR'),
                                       ),
                                     ),
                                   ],
@@ -224,7 +227,7 @@ class _FahpResultState extends State<FahpResult> {
                                   TableCell(
                                     child: Padding(
                                       padding: EdgeInsets.all(8.0),
-                                      child: Text(context
+                                      child: SelectableText(context
                                           .watch<QuestionNotifier>()
                                           .gci[qMatrices.values
                                               .toList()
@@ -235,7 +238,7 @@ class _FahpResultState extends State<FahpResult> {
                                   TableCell(
                                     child: Padding(
                                       padding: EdgeInsets.all(8.0),
-                                      child: Text(context
+                                      child: SelectableText(context
                                           .watch<QuestionNotifier>()
                                           .cr[qMatrices.values
                                               .toList()

@@ -36,7 +36,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
         children: [
-          Text(
+          SelectableText(
             'FAHP with GDM',
             style: TextStyle(
               color: Theme.of(context).colorScheme.primary,
@@ -49,7 +49,8 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
               children: [
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 0.0),
-                  child: Text('Enter number of Experts'),
+                  child: SelectableText(
+                      'Enter the number of Experts who participated in the Pairwise Comparison matrices'),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -94,13 +95,14 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: const Text('Please input a number'),
+                            content:
+                                const SelectableText('Please input a number'),
                             backgroundColor: Theme.of(context).errorColor,
                           ),
                         );
                       }
                     },
-                    child: const Text('Next'),
+                    child: const SelectableText('Next'),
                   ),
                 ),
               ],
@@ -113,12 +115,12 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                     children: [
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(
-                            'The experts’ weight reflects the expert’s years of experience or his/her knowledge.'),
+                        child: SelectableText(
+                            'These weights reflect the experts’ years of experience or their level of knowledge.'),
                       ),
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(
+                        child: SelectableText(
                             'If experts have the same weight, please keep this field blank'),
                       ),
                       Table(
@@ -129,13 +131,13 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                             TableCell(
                               child: Padding(
                                 padding: EdgeInsets.all(8.0),
-                                child: Text('Expert'),
+                                child: SelectableText('Expert'),
                               ),
                             ),
                             TableCell(
                               child: Padding(
                                 padding: EdgeInsets.all(8.0),
-                                child: Text('Weight'),
+                                child: SelectableText('Weight'),
                               ),
                             ),
                           ]),
@@ -147,7 +149,8 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                                 TableCell(
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Text('ΔE$i'),
+                                    child:
+                                        SelectableText('Weight of expert $i'),
                                   ),
                                 ),
                                 TableCell(
@@ -160,7 +163,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                                         autovalidateMode:
                                             AutovalidateMode.onUserInteraction,
                                         decoration: InputDecoration(
-                                          labelText: 'Weight of ΔE$i',
+                                          labelText: 'Weight of expert $i',
                                         ),
                                         // inputFormatters: [
                                         //   FilteringTextInputFormatter.digitsOnly
@@ -207,7 +210,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                                 _expertWeights = false;
                               });
                             },
-                            child: const Text('Back'),
+                            child: const SelectableText('Back'),
                           ),
                           const SizedBox(
                             width: 30.0,
@@ -226,14 +229,15 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
-                                    content: const Text('Invalid weights'),
+                                    content:
+                                        const SelectableText('Invalid weights'),
                                     backgroundColor:
                                         Theme.of(context).errorColor,
                                   ),
                                 );
                               }
                             },
-                            child: const Text('Next'),
+                            child: const SelectableText('Next'),
                           ),
                         ],
                       ),
@@ -247,8 +251,8 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
               children: [
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 10.0),
-                  child: Text(
-                      'Enter number of Pairwise Comparison Matrices (PCMs)'),
+                  child: SelectableText(
+                      'Enter the number of Pairwise Comparison Matrices (PCMs)'),
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.5,
@@ -279,7 +283,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                           _numQuestions = false;
                         });
                       },
-                      child: const Text('Back'),
+                      child: const SelectableText('Back'),
                     ),
                     const SizedBox(
                       width: 30.0,
@@ -297,13 +301,14 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: const Text('Please input a number'),
+                              content:
+                                  const SelectableText('Please input a number'),
                               backgroundColor: Theme.of(context).errorColor,
                             ),
                           );
                         }
                       },
-                      child: const Text('Next'),
+                      child: const SelectableText('Next'),
                     ),
                   ],
                 ),
@@ -317,7 +322,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                     children: [
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(
+                        child: SelectableText(
                             'Insert the matrix of each Pairwise Comparison Matrices (PCMs)'),
                       ),
                       Table(
@@ -329,25 +334,25 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                               TableCell(
                                 child: Padding(
                                   padding: EdgeInsets.all(8.0),
-                                  child: Text('Q'),
+                                  child: SelectableText('Q'),
                                 ),
                               ),
                               TableCell(
                                 child: Padding(
                                   padding: EdgeInsets.all(8.0),
-                                  child: Text('Matrix'),
+                                  child: SelectableText('Matrix'),
                                 ),
                               ),
                               TableCell(
                                 child: Padding(
                                   padding: EdgeInsets.all(8.0),
-                                  child: Text('Criteria'),
+                                  child: SelectableText('Criteria'),
                                 ),
                               ),
                               TableCell(
                                 child: Padding(
                                   padding: EdgeInsets.all(8.0),
-                                  child: Text('With respect to'),
+                                  child: SelectableText('With respect to'),
                                 ),
                               ),
                             ],
@@ -371,7 +376,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                                 _questionsMatrix = false;
                               });
                             },
-                            child: const Text('Back'),
+                            child: const SelectableText('Back'),
                           ),
                           const SizedBox(
                             width: 30.0,
@@ -387,7 +392,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                                 _criteriaTable = true;
                               });
                             },
-                            child: const Text('Next'),
+                            child: const SelectableText('Next'),
                           ),
                         ],
                       ),
@@ -402,10 +407,6 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
               child: _criteriaTable
                   ? Column(
                       children: [
-                        const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8.0),
-                          child: Text('Saaty\'s scale'),
-                        ),
                         Table(
                           border: TableBorder.all(),
                           defaultColumnWidth:
@@ -416,29 +417,13 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text('AHP Saaty (1980)'),
+                                    child: SelectableText('1'),
                                   ),
                                 ),
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text('Explanation'),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
-                                TableCell(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Text('1'),
-                                  ),
-                                ),
-                                TableCell(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Text('Equal Importance'),
+                                    child: SelectableText('Equal Importance'),
                                   ),
                                 ),
                               ],
@@ -448,29 +433,14 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text('3'),
+                                    child: SelectableText('3'),
                                   ),
                                 ),
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text('Moderate Importance'),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
-                                TableCell(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Text('5'),
-                                  ),
-                                ),
-                                TableCell(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Text('Strong Importance'),
+                                    child:
+                                        SelectableText('Moderate Importance'),
                                   ),
                                 ),
                               ],
@@ -480,29 +450,13 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text('7'),
+                                    child: SelectableText('5'),
                                   ),
                                 ),
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text('Very Strong Importance'),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
-                                TableCell(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Text('9'),
-                                  ),
-                                ),
-                                TableCell(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Text('Extremely Important'),
+                                    child: SelectableText('Strong Importance'),
                                   ),
                                 ),
                               ],
@@ -512,29 +466,14 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text('2'),
+                                    child: SelectableText('7'),
                                   ),
                                 ),
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text('Equally to Moderately'),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
-                                TableCell(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Text('4'),
-                                  ),
-                                ),
-                                TableCell(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Text('Moderately to Strongly'),
+                                    child: SelectableText(
+                                        'Very Strong Importance'),
                                   ),
                                 ),
                               ],
@@ -544,13 +483,14 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text('6'),
+                                    child: SelectableText('9'),
                                   ),
                                 ),
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text('Strongly to very strong'),
+                                    child:
+                                        SelectableText('Extremely Important'),
                                   ),
                                 ),
                               ],
@@ -560,13 +500,65 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text('8'),
+                                    child: SelectableText('2'),
                                   ),
                                 ),
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text('Very strong to extremely'),
+                                    child:
+                                        SelectableText('Equally to Moderately'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: SelectableText('4'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: SelectableText(
+                                        'Moderately to Strongly'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: SelectableText('6'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: SelectableText(
+                                        'Strongly to very strong'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: SelectableText('8'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: SelectableText(
+                                        'Very strong to extremely'),
                                   ),
                                 ),
                               ],
@@ -577,6 +569,35 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                             onStepTapped: (step) => tapped(step),
                             onStepContinue: continued,
                             onStepCancel: cancel,
+                            controlsBuilder: (BuildContext context,
+                                ControlsDetails details) {
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: <Widget>[
+                                    TextButton(
+                                      onPressed: details.onStepContinue,
+                                      child: SelectableText(
+                                        'Next Expert',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge!
+                                            .copyWith(color: Colors.green),
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: details.onStepCancel,
+                                      child: SelectableText(
+                                        'Cancel',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
                             physics: const ScrollPhysics(),
                             currentStep: _currentStep,
                             steps: [
@@ -588,7 +609,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                                           .length;
                                   i++)
                                 Step(
-                                  title: Text("Expert $i"),
+                                  title: SelectableText("Expert $i"),
                                   content: Column(
                                     children: [
                                       PairWiseComp(
@@ -616,7 +637,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                                   _questionsMatrix = !_questionsMatrix;
                                 });
                               },
-                              child: const Text('Back'),
+                              child: const SelectableText('Back'),
                             ),
                             const SizedBox(
                               width: 30.0,
@@ -666,7 +687,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                                               const FahpGdmResult())));
                                 });
                               },
-                              child: const Text('Calculate CJM'),
+                              child: const SelectableText('Calculate CJM'),
                             ),
                           ],
                         ),
@@ -722,7 +743,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
         TableCell(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text('${q + 1}'),
+            child: SelectableText('${q + 1}'),
           ),
         ),
         TableCell(
@@ -746,7 +767,8 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                   },
                   icon: const Icon(Icons.remove),
                 ),
-                Text('${context.read<QuestionNotifier>().questionMatrix![q]}'),
+                SelectableText(
+                    '${context.read<QuestionNotifier>().questionMatrix![q]}'),
                 IconButton(
                   onPressed: () {
                     if (context.read<QuestionNotifier>().questionMatrix![q] <=

@@ -70,11 +70,11 @@ class _QfdResultState extends State<QfdResult> {
       appBar: AppBar(
         title: Row(
           children: const [
-            Text("LOGO"),
+            SelectableText("LOGO"),
             Expanded(
               child: Align(
                 alignment: Alignment.center,
-                child: Text("Consensus AHP Online Calculator"),
+                child: SelectableText("Consensus AHP Online Calculator"),
               ),
             ),
           ],
@@ -84,14 +84,14 @@ class _QfdResultState extends State<QfdResult> {
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
           children: [
-            Text(
+            SelectableText(
               'FQFD',
               style: TextStyle(
                 color: Theme.of(context).colorScheme.primary,
                 fontSize: 40,
               ),
             ),
-            Text(
+            SelectableText(
               house,
               style: TextStyle(
                 color: Theme.of(context).colorScheme.primary,
@@ -105,7 +105,7 @@ class _QfdResultState extends State<QfdResult> {
                       children: [
                         const Padding(
                           padding: EdgeInsets.symmetric(vertical: 0.0),
-                          child: Text('Results'),
+                          child: SelectableText('Results'),
                         ),
                         Table(
                           border: TableBorder.all(),
@@ -122,19 +122,19 @@ class _QfdResultState extends State<QfdResult> {
                                 const TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text(''),
+                                    child: SelectableText(''),
                                   ),
                                 ),
                                 const TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text(''),
+                                    child: SelectableText(''),
                                   ),
                                 ),
                                 TableCell(
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Text(
+                                    child: SelectableText(
                                       requirementCol,
                                       textAlign: TextAlign.center,
                                     ),
@@ -153,20 +153,20 @@ class _QfdResultState extends State<QfdResult> {
                                 TableCell(
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Text(requirement),
+                                    child: SelectableText(requirement),
                                   ),
                                 ),
                                 const TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text('Weights'),
+                                    child: SelectableText('Weights'),
                                   ),
                                 ),
                                 for (String req in engReq)
                                   TableCell(
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Text(req),
+                                      child: SelectableText(req),
                                     ),
                                   ),
                               ],
@@ -179,20 +179,22 @@ class _QfdResultState extends State<QfdResult> {
                                 const TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text('IMPORTANCE'),
+                                    child: SelectableText('IMPORTANCE'),
                                   ),
                                 ),
                                 TableCell(
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Text(sumWeights.toStringAsFixed(2)),
+                                    child: SelectableText(
+                                        sumWeights.toStringAsFixed(2)),
                                   ),
                                 ),
                                 for (var im in importance)
                                   TableCell(
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Text(im.toStringAsFixed(3)),
+                                      child:
+                                          SelectableText(im.toStringAsFixed(3)),
                                     ),
                                   ),
                               ],
@@ -202,20 +204,20 @@ class _QfdResultState extends State<QfdResult> {
                                 const TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text(''),
+                                    child: SelectableText(''),
                                   ),
                                 ),
                                 const TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: Text(''),
+                                    child: SelectableText(''),
                                   ),
                                 ),
                                 for (var percent in percentages)
                                   TableCell(
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Text(
+                                      child: SelectableText(
                                           '${(percent * 100).round().toString()}%'),
                                     ),
                                   ),
@@ -310,8 +312,8 @@ class _QfdResultState extends State<QfdResult> {
                                       }
                                     },
                                     child: stepNotif == DefaultQfd.process
-                                        ? const Text('Home')
-                                        : const Text('Next stage'),
+                                        ? const SelectableText('Home')
+                                        : const SelectableText('Next stage'),
                                   ),
                                 ],
                               ),
@@ -326,7 +328,7 @@ class _QfdResultState extends State<QfdResult> {
             //           children: [
             //             const Padding(
             //               padding: EdgeInsets.symmetric(vertical: 0.0),
-            //               child: Text('Insert the engineering requirements'),
+            //               child: SelectableText('Insert the engineering requirements'),
             //             ),
             //             Table(
             //               border: TableBorder.all(),
@@ -385,7 +387,7 @@ class _QfdResultState extends State<QfdResult> {
             //                       _houseInput = true;
             //                     });
             //                   },
-            //                   child: const Text('Back'),
+            //                   child: const SelectableText('Back'),
             //                 ),
             //                 const SizedBox(
             //                   width: 30.0,
@@ -398,7 +400,7 @@ class _QfdResultState extends State<QfdResult> {
             //                       _houseInput = true;
             //                     });
             //                   },
-            //                   child: const Text('Next'),
+            //                   child: const SelectableText('Next'),
             //                 ),
             //               ],
             //             ),
@@ -413,7 +415,7 @@ class _QfdResultState extends State<QfdResult> {
             //           children: [
             //             const Padding(
             //               padding: EdgeInsets.symmetric(vertical: 0.0),
-            //               child: Text('Insert the value for each requirement'),
+            //               child: SelectableText('Insert the value for each requirement'),
             //             ),
             //             Table(
             //               border: TableBorder.all(),
@@ -424,20 +426,20 @@ class _QfdResultState extends State<QfdResult> {
             //                     const TableCell(
             //                       child: Padding(
             //                         padding: EdgeInsets.all(8.0),
-            //                         child: Text('Customer Requirements'),
+            //                         child: SelectableText('Customer Requirements'),
             //                       ),
             //                     ),
             //                     const TableCell(
             //                       child: Padding(
             //                         padding: EdgeInsets.all(8.0),
-            //                         child: Text('Weights'),
+            //                         child: SelectableText('Weights'),
             //                       ),
             //                     ),
             //                     for (String req in engReq)
             //                       TableCell(
             //                         child: Padding(
             //                           padding: const EdgeInsets.all(8.0),
-            //                           child: Text(req),
+            //                           child: SelectableText(req),
             //                         ),
             //                       ),
             //                   ],
@@ -460,7 +462,7 @@ class _QfdResultState extends State<QfdResult> {
             //                       // _questionsMatrix = false;
             //                     });
             //                   },
-            //                   child: const Text('Back'),
+            //                   child: const SelectableText('Back'),
             //                 ),
             //                 const SizedBox(
             //                   width: 30.0,
@@ -474,7 +476,7 @@ class _QfdResultState extends State<QfdResult> {
             //                     //         builder: ((context) =>
             //                     //             const FahpResult())));
             //                   },
-            //                   child: const Text('Calculate'),
+            //                   child: const SelectableText('Calculate'),
             //                 ),
             //               ],
             //             ),
@@ -494,7 +496,7 @@ class _QfdResultState extends State<QfdResult> {
         TableCell(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(cus),
+            child: SelectableText(cus),
           ),
         ),
         TableCell(
@@ -565,20 +567,20 @@ class _QfdResultState extends State<QfdResult> {
         TableCell(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(cus),
+            child: SelectableText(cus),
           ),
         ),
         TableCell(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(weight.toStringAsFixed(3)),
+            child: SelectableText(weight.toStringAsFixed(3)),
           ),
         ),
         for (int req in numEng)
           TableCell(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(req.toString()),
+              child: SelectableText(req.toString()),
             ),
           ),
       ],

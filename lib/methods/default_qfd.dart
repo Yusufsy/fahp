@@ -70,11 +70,11 @@ class _DefaultQfdMethodState extends State<DefaultQfdMethod> {
       appBar: AppBar(
         title: Row(
           children: const [
-            Text("FAHP & QFD Calculator"),
+            SelectableText("FAHP & QFD Calculator"),
             Expanded(
               child: Align(
                 alignment: Alignment.center,
-                child: Text("Consensus AHP Online Calculator"),
+                child: SelectableText("Consensus AHP Online Calculator"),
               ),
             ),
           ],
@@ -85,14 +85,14 @@ class _DefaultQfdMethodState extends State<DefaultQfdMethod> {
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
             children: [
-              Text(
+              SelectableText(
                 'FQFD',
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.primary,
                   fontSize: 40,
                 ),
               ),
-              Text(
+              SelectableText(
                 house,
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.primary,
@@ -105,7 +105,7 @@ class _DefaultQfdMethodState extends State<DefaultQfdMethod> {
               //     children: [
               //       const Padding(
               //         padding: EdgeInsets.symmetric(vertical: 0.0),
-              //         child: Text('Enter number of Customer Nodes'),
+              //         child: SelectableText('Enter number of Customer Nodes'),
               //       ),
               //       Row(
               //         mainAxisAlignment: MainAxisAlignment.center,
@@ -151,13 +151,13 @@ class _DefaultQfdMethodState extends State<DefaultQfdMethod> {
               //             } else {
               //               ScaffoldMessenger.of(context).showSnackBar(
               //                 SnackBar(
-              //                   content: const Text('Please input a number'),
+              //                   content: const SelectableText('Please input a number'),
               //                   backgroundColor: Theme.of(context).errorColor,
               //                 ),
               //               );
               //             }
               //           },
-              //           child: const Text('Next'),
+              //           child: const SelectableText('Next'),
               //         ),
               //       ),
               //     ],
@@ -170,7 +170,7 @@ class _DefaultQfdMethodState extends State<DefaultQfdMethod> {
               //           children: [
               //             const Padding(
               //               padding: EdgeInsets.symmetric(vertical: 0.0),
-              //               child: Text('Insert the customer requirement'),
+              //               child: SelectableText('Insert the customer requirement'),
               //             ),
               //             Table(
               //               border: TableBorder.all(),
@@ -180,13 +180,13 @@ class _DefaultQfdMethodState extends State<DefaultQfdMethod> {
               //                   TableCell(
               //                     child: Padding(
               //                       padding: EdgeInsets.all(8.0),
-              //                       child: Text('Expert'),
+              //                       child: SelectableText('Expert'),
               //                     ),
               //                   ),
               //                   TableCell(
               //                     child: Padding(
               //                       padding: EdgeInsets.all(8.0),
-              //                       child: Text('Weight'),
+              //                       child: SelectableText('Weight'),
               //                     ),
               //                   ),
               //                 ]),*/
@@ -247,7 +247,7 @@ class _DefaultQfdMethodState extends State<DefaultQfdMethod> {
               //                       _expertWeights = false;
               //                     });
               //                   },
-              //                   child: const Text('Back'),
+              //                   child: const SelectableText('Back'),
               //                 ),
               //                 const SizedBox(
               //                   width: 30.0,
@@ -259,7 +259,7 @@ class _DefaultQfdMethodState extends State<DefaultQfdMethod> {
               //                       _numQuestions = true;
               //                     });
               //                   },
-              //                   child: const Text('Next'),
+              //                   child: const SelectableText('Next'),
               //                 ),
               //               ],
               //             ),
@@ -273,7 +273,7 @@ class _DefaultQfdMethodState extends State<DefaultQfdMethod> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: Text('Enter number of $requirement'),
+                      child: SelectableText('Enter number of $requirement'),
                     ),
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.5,
@@ -309,7 +309,7 @@ class _DefaultQfdMethodState extends State<DefaultQfdMethod> {
                                   builder: ((context) => const MyHomePage()),
                                 ));
                           },
-                          child: const Text('Home'),
+                          child: const SelectableText('Home'),
                         ),
                         const SizedBox(
                           width: 30.0,
@@ -327,13 +327,14 @@ class _DefaultQfdMethodState extends State<DefaultQfdMethod> {
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: const Text('Please input a number'),
+                                  content: const SelectableText(
+                                      'Please input a number'),
                                   backgroundColor: Theme.of(context).errorColor,
                                 ),
                               );
                             }
                           },
-                          child: const Text('Next'),
+                          child: const SelectableText('Next'),
                         ),
                       ],
                     ),
@@ -347,7 +348,8 @@ class _DefaultQfdMethodState extends State<DefaultQfdMethod> {
                         children: [
                           const Padding(
                             padding: EdgeInsets.symmetric(vertical: 0.0),
-                            child: Text('Insert the technical measures'),
+                            child:
+                                SelectableText('Insert the technical measures'),
                           ),
                           Table(
                             border: TableBorder.all(),
@@ -408,7 +410,7 @@ class _DefaultQfdMethodState extends State<DefaultQfdMethod> {
                                     _numQuestions = true;
                                   });
                                 },
-                                child: const Text('Back'),
+                                child: const SelectableText('Back'),
                               ),
                               const SizedBox(
                                 width: 30.0,
@@ -422,7 +424,7 @@ class _DefaultQfdMethodState extends State<DefaultQfdMethod> {
                                     _questionsMatrix = true;
                                   });
                                 },
-                                child: const Text('Next'),
+                                child: const SelectableText('Next'),
                               ),
                             ],
                           ),
@@ -437,8 +439,8 @@ class _DefaultQfdMethodState extends State<DefaultQfdMethod> {
                         children: [
                           const Padding(
                             padding: EdgeInsets.symmetric(vertical: 0.0),
-                            child:
-                                Text('Insert the value for each requirement'),
+                            child: SelectableText(
+                                'Insert the value for each requirement'),
                           ),
                           Table(
                             border: TableBorder.all(),
@@ -449,20 +451,20 @@ class _DefaultQfdMethodState extends State<DefaultQfdMethod> {
                                   const TableCell(
                                     child: Padding(
                                       padding: EdgeInsets.all(8.0),
-                                      child: Text('Customer Nodes'),
+                                      child: SelectableText('Customer Nodes'),
                                     ),
                                   ),
                                   const TableCell(
                                     child: Padding(
                                       padding: EdgeInsets.all(8.0),
-                                      child: Text('Weights'),
+                                      child: SelectableText('Weights'),
                                     ),
                                   ),
                                   for (String req in engReq)
                                     TableCell(
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: Text(req),
+                                        child: SelectableText(req),
                                       ),
                                     ),
                                 ],
@@ -485,7 +487,7 @@ class _DefaultQfdMethodState extends State<DefaultQfdMethod> {
                                     _questionsMatrix = false;
                                   });
                                 },
-                                child: const Text('Back'),
+                                child: const SelectableText('Back'),
                               ),
                               const SizedBox(
                                 width: 30.0,
@@ -499,7 +501,7 @@ class _DefaultQfdMethodState extends State<DefaultQfdMethod> {
                                           builder: ((context) =>
                                               const QfdResult())));
                                 },
-                                child: const Text('Calculate'),
+                                child: const SelectableText('Calculate'),
                               ),
                             ],
                           ),
@@ -520,7 +522,7 @@ class _DefaultQfdMethodState extends State<DefaultQfdMethod> {
         TableCell(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(cus),
+            child: SelectableText(cus),
           ),
         ),
         TableCell(
