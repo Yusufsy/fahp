@@ -20,7 +20,7 @@ class _MyHomePageState extends State<MyHomePage> {
     'FAHP',
     'FAHP - GDM',
     'QFD',
-    'FAHP with QFD',
+    // 'FAHP with QFD',
     'FQFD',
   ];
 
@@ -83,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     items: items.map((String items) {
                       return DropdownMenuItem(
                         value: items,
-                        child: SelectableText(items),
+                        child: Text(items),
                       );
                     }).toList(),
                     // After selecting the desired option,it will

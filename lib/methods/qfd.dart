@@ -110,7 +110,7 @@ class _QfdMethodState extends State<QfdMethod> {
                         );
                       }
                     },
-                    child: const SelectableText('Next'),
+                    child: const Text('Next'),
                   ),
                 ),
               ],
@@ -197,7 +197,7 @@ class _QfdMethodState extends State<QfdMethod> {
                                 _expertWeights = false;
                               });
                             },
-                            child: const SelectableText('Back'),
+                            child: const Text('Back'),
                           ),
                           const SizedBox(
                             width: 30.0,
@@ -209,7 +209,7 @@ class _QfdMethodState extends State<QfdMethod> {
                                 _numQuestions = true;
                               });
                             },
-                            child: const SelectableText('Next'),
+                            child: const Text('Next'),
                           ),
                         ],
                       ),
@@ -254,7 +254,7 @@ class _QfdMethodState extends State<QfdMethod> {
                           _numQuestions = false;
                         });
                       },
-                      child: const SelectableText('Back'),
+                      child: const Text('Back'),
                     ),
                     const SizedBox(
                       width: 30.0,
@@ -280,7 +280,7 @@ class _QfdMethodState extends State<QfdMethod> {
                           );
                         }
                       },
-                      child: const SelectableText('Next'),
+                      child: const Text('Next'),
                     ),
                   ],
                 ),
@@ -352,7 +352,7 @@ class _QfdMethodState extends State<QfdMethod> {
                                 _numQuestions = true;
                               });
                             },
-                            child: const SelectableText('Back'),
+                            child: const Text('Back'),
                           ),
                           const SizedBox(
                             width: 30.0,
@@ -366,7 +366,7 @@ class _QfdMethodState extends State<QfdMethod> {
                                 _questionsMatrix = true;
                               });
                             },
-                            child: const SelectableText('Next'),
+                            child: const Text('Next'),
                           ),
                         ],
                       ),
@@ -428,7 +428,7 @@ class _QfdMethodState extends State<QfdMethod> {
                                 _questionsMatrix = false;
                               });
                             },
-                            child: const SelectableText('Back'),
+                            child: const Text('Back'),
                           ),
                           const SizedBox(
                             width: 30.0,
@@ -442,7 +442,7 @@ class _QfdMethodState extends State<QfdMethod> {
                                       builder: ((context) =>
                                           const QfdResult())));
                             },
-                            child: const SelectableText('Calculate'),
+                            child: const Text('Calculate'),
                           ),
                         ],
                       ),

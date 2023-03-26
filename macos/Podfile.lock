@@ -41,7 +41,7 @@ SPEC CHECKSUMS:
   firebase_core: 8bcdc56ca0b558785aa19ac6b56a4753b9169813
   FirebaseCore: 988754646ab3bd4bdcb740f1bfe26b9f6c0d5f2a
   FirebaseCoreInternal: e301297f4c15a17489e48ed722d733b1578e0c02
-  FlutterMacOS: ae6af50a8ea7d6103d888583d46bd8328a7e9811
+  FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
   GoogleUtilities: c2bdc4cf2ce786c4d2e6b3bcfd599a25ca78f06f
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
 

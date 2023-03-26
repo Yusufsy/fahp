@@ -104,7 +104,7 @@ class _AhpMethodState extends State<AhpMethod> {
                         );
                       }
                     },
-                    child: const SelectableText('Next'),
+                    child: const Text('Next'),
                   ),
                 ),
               ],
@@ -206,7 +206,7 @@ class _AhpMethodState extends State<AhpMethod> {
                                 _expertWeights = false;
                               });
                             },
-                            child: const SelectableText('Back'),
+                            child: const Text('Back'),
                           ),
                           const SizedBox(
                             width: 30.0,
@@ -218,7 +218,7 @@ class _AhpMethodState extends State<AhpMethod> {
                                 _numQuestions = true;
                               });
                             },
-                            child: const SelectableText('Next'),
+                            child: const Text('Next'),
                           ),
                         ],
                       ),
@@ -264,7 +264,7 @@ class _AhpMethodState extends State<AhpMethod> {
                           _numQuestions = false;
                         });
                       },
-                      child: const SelectableText('Back'),
+                      child: const Text('Back'),
                     ),
                     const SizedBox(
                       width: 30.0,
@@ -289,7 +289,7 @@ class _AhpMethodState extends State<AhpMethod> {
                           );
                         }
                       },
-                      child: const SelectableText('Next'),
+                      child: const Text('Next'),
                     ),
                   ],
                 ),
@@ -357,7 +357,7 @@ class _AhpMethodState extends State<AhpMethod> {
                                 _questionsMatrix = false;
                               });
                             },
-                            child: const SelectableText('Back'),
+                            child: const Text('Back'),
                           ),
                           const SizedBox(
                             width: 30.0,
@@ -370,7 +370,7 @@ class _AhpMethodState extends State<AhpMethod> {
                                 _criteriaTable = true;
                               });
                             },
-                            child: const SelectableText('Next'),
+                            child: const Text('Next'),
                           ),
                         ],
                       ),
@@ -586,7 +586,7 @@ class _AhpMethodState extends State<AhpMethod> {
                                   _questionsMatrix = !_questionsMatrix;
                                 });
                               },
-                              child: const SelectableText('Back'),
+                              child: const Text('Back'),
                             ),
                             const SizedBox(
                               width: 30.0,
@@ -604,7 +604,7 @@ class _AhpMethodState extends State<AhpMethod> {
                                               const AhpResult())));
                                 });
                               },
-                              child: const SelectableText('Calculate'),
+                              child: const Text('Calculate'),
                             ),
                           ],
                         ),

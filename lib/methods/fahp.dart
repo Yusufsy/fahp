@@ -107,7 +107,7 @@ class _FahpMethodState extends State<FahpMethod> {
                           );
                         }
                       },
-                      child: const SelectableText('Next'),
+                      child: const Text('Next'),
                     ),
                   ],
                 ),
@@ -175,7 +175,7 @@ class _FahpMethodState extends State<FahpMethod> {
                                 _questionsMatrix = false;
                               });
                             },
-                            child: const SelectableText('Back'),
+                            child: const Text('Back'),
                           ),
                           const SizedBox(
                             width: 30.0,
@@ -188,7 +188,7 @@ class _FahpMethodState extends State<FahpMethod> {
                                 _criteriaTable = true;
                               });
                             },
-                            child: const SelectableText('Next'),
+                            child: const Text('Next'),
                           ),
                         ],
                       ),
@@ -404,7 +404,7 @@ class _FahpMethodState extends State<FahpMethod> {
                                   _questionsMatrix = !_questionsMatrix;
                                 });
                               },
-                              child: const SelectableText('Back'),
+                              child: const Text('Back'),
                             ),
                             const SizedBox(
                               width: 30.0,
@@ -422,7 +422,7 @@ class _FahpMethodState extends State<FahpMethod> {
                                               const FahpResult())));
                                 });
                               },
-                              child: const SelectableText('Calculate'),
+                              child: const Text('Calculate'),
                             ),
                           ],
                         ),

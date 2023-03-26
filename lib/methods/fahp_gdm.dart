@@ -102,7 +102,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                         );
                       }
                     },
-                    child: const SelectableText('Next'),
+                    child: const Text('Next'),
                   ),
                 ),
               ],
@@ -210,7 +210,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                                 _expertWeights = false;
                               });
                             },
-                            child: const SelectableText('Back'),
+                            child: const Text('Back'),
                           ),
                           const SizedBox(
                             width: 30.0,
@@ -237,7 +237,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                                 );
                               }
                             },
-                            child: const SelectableText('Next'),
+                            child: const Text('Next'),
                           ),
                         ],
                       ),
@@ -283,7 +283,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                           _numQuestions = false;
                         });
                       },
-                      child: const SelectableText('Back'),
+                      child: const Text('Back'),
                     ),
                     const SizedBox(
                       width: 30.0,
@@ -308,7 +308,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                           );
                         }
                       },
-                      child: const SelectableText('Next'),
+                      child: const Text('Next'),
                     ),
                   ],
                 ),
@@ -376,7 +376,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                                 _questionsMatrix = false;
                               });
                             },
-                            child: const SelectableText('Back'),
+                            child: const Text('Back'),
                           ),
                           const SizedBox(
                             width: 30.0,
@@ -392,7 +392,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                                 _criteriaTable = true;
                               });
                             },
-                            child: const SelectableText('Next'),
+                            child: const Text('Next'),
                           ),
                         ],
                       ),
@@ -637,7 +637,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                                   _questionsMatrix = !_questionsMatrix;
                                 });
                               },
-                              child: const SelectableText('Back'),
+                              child: const Text('Back'),
                             ),
                             const SizedBox(
                               width: 30.0,
@@ -687,7 +687,7 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                                               const FahpGdmResult())));
                                 });
                               },
-                              child: const SelectableText('Calculate CJM'),
+                              child: const Text('Calculate CJM'),
                             ),
                           ],
                         ),

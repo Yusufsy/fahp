@@ -309,7 +309,7 @@ class _DefaultQfdMethodState extends State<DefaultQfdMethod> {
                                   builder: ((context) => const MyHomePage()),
                                 ));
                           },
-                          child: const SelectableText('Home'),
+                          child: const Text('Home'),
                         ),
                         const SizedBox(
                           width: 30.0,
@@ -334,7 +334,7 @@ class _DefaultQfdMethodState extends State<DefaultQfdMethod> {
                               );
                             }
                           },
-                          child: const SelectableText('Next'),
+                          child: const Text('Next'),
                         ),
                       ],
                     ),
@@ -410,7 +410,7 @@ class _DefaultQfdMethodState extends State<DefaultQfdMethod> {
                                     _numQuestions = true;
                                   });
                                 },
-                                child: const SelectableText('Back'),
+                                child: const Text('Back'),
                               ),
                               const SizedBox(
                                 width: 30.0,
@@ -424,7 +424,7 @@ class _DefaultQfdMethodState extends State<DefaultQfdMethod> {
                                     _questionsMatrix = true;
                                   });
                                 },
-                                child: const SelectableText('Next'),
+                                child: const Text('Next'),
                               ),
                             ],
                           ),
@@ -487,7 +487,7 @@ class _DefaultQfdMethodState extends State<DefaultQfdMethod> {
                                     _questionsMatrix = false;
                                   });
                                 },
-                                child: const SelectableText('Back'),
+                                child: const Text('Back'),
                               ),
                               const SizedBox(
                                 width: 30.0,
@@ -501,7 +501,7 @@ class _DefaultQfdMethodState extends State<DefaultQfdMethod> {
                                           builder: ((context) =>
                                               const QfdResult())));
                                 },
-                                child: const SelectableText('Calculate'),
+                                child: const Text('Calculate'),
                               ),
                             ],
                           ),
