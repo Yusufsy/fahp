@@ -39,7 +39,7 @@ class _QfdMethodState extends State<QfdMethod> {
       child: Column(
         children: [
           SelectableText(
-            'FQFD',
+            'QFD',
             style: TextStyle(
               color: Theme.of(context).colorScheme.primary,
               fontSize: 40,
@@ -105,7 +105,8 @@ class _QfdMethodState extends State<QfdMethod> {
                           SnackBar(
                             content:
                                 const SelectableText('Please input a number'),
-                            backgroundColor: Theme.of(context).errorColor,
+                            backgroundColor:
+                                Theme.of(context).colorScheme.error,
                           ),
                         );
                       }

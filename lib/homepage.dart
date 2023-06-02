@@ -47,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const ExpansionTile(
-                title: SelectableText("About App"),
+                title: Text("About App"),
                 children: [
                   SelectableText(
                       "This website is a calculator that performs the Analytical Hierarchy Process (AHP) method. "
@@ -56,13 +56,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
               const ExpansionTile(
-                title: SelectableText("How to use the app"),
+                title: Text("How to use the app"),
                 children: [
                   SelectableText("How-to app goes here"),
                 ],
               ),
               const ExpansionTile(
-                title: SelectableText("Why Fuzzy-AHP"),
+                title: Text("Why Fuzzy-AHP"),
                 children: [
                   SelectableText("Why fuzzy-AHP goes here"),
                 ],
@@ -71,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Row(
                 children: [
                   const Spacer(),
-                  const SelectableText('Method: '),
+                  const Text('Method: '),
                   DropdownButton(
                     // Initial Value
                     value: dropdownvalue,

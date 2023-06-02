@@ -312,8 +312,8 @@ class _QfdResultState extends State<QfdResult> {
                                       }
                                     },
                                     child: stepNotif == DefaultQfd.process
-                                        ? const SelectableText('Home')
-                                        : const SelectableText('Next stage'),
+                                        ? const Text('Home')
+                                        : const Text('Next stage'),
                                   ),
                                 ],
                               ),
