@@ -572,7 +572,7 @@ class _DefaultQfdMethodState extends State<DefaultQfdMethod> {
                 },
                 validator: (value) {
                   if (value == '0' ||
-                      value == '1' ||
+                      // value == '1' ||
                       value == '3' ||
                       value == '9') {
                     return null;

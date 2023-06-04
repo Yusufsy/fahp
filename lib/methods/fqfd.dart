@@ -356,6 +356,11 @@ class _FqfdMethodState extends State<FqfdMethod> {
                           ElevatedButton(
                             onPressed: () {
                               context.read<QfdNotifier>().initHouse();
+                              if (weights.isNotEmpty) {
+                                context
+                                    .read<QfdNotifier>()
+                                    .importCusReq(weights);
+                              }
                               setState(() {
                                 _engReq = false;
                                 _numQuestions = false;
@@ -433,7 +438,7 @@ class _FqfdMethodState extends State<FqfdMethod> {
                           ElevatedButton(
                             onPressed: () {
                               context.read<QfdNotifier>().calculateHoE();
-                              Navigator.pushReplacement(
+                              Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: ((context) =>
@@ -478,10 +483,17 @@ class _FqfdMethodState extends State<FqfdMethod> {
                   ? null
                   : weights.entries.first.value[cusIndex].toStringAsFixed(1),
               onChanged: (value) {
-                if (value.isNotEmpty || value != '') {
-                  context
-                      .read<QfdNotifier>()
-                      .setWeight(cusIndex, double.parse(value));
+                // if (value.isNotEmpty && value != '' && value != '.') {
+                //   context
+                //       .read<QfdNotifier>()
+                //       .setWeight(cusIndex, double.parse(value));
+                // }
+                if (value.isNotEmpty && value != '') {
+                  if (double.tryParse(value) != null && value != '.') {
+                    context
+                        .read<QfdNotifier>()
+                        .setWeight(cusIndex, double.parse(value));
+                  }
                 }
               },
               keyboardType:
@@ -489,8 +501,11 @@ class _FqfdMethodState extends State<FqfdMethod> {
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Cannot be empty';
-                } else if (double.parse(value) >= 0 &&
-                    double.parse(value) <= 1) {
+                } else if (double.tryParse(value) == null) {
+                  return 'Between 0.0 - 1.0';
+                } else if (double.tryParse(value) != null &&
+                    double.parse(value) >= 0.0 &&
+                    double.parse(value) <= 1.0) {
                   return null;
                 } else {
                   return 'Invalid value';

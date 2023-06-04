@@ -30,6 +30,14 @@ class QfdNotifier extends ChangeNotifier {
     print(cusReq);
   }
 
+  importCusReq(Map<String, List<double>> importedWeights) {
+    var listCus = importedWeights.entries.first.value;
+    for (var element in listCus) {
+      weights[listCus.indexOf(element)] = element;
+    }
+    print(weights);
+  }
+
   setNumEngReq(int num) {
     engReq.clear();
     for (int i = 0; i < num; i++) {

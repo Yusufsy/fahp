@@ -171,19 +171,29 @@ class _FahpGdmMethodState extends State<FahpGdmMethod> {
                                         keyboardType: const TextInputType
                                             .numberWithOptions(decimal: true),
                                         onChanged: (value) {
-                                          if (value.isNotEmpty || value != '') {
-                                            context
-                                                .read<ExpertNotifier>()
-                                                .setWeight(
-                                                    i - 1, double.parse(value));
+                                          if (value.isNotEmpty && value != '') {
+                                            if (value != '.') {
+                                              context
+                                                  .read<ExpertNotifier>()
+                                                  .setWeight(i - 1,
+                                                      double.parse(value));
+                                            }
                                           }
                                         },
                                         validator: (value) {
                                           if (value!.isNotEmpty) {
-                                            if (double.parse(value) < 0.0 ||
-                                                double.parse(value) > 1.0) {
-                                              return 'Between 0-1';
+                                            // if (value.startsWith('.') ==
+                                            //     false) {
+                                            if (double.tryParse(value) !=
+                                                null) {
+                                              if (double.parse(value) < 0.0 ||
+                                                  double.parse(value) > 1.0) {
+                                                return 'Between 0-1';
+                                              }
+                                            } else {
+                                              return 'Invalid input';
                                             }
+                                            // }
                                           }
                                           return value.isEmpty
                                               ? 'Please fill this field'

@@ -39,7 +39,7 @@ class _FahpMethodState extends State<FahpMethod> {
             'FAHP',
             style: TextStyle(
               color: Theme.of(context).colorScheme.primary,
-              fontSize: 40,
+              fontSize: 44,
             ),
           ),
           Visibility(
@@ -49,7 +49,11 @@ class _FahpMethodState extends State<FahpMethod> {
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 10.0),
                   child: SelectableText(
-                      'Enter number of Pairwise Comparison Matrices (PCMs)'),
+                    'Enter number of Pairwise Comparison Matrices (PCMs)',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.5,
@@ -197,7 +201,7 @@ class _FahpMethodState extends State<FahpMethod> {
                 : const SizedBox(),
           ),
           SizedBox(
-            width: MediaQuery.of(context).size.width * 0.7,
+            width: MediaQuery.of(context).size.width * 0.9,
             child: Visibility(
               visible: _criteriaTable,
               child: _criteriaTable
@@ -209,8 +213,7 @@ class _FahpMethodState extends State<FahpMethod> {
                         ),
                         Table(
                           border: TableBorder.all(),
-                          defaultColumnWidth:
-                              FixedColumnWidth(size.width * 0.3),
+                          defaultColumnWidth: IntrinsicColumnWidth(),
                           children: const [
                             TableRow(
                               children: [
@@ -223,29 +226,9 @@ class _FahpMethodState extends State<FahpMethod> {
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: SelectableText('Explanation'),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
-                                TableCell(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
                                     child: SelectableText('1'),
                                   ),
                                 ),
-                                TableCell(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: SelectableText('Equal Importance'),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
@@ -255,30 +238,9 @@ class _FahpMethodState extends State<FahpMethod> {
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child:
-                                        SelectableText('Moderate Importance'),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
-                                TableCell(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
                                     child: SelectableText('5'),
                                   ),
                                 ),
-                                TableCell(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: SelectableText('Strong Importance'),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
@@ -288,31 +250,9 @@ class _FahpMethodState extends State<FahpMethod> {
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: SelectableText(
-                                        'Very Strong Importance'),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
-                                TableCell(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
                                     child: SelectableText('9'),
                                   ),
                                 ),
-                                TableCell(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child:
-                                        SelectableText('Extremely Important'),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
@@ -322,31 +262,9 @@ class _FahpMethodState extends State<FahpMethod> {
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child:
-                                        SelectableText('Equally to Moderately'),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
-                                TableCell(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
                                     child: SelectableText('4'),
                                   ),
                                 ),
-                                TableCell(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: SelectableText(
-                                        'Moderately to Strongly'),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
@@ -356,8 +274,7 @@ class _FahpMethodState extends State<FahpMethod> {
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: SelectableText(
-                                        'Strongly to very strong'),
+                                    child: SelectableText('8'),
                                   ),
                                 ),
                               ],
@@ -367,7 +284,61 @@ class _FahpMethodState extends State<FahpMethod> {
                                 TableCell(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: SelectableText('8'),
+                                    child: SelectableText('Explanation'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: SelectableText('Equal Importance'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child:
+                                        SelectableText('Moderate Importance'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: SelectableText('Strong Importance'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: SelectableText(
+                                        'Very Strong Importance'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child:
+                                        SelectableText('Extremely Important'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child:
+                                        SelectableText('Equally to Moderately'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: SelectableText(
+                                        'Moderately to Strongly'),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: SelectableText(
+                                        'Strongly to very strong'),
                                   ),
                                 ),
                                 TableCell(
